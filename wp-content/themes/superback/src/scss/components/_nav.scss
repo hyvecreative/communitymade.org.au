@@ -1,0 +1,299 @@
+/* ------------------------------------------------------------ *\
+	Nav
+\* ------------------------------------------------------------ */
+
+.nav {
+	text-transform: uppercase; 
+	font-size: .85rem; 
+	line-height: 1.71; 
+	letter-spacing: 0.05em; 
+	font-weight: $bold;
+	height: 100%;
+
+	@include breakpoint-down(tablet) {
+		font-size: 16px; 
+		height: auto;
+		padding: 50px 0;
+	}
+	
+	/*ul.toplevel > li {
+			&:last-child {border-top: none;
+				a {color: white; background: $yellow_5; padding: .5rem 1rem; border-radius: .25rem;
+					&:hover {background: $yellow_10;}
+					@include breakpoint-down(tablet) {width: 100%; color: #fff; padding: 13px 13px;
+						&:hover {background: $yellow_10; }
+					}
+				}
+			}
+		}
+	
+    */
+
+	li.menu-item-has-children > a {
+		position: relative; 
+		&:after {
+			content: '';
+			border: solid $c-white;
+			border-width: 0 3px 3px 0;
+			display: inline-block;
+			padding: 3px;
+			transform: rotate(45deg) translateY(-50%);
+			position: absolute;
+			right: 6px;
+			top: 45%;
+			transition: transform .3s;
+            @include media('>=1023px') {display: none;}
+		}
+	}
+
+	li.menu-item-has-children.isOpen > a {
+		&:after {
+			transform: rotate(-135deg);
+		}
+	}
+    
+    li.menu-item-2130  { // dev
+        
+        a {background-color: $yellow_5; padding: .5rem; border-radius: 4px;
+            @include breakpoint-down(tablet) {color: $c-black; padding: .25rem .5rem; margin-top: 1rem;}
+            &:hover {background-color: $blue_15; color: $c-white;
+            @include breakpoint-down(tablet) {background-color: $yellow_10; color: $c-black;}
+            }
+            &:active {background-color: $blue_5; color: $c-white;}
+        }
+	}
+    
+    li.menu-item-1375  {
+        
+        a {background-color: $yellow_5; padding: .5rem; border-radius: 4px;
+            @include breakpoint-down(tablet) {color: $c-black; padding: .25rem .5rem; margin-top: 1rem;}
+            &:hover {background-color: $blue_15; color: $c-white;}
+            &:active {background-color: $blue_5; color: $c-white;}
+        }
+	}
+
+	ul {
+		list-style: none;
+		margin: 0 -13px;
+		height: 100%;
+
+		@include breakpoint-down(small-desktop) {
+			margin: 0 -7px;
+		}
+
+		@include breakpoint-down(tablet) {
+			flex-direction: column;
+			margin: -5px 0;
+			text-align: left; 
+		}
+	}
+
+	ul li {
+		display: flex; 
+		align-items: center;
+
+		&.menu-item-has-children {	
+
+		}
+	}
+
+	a { color: #51515d;
+		text-decoration: none; 
+		transition: color .3s;
+		
+		@include breakpoint-down(tablet) {
+				color: $c-white;
+			}
+
+		&:hover {
+			color: $blue_5;
+
+			@include breakpoint-down(tablet) {
+				color: rgba($c-white,.7);
+			}
+		} 
+        
+        &:active, &:focus  {
+			color: $blue_15;
+
+			@include breakpoint-down(tablet) {
+				color: rgba($yellow_5,.8);
+			}
+		} 
+        
+        &.touch-active {
+            color: rgba($yellow_5, 0.7);
+          }
+	}
+
+	> ul > li + li {
+
+		@include breakpoint-down(tablet) {
+			border-top: 1px solid rgba($c-white, .24); 
+		}
+	}
+
+	> ul > li > a {
+		
+		position: relative;
+        padding: 0 13px;
+		display: block; 
+
+		@include breakpoint-down(small-desktop) {
+			padding: 0 7px;
+		}
+
+		@include breakpoint-down(tablet) {
+			padding: 14px 20px 14px 0;
+		}
+        
+        &::before {
+              content: "";
+              position: absolute;
+              bottom: -.25rem;
+              left: 50%;
+              width: 0;
+              height: 4px;            /* thickness of your “border” */
+              background: $blue_5;
+              transform: translateX(-50%);
+              transition: width 0.3s ease;
+            
+                @include breakpoint-down(tablet) {
+                display: none;
+                }
+            
+            }
+        
+        &:hover::before,
+        &:focus::before {
+              width: 90%;            /* grows outward from center */
+            @include breakpoint-down(tablet) {
+			width: 0;
+		    }
+            
+            }
+		
+	}
+
+	ul > li > ul {
+		background-color: $c-white;
+		padding: 0 12px 0px;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		min-width: 209px;
+		width: 100%;  
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity .3s, visibility .3s;
+		height: fit-content;
+
+		@include breakpoint-down(tablet) {
+			opacity: 1;
+			visibility: visible;
+			position: static; 
+			margin: 0;
+			display: none; 
+			background-color: transparent; 
+			padding-left: 0; 
+			padding-right: 0; 
+			max-width: 100%;
+			color: #98D1F7;
+			border-top: 1px solid rgba($c-white, .24); 
+		}
+	}
+
+	ul > li > ul > li > a {
+		display: block; 
+		padding: 10px 13px 8px;
+		line-height: 1.2;
+
+		@include breakpoint-down(tablet) {
+			padding: 14px 0 14px 12px;
+			font-size: 14px; 
+		}
+	}
+
+	ul > li > ul > li + li {
+		border-top: 1px solid $c-black; 
+
+		@include breakpoint-down(tablet) {
+			border-top: 1px solid rgba($c-white, .24); 
+		}
+	}
+
+	li.menu-item-has-children {
+		position: relative; 
+
+		@include breakpoint-down(tablet) {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+
+			> a {
+				width: 100%;
+			}
+		}
+	}
+
+	li.menu-item-has-children:hover > ul {
+		opacity: 1;
+		visibility: visible;
+	}
+    
+    li {
+        &.menu-item-2226 {background: $yellow_5;
+            &:hover {background: $blue_5;
+                a {color: $c-white;}
+            }
+            &:active, &:focus   {background: $blue_15; }
+            @include breakpoint-up(tablet) {border-radius: 4px; margin-top: 19px; height: 44px;
+            &:hover {background: $blue_15;
+                a {color: $c-white;}
+            }
+            &:active, &:focus   {background: $blue_5; }
+            }
+            
+            a { padding-left: 13px;
+                &:hover {color: $c-white; }
+                &:active, &:focus   {color: $c-white;}
+                @include breakpoint-down(tablet) {color: $c-black; padding-left: 20px;}
+            }
+        }
+    }
+    
+    
+    /* 3rd level */
+    
+    ul > li > ul > li {
+        &.menu-item-has-children {position: relative}
+    }
+    
+    ul > li > ul > li > ul {
+		background-color: $c-white;
+		padding: 0 12px 0px;
+		position: absolute;
+        top: 0;
+		left: 200px;
+		min-width: 160px;
+		width: 100%;  
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity .3s, visibility .3s;
+		height: fit-content;
+
+		@include breakpoint-down(tablet) {
+			opacity: 1;
+			visibility: visible;
+			position: static; 
+			margin: 0;
+			display: none; 
+			background-color: transparent; 
+			padding-left: 0; 
+			padding-right: 0; 
+			max-width: 100%;
+			color: #98D1F7;
+			border-top: 1px solid rgba($c-white, .24); 
+		}
+	}
+}

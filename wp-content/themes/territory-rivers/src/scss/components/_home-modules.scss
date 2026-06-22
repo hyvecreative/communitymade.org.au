@@ -1,0 +1,362 @@
+.hm-feature-page {min-height: 70vh; background-size: cover; background-position: -100px top;
+	
+	 @include media('>=567px') {
+		min-height: 90vh;
+    }
+
+    @include media('>=992px') {
+		min-height: 800px;
+        background-position: center top;
+    }
+
+    @include media('>=1200px') {
+		min-height: 100vh;
+    }
+}
+
+.hm-pg-header {background-color: $yellow_5; transition: all .3s ease-out;
+    .hm-feature-wrap {height: 240px; transition: all .3s ease-out; margin-right: -3rem; margin-left: -3rem;
+        
+         @include media('>=390px') {
+            margin-right: -2rem; margin-left: -2rem;
+        }
+	
+         @include media('>=567px') {
+            height: 320px; margin-right: -15px; margin-left: -15px;
+        }
+
+        @include media('>=992px') {
+            height: 600px; margin-right: -15px; margin-left: -15px;
+        }
+
+        @include media('>=1200px') {
+            height: 700px;
+        }
+        
+        @include media('>=1450px') {
+            height: 800px;
+        }
+    }
+    
+    .hm-feature-text {display: none; position: absolute; bottom: 5rem; width: 100%;
+        @include media('>=1200px') { display: flex;}
+    }
+    
+}
+
+
+.hm-feature { 
+     @include media('>=992px') {justify-content: flex-end;}
+.hm-form {color: #fff; background: transparent url('/wp-content/themes/territory-rivers/images/header-text-grdient.png') repeat-x bottom left; 
+        width: 100%;
+        padding: 0;
+	 @include media('>=992px') {bottom: 0; position: absolute; padding: 0 0 4rem; min-height: 600px; display: flex; align-items: center; background: transparent url('/wp-content/themes/territory-rivers/images/header-text-grdient-2.png') repeat-y center right;}
+	
+	 @include media('>=1200px') {
+		 min-height: 700px;
+    }
+    
+    @include media('>=1450px') {
+		 min-height: 800px;
+    }
+    
+    .hm-form-wrap {background: rgba($ochre_15, 1); padding: 2rem 2rem 4rem;
+            @include media('>=992px') {background: rgba($ochre_15, .8); padding: 2rem; border-radius: 10px 0 0 10px;}
+            @include media('>=1200px') {padding: 2.5rem 5rem 2.5rem 5rem;}
+            @include media('>=1500px') {margin-right: 4rem;}
+	
+            h1 {font-size: 2.25rem; margin: 0 0 0rem; line-height: 1; position: relative;
+                @include media('>=992px') {
+                    font-size: 2.5rem;
+                    text-align: left;
+                }
+                @include media('>=1200px') {
+                    font-size: 3.25rem;
+                    &:before {
+                    position: absolute;
+                    content: "";
+                    background: url('/wp-content/themes/territory-rivers/images/hero-arrow-right.svg') no-repeat left top;
+                    background-size:contain;
+                    top: 0; left: -2.5rem;
+                    height: 3rem;
+                    width: 2rem;
+                    }
+                }
+                
+            }
+            h2 {font-size: 1.25rem; margin-top: 0; font-family: proxima-nova, Helvetica, sans-serif; font-weight: 400;
+                @include media('>=992px') {
+                    font-size: 1.75rem;
+                    text-align: left;
+                }
+            }
+        
+            p {
+                &:last-child  {margin-bottom:0; line-height: 1.1; font-size: .85rem;}  
+                a {color: $white_5; text-decoration: underline;
+                    &:hover {text-decoration: none;}                    
+                }
+        }
+
+        }
+    }
+}
+
+.feature-text {color: #fff; background: transparent url('/wp-content/themes/territory-rivers/images/header-text-grdient.png') repeat-x bottom left; 
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        padding: 0 4% 5%;
+		text-align: center;
+	 @include media('>=992px') {align-items: 0 2% 5%;}
+	
+	 @include media('>=1200px') {
+		background: transparent url('/wp-content/themes/territory-rivers/images/header-text-grdient.png') repeat-x bottom left; padding: 0 2% 6%;
+    }
+	
+	
+	h1 {font-size: 1.75rem; margin: 0 0 .5rem;
+        @include media('>=992px') {
+            font-size: 2.75rem;
+			text-shadow: 4px 4px 10px rgba($green_15, .8);
+        }
+		@include media('>=1200px') {
+            font-size: 3.25rem;
+        }
+    }
+	h2 {font-size: 1.25rem; margin-top: 0;
+        @include media('>=992px') {
+            font-size: 1.75rem;
+			text-shadow: 2px 2px 8px rgba($green_15, .6);
+        }
+    }
+	
+	h2 {
+        @include media('>=992px') {
+			text-shadow: 2px 2px 8px rgba($green_15, .6);
+        }
+    }
+	
+	&.feature-second {
+		@include media('>=992px') {
+		padding: 5% 2% 2%;
+    	}
+		
+		@include media('>=992px') {
+		padding: 5% 2% 6%;
+    	}
+		
+		@include media('>=1500px') {
+		bottom: 40px;
+    	}
+	}
+	
+	&.feature-bottom {
+		@include media('>=992px') {
+		bottom: 8%;
+		padding: 5% 2% 2%;
+		background: none;
+    	}
+		h2 {
+			@include media('>=992px') {
+		font-size: 2.25rem;
+    	}
+			@include media('>=1200px') {
+		font-size: 3.25rem;
+    	}
+		}
+	}
+
+}
+
+.hm-wave {position: absolute; bottom: -5px; left: 0; width: 100%;}
+
+.intro-panel {padding: 2rem 1rem 6rem; background: $yellow_5; color: $white_5; position: relative; padding: 3rem 1rem 6rem;
+		background-image: url('/wp-content/themes/territory-rivers/images/logo-bot-right-cnr-bg.svg');  background-size: 32%; background-position: right bottom;  background-repeat: no-repeat;
+	
+	@include media('>=1200px') {
+		padding: 3rem 1rem 8rem; background-size: 24%;
+    	}
+	
+	h2 {color: $ochre_5; margin-top: 0; margin-bottom: 1rem;}
+    
+    .wp-block-column {
+        p {
+            &:first-child {margin-top: 0;
+            }
+        }
+    }
+
+	
+}
+
+.river-sections {
+&.rivers-panel-wrap {padding: 1rem 1rem 0; background: $yellow_5;
+	.rivers-panel {padding-right: 0; padding-left: 0;
+		p {margin: 0;
+            &.river-trigger {margin: -4rem 0 0; transition: transform 0.3s ease-in-out;
+                @include media('>=992px') {margin: -6.2rem 0 0;}	
+            }
+        }
+		.card {border: 1px solid $ochre_5; border-radius: 0; background: $ochre_5;
+			&.card-body {padding: 2rem;}
+			}
+		.river-wrapper {
+			&:nth-child(5) {background: $yellow_5;
+				@include media('<=768px') {margin-bottom: .5rem;}	
+				}
+			
+			&:nth-child(3) {
+				@include media('<=768px') {margin-bottom: .5rem;}	
+				}
+			}
+}
+}
+}
+
+.people-grid {margin-bottom: 10px;
+	@include media('>=768px') {margin-bottom: 0;}
+	.river-wrapper {
+		&.river-image {margin-bottom: 0;}
+		p {
+			&.off {display: none;}
+		}
+	}
+	&:nth-child(2n+1) {
+		@include media('>=992px') {flex-direction: row-reverse}	
+		.river-wrapper {background: $yellow_5;}
+	}
+}
+
+/*a.btn-rivers:not(.collapsed) .rotate-icon {
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+*/
+
+/* River champions */
+
+.river-sections {padding: 1rem 1rem 2rem; background: $ochre_5; color: $white_5;}
+
+.river-image {padding-right:0; padding-left: 0; min-height: 250px; position: relative;
+	img {height: 100%; -o-object-fit: cover; object-fit: cover;}
+}
+
+.river-wrapper {background: $orange_5; min-height: 250px; display: flex; align-items: center;
+	 @include media('>=1200px') {
+            min-height: 400px;
+        }
+
+	.river-text-wrap {width: 100%; padding: 2rem;
+			h2 {margin-top: .25rem; margin-bottom: .25rem;}
+			h3 {margin-top: .25rem; margin-bottom: .25rem;}
+			p {font-size: 1rem;}
+			.btn {min-width: 80px;}
+		}
+	
+}
+
+/* Promo section */
+
+.promo-section {padding: 1rem 1rem 4rem; background: $ochre_5; color: $white_5;
+ @include media('>=992px') {
+            padding: 2rem 1rem 9rem;
+        }
+    
+    .promo-grid {background: rgba($yellow_5, .6); padding: 1rem 0; border-radius: 10px;
+        .promo-grid-wrap { padding: 0 2rem;
+            @include media('>=992px') {
+            padding: 0 15%;
+            }
+            h2 { color: $white_5; margin-top: .5rem;}
+            p { color: $white_5;}
+            img {margin-bottom: 1rem;}
+            }
+    }
+}
+
+/* Threats*/
+
+.threats-wrap{
+	h2 {color: $ochre_5; font-size: 2rem;
+        @include media('>=992px') {
+            font-size: 2.75rem;
+        }
+    }
+	.threat-icons {padding: 0 25%; margin-bottom: 1.5rem;
+        @include media('>=575px') {padding: 0 15px;}
+	.image-wrap {width: 100%; position: relative;  padding: 0; aspect-ratio: 1/1;		
+		}
+	h2 {
+		&.threat-text-hd {color: #fff; margin-top: 0;position: absolute; top: 75%; width: 100%; text-shadow: 4px 4px 10px rgba($black_5, .4);
+  left: 50%; padding: 0 10%; font-size: 2rem; line-height: 1; transform: translate(-50%, -75%)}
+	}
+	p {padding: 0; margin-top: .75rem; margin-bottom: 1.75rem; line-height: 1.4;
+		@include media('>=768px') {
+            padding: 0 10%;
+        	}
+		&.off {display: none;}
+		}
+	img {border-radius: 50%; transition: transform .2s; object-fit: cover; object-position: center center; height: 100%;
+		&:hover{-ms-transform: scale(1.05); transform: scale(1.05);}
+		}
+	}
+    
+    
+    &.next-wrap {padding-top: 0rem; margin-top: -2rem;
+        @include media('>=992px') {
+            padding-bottom: 4rem;
+        }
+    }
+}
+
+
+/* Threats page */
+
+.threats-page {background: #f4f5f9; margin-top: -2rem; padding-top: 2rem; padding-bottom: 6rem;}
+
+.threats-grid {margin-bottom: 1rem; border-bottom: 4px solid #f4f5f9; padding-bottom: 1rem;
+	&:last-child { border-bottom: none;}
+	.threats-wrapper {display: flex; align-items: center; background: $white_5;
+		.threats-text-wrap {
+			@include media('>=992px') {padding-left: 15px; padding-right: 15px;}
+		}
+		&.threats-image {margin-bottom: 0;  padding-right: 0; padding-left: 0; 
+			img {}
+		}
+		h2 {margin-top: 1rem;}
+		p {
+			@include media('>=992px') {text-align: left;}
+			&.off {display: none;}
+		}
+		
+	}
+	&:nth-child(2n), &:nth-child(4n), &:nth-child(6n) {
+		@include media('>=992px') {flex-direction: row-reverse;}
+		}	
+		
+	}
+
+
+/* Solutions */ 
+
+
+.solutions-wrap {padding: 1rem 1rem 6rem; color: $white_5; background: $yellow_5 url('/wp-content/themes/territory-rivers/images/logo-bot-left-cnr-bg.svg') no-repeat left bottom; padding: 5% 2% 5%; background-size: 36%;
+
+	h2 {color: $ochre_5;}
+}
+
+.sign-up { margin-top: -3rem; margin-bottom: 0;
+    &.sign-up-hm {margin-top: 3rem; margin-bottom: -7rem;}
+	.sign-up-wrap {background: $ochre_5; color: $white_5; margin-top: -2rem; margin-bottom: -4rem; padding: 15px;
+		@include media('>=576px') {
+            border-radius: 12px;
+        	}
+		h2 {color: $white_5; margin-top: 1rem; margin-bottom: 0;}
+		a {color: $yellow_5;}
+	}
+}
+
+.bottom-hero-pic {padding: 0;}
+
+

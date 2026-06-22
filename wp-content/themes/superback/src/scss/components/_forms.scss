@@ -1,0 +1,163 @@
+/* Generic Gravity Form */
+
+#wrapper {
+	.gform_wrapper {
+        
+        .gform_heading {
+            h2 {margin-top: 0;}
+        }
+		
+		.gform_body {
+        
+		}
+		
+		.gform_footer {
+                
+		}
+	}
+}
+
+/* Form specific Gravity Form  */
+
+#wrapper {
+	.gform_wrapper {
+        
+        .gform_heading {
+            h2 {margin-bottom: 2rem;}
+        }
+		
+		.gform_body {
+            fieldset.gfield {
+                label {font-size: 1.125rem;}
+                > legend.gfield_label {
+                  font-weight: 600; font-size: 1.2rem;
+                }
+            }
+            
+            .gfield_radio {
+                    .gchoice {
+                        input {margin-top: 3px;}
+                    }
+                }
+            
+            .gfield_html {
+                border: solid 3px rgba(2, 40, 59, 0.2); border-radius: .5rem; padding: 0 1.5rem!important ;
+            }
+		}
+		
+		.gform_footer {
+                display: none!important;
+		}
+        
+        i.form-icon {color: $yellow_10;}
+        i.form-icon-green {color: $green_5;}
+	}
+    
+    .complaintPW {
+        h3.gsection_title {margin: .75rem 0 .25rem;}
+        #gform_fields_2 {row-gap: 12px;}
+    }
+
+}
+
+/* Action Network default settings */
+
+/* Generic Action Network form */
+
+#wrapper {
+    .can_embed {padding: 0;}
+    
+#can_embed_form {max-width: 600px!important; border: none!important; padding: 0!important;
+	h2 {display: none;}
+	h4 {display: none;}
+	p {color: $c-white;
+		a {text-decoration:underline;
+			&:hover {text-decoration:none;}
+		}
+	}
+	.country_drop_wrap {display: none;}
+	
+	label {color: $c-white; font-size: .9rem;}
+	#action_info {display: none;}
+	input {border-radius: 4px!important;
+		&[type="submit"] {color: #000!important; font-size: 1.2rem!important; border-radius: 4px!important; background-color: $yellow_5!important; font-weight: 700!important; height: 44px!important; line-height: 39px!important; transition: transform .2s;
+			&:hover {color: $c-white; background-color: $yellow_10!important; transform: scale(1.05);}
+		}
+		&[type="text"] {height: 44px; border: 2px solid $yellow_5;}
+		&[type="email"] {height: 44px; border: 2px solid $yellow_5;}
+	}
+    
+    .js-fb-textarea {
+        label {display: none;}
+        textarea {border-radius: 4px; border: 2px solid #F9CD32;}
+    }
+    
+	#can_thank_you {background-color: #ee1d42;}
+	.iti {
+		&input{
+		&[type="text"]{margin-bottom: 15px;}
+		}
+	}
+    
+	#d_sharing {display: none;}
+	.floatlabel-wrapper {
+		.floatlabel-label-active {display: none ;}
+	}
+	.international_link {
+		color: #fff;
+		}
+    
+    .international_link-wrap {margin-top: 0!important;}
+	
+	/* progress bar */
+	
+	.action_status_tracker {
+		.action_status_goal {color: #fff; font-size: 1rem;}
+	}
+	
+	.action-widget--toggle{
+		&.action_status_tracker {
+			.action_status_running_total {color: #fff; font-size: 1.2rem;}
+		}
+		
+		.action_status_status_bar {
+			span{
+				&.action_status_status_bar-grow {background-color: #f98c39;}
+			}
+		}
+	}
+	
+	.html-input-wrapper {color: #fff; line-height: 1.2; margin-bottom: .75rem; font-size: .85rem;}
+    
+    #logo_wrap {display: none;}
+    
+    .check_radio_field {margin-bottom: .5rem!important;}
+}
+}
+
+#can_embed_form .floatlabel-wrapper .floatlabel-label-active {
+    display: none ;
+}
+
+#wrapper{
+#can_embed_form {
+	&.can_float {
+		#form_col1, #form_col2 {float: none!important; width: 100%!important;}
+	}
+}
+}
+
+#wrapper {
+	.action-content-wrap {
+		#can_embed_form {
+
+			input {border-radius: 4px;
+				&[type="submit"] {color: #E5BC8F; font-size: 1.2rem; border-radius: 4px; background-color: #1D1926; font-weight: 700; height: 44px ;
+					&:hover {color: #000; background-color: $yellow_5;}
+				}
+				&[type="text"] {height: 44px; border: none;}
+				&[type="email"] {height: 44px; border: none;}
+			}
+		}
+	}
+}

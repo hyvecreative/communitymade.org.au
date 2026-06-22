@@ -1,0 +1,126 @@
+.search-hd-wrap {
+  width: auto;
+  float: right;
+  padding-top: 2rem;
+  padding-left: 0.625rem;
+  position: relative;
+}
+
+.header-search {position: absolute; top: 1rem; right: 3.5rem; z-index:10; 
+      display: inline-block;
+	  
+
+      @include media('>=575px') {
+        top: 1.85rem; right: 4.5rem;
+      }
+    
+    @include media('>=1024px') {
+        top: 2.2rem; right: 1rem;
+      }
+		
+		&.header-search-is-active {width: 19rem; position: absolute;
+		right: 1rem; background: $c-white; height: 35px; border: solid 1px #ccc; border-radius: 4px;}	
+    }
+
+.header-search {
+  &.is-active {
+    border: 0.125rem solid red;
+  }
+
+  &-wrap {}
+  &-form {
+    position: relative;
+    padding-left: 0.125rem;
+  }
+  &-label {}
+  &-field {
+	font-size: 1.1rem;
+    $transition: ease-out 0.25s;
+    transition: visibility $transition, width $transition, opacity $transition;
+    width: 0;
+    border-radius: 1rem;
+    border: none;
+    -webkit-appearance: none;
+    padding: 0;
+    visibility: hidden;
+    opacity: 0;
+    color: $grey_20;
+
+    &::placeholder {
+      color: $grey_15;
+      opacity: 0.6;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-ms-clear {
+      display: none;
+    }
+
+    .header-search-is-active & {
+      width: 77%;
+      padding: 0 0.625rem;
+      visibility: visible;
+      opacity: 1;
+      transition-delay: 0s;
+	  border: none;
+    }
+  }
+
+  &-submit {
+    border: 0;
+    width: 1.875rem;
+    height: 1.875rem;
+    background: url('/wp-content/themes/superback/images/iconSearch-grey.svg') center no-repeat;
+    text-indent: -999rem;
+    border-radius: 0.3125rem;
+    transition: background-color 0.2s;
+    outline: none;
+
+    &:hover {
+      background: url('/wp-content/themes/superback/images/iconSearch-blue.svg') center no-repeat;
+    }
+    &:focus {
+      background: url('/wp-content/themes/superback/images/iconSearch-grey.svg') center no-repeat;
+    }
+  }
+
+  &-reset {
+    border-radius: 50%;
+    height: 1.25rem;
+    width: 1.25rem;
+    padding: 0;
+    position: absolute;
+    right: .5rem;
+    top: 0.4rem;
+    border: 0;
+    background-color: $blue_5;
+    display: none;
+
+    &:focus,
+    &:hover {
+      background-color: $blue_10;
+      outline: none;
+    }
+
+    svg {
+      width: 1.2rem;
+	  height: 1.2rem;
+	  vertical-align: top;
+    }
+
+    .header-search-is-active & {
+      display: block;
+    }
+  }
+}
+
+ .is-active {
+     .header-search {
+         &-submit {display: none; /*background: url('/wp-content/themes/superconsumers/images/iconSearch-whi.svg') center no-repeat;*/}
+     }
+    }
+
+

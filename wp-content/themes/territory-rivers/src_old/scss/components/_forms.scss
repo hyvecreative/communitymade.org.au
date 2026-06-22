@@ -1,0 +1,145 @@
+/* generic form */
+
+#wrapper {
+	.gform_wrapper {
+		
+		.top_label{
+			textarea{
+				&.textarea {
+				width: 100%;
+				padding: 2%;
+				border: 1px solid #CCC;
+				border-radius: 4px;
+				width: 100%;}
+				margin-bottom: 2%;
+				}
+			}
+		.gform_footer {
+			input{
+			&.button{
+				border: none;
+				color: #fff;
+				height: 44px;
+				line-height: 44px;
+				font-size:1.3em;
+				font-weight: $semibold;	
+				margin: 0;
+				padding: 0 2%;
+				border-radius: 4px 4px 4px 4px;
+				background-color: #3b565f;
+				background-image: none;
+				&:hover {background-color: $yellow_5;}
+				&:active {background-color: $blue_5;}
+			} 
+			}
+		}
+		.gfield_required {
+    		color: #fff;
+    		margin-left: 4px;
+			}
+	}
+}
+
+
+/* updates form */
+
+#wrapper {
+	.sign-up-wrap{
+	.gform_wrapper {
+		ul{
+		&.gform_fields{
+			li{
+			&.gfield {padding-right: 0; width: 100%; margin-top: 0; margin-bottom: 20px; float: left; clear:none; padding: 0 1%;
+				input {height: 44px; line-height: 44px; border-radius: 4px; border: solid $yellow_5 2px;
+					 &:focus{border: solid $orange_5 2px;}
+				}
+				}
+			&.hidden_label{
+				input {margin-top: 0;}
+				}	
+			}
+		}
+		}
+	.gform_footer {padding-top: 8px;
+		input{
+		&.button {margin: 0 auto; display: block; min-width: 180px; background: $yellow_5; font-weight: $bold;
+			&:hover{color: $grey_25; background: $yellow_5;}
+			}
+	}
+	}
+}
+}
+}
+
+@media (min-width: 576px) {
+	
+	#wrapper {
+	.sign-up-wrap{
+		.gform_wrapper {
+			ul{
+			&.gform_fields{
+				li{
+					&.gfield {width: 50%;}
+				}
+				}
+			}
+		}
+	}
+}
+}
+
+/* Report form */
+
+#wrapper {
+	.report-form {
+		.gform_wrapper {
+			span{
+				&.gform_description {
+					font-weight: $semibold;
+					margin-bottom: .5rem
+				}
+			}
+			ul{
+				&.gform_fields {
+					li{
+					&.gfield {padding-right: 0px; margin-top: 0;}
+					}
+				}
+			}
+			h3 {
+			 &.gform_title {font-size: 2.75rem; margin-top: 0; color:$grey_25;}
+			}
+			.top_label{
+				div{
+					&.ginput_container { margin-top: 0;
+						&.ginput_container_fileupload { 
+						input {
+								&.medium {height: 40px; border: none;}
+							}
+						}
+					}
+				}
+				input{
+					&.large
+					{border: 1px solid #CCCCCC;
+					height: 44px;
+					line-height: 44px;
+					padding: 4px;
+					border-radius: 4px 4px 4px 4px;
+					margin-bottom: 2%;
+						&:focus {border: 1px solid $grey_25;}
+					}
+				}
+				#field_5_17 {
+					.gfield_label {margin: 0;}
+					}
+				}
+			.gform_footer {padding-top: 8px;
+				input{
+				&.button {float: right;}
+				}
+			}
+
+		}
+	}
+}

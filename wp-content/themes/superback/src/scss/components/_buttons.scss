@@ -1,0 +1,32 @@
+.btn {
+	display:inline-block;
+	color: #000;
+	min-width: 120px;
+	height: auto;
+	line-height: 20px;
+	font-size: .85rem;
+	border-radius: .25rem;
+	background-color: $yellow_5;
+	text-decoration: none;
+	text-align: center;
+	font-weight:700;
+	margin: 1rem auto 0;
+	padding: .5rem 1rem;
+    transition: transform .2s;
+	&:hover {background-color: $yellow_10; transform: scale(1.05);}
+	&:active, &:focus  {color: $c-black; background-color: $yellow_10;}
+	
+	@include media('>=575px') {	font-size: 1rem;
+        &.btn-lg {font-size: 1.3rem; padding: .75rem 1.25rem;}
+    }
+    
+    &.btn-blue {background-color: $blue_15; color: $c-white; transition: transform .2s;
+        &:hover {background-color: $blue_5; color: $c-white; transform: scale(1.05);}
+        &:active, &:focus  {color: $c-black; background-color: $yellow_10;}
+    }
+    
+    &.btn-midblue {background-color: $blue_5; color: $c-white; transition: transform .2s;
+        &:hover {background-color: $blue_15; color: $c-white; transform: scale(1.05);}
+        &:active, &:focus  {color: $c-black; background-color: $yellow_10;}
+    }
+}

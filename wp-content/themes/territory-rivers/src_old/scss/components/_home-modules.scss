@@ -1,0 +1,138 @@
+.hm-feature-page {min-height: 250px; background-size: cover; background-position: center top;
+
+    @include media('>=992px') {
+		min-height: 600px;
+    }
+
+    @include media('>=1200px') {
+		min-height: 100vh;
+    }
+}
+
+.feature-text {color: #fff; background: #000; text-align: center; padding: 4%;
+
+    @include media('>=992px') {
+		background: transparent url('/wp-content/themes/territory-rivers/images/header-text-grdient.png') repeat-x bottom left; 
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        padding: 5% 2% 2%;
+    }
+	
+	 @include media('>=1200px') {
+		background: transparent url('/wp-content/themes/territory-rivers/images/header-text-grdient.png') repeat-x bottom left; padding: 5% 2% 6%;
+    }
+	
+	
+	h1 {font-size: 1.75rem; margin: 0 0 .5rem;
+        @include media('>=992px') {
+            font-size: 3rem;
+        }
+    }
+	h2 {font-size: 1.25rem; margin-top: 0;
+        @include media('>=992px') {
+            font-size: 2rem;
+        }
+    }
+
+}
+
+.intro-panel {padding: 1rem 1rem 2rem; background: $yellow_5; color: $white_5;
+	
+	h2 {color: $ochre_5;}
+	
+	
+}
+
+.river-sections {
+&.rivers-panel-wrap {padding: 1rem 1rem 0; background: $yellow_5;
+	.rivers-panel {padding-right: 0; padding-left: 0;
+		p {margin: 0;}
+		.card {border: 1px solid $ochre_5; border-radius: 0; background: $ochre_5;
+			&.card-body {padding: 2rem;}
+			}
+		.river-wrapper {
+			&:nth-child(5) {background: $green_5;
+				@include media('<=768px') {margin-bottom: .5rem;}	
+				}
+			
+			&:nth-child(3) {
+				@include media('<=768px') {margin-bottom: .5rem;}	
+				}
+			}
+}
+}
+}
+
+/*a.btn-rivers:not(.collapsed) .rotate-icon {
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+*/
+
+/* River champions */
+
+.river-sections {padding: 1rem 1rem 2rem; background: $ochre_5; color: $white_5;}
+
+.river-image {padding-right:0; padding-left: 0; min-height: 250px; position: relative;
+	img {height: 100%; -o-object-fit: cover; object-fit: cover;}
+}
+
+.river-wrapper {background: $orange_5; min-height: 250px; display: flex; align-items: center;
+	 @include media('>=1200px') {
+            min-height: 400px;
+        }
+	&:nth-child(3) {
+		@include media('<=768px') {
+            margin-bottom: .5rem;
+        }
+	}
+	&:nth-child(4) {background: $green_5}
+	.river-text-wrap {width: 100%; padding: 2rem;
+		h2 {margin-top: .25rem; margin-bottom: .25rem;}
+		h3 {margin-top: .25rem; margin-bottom: .25rem;}
+		p {font-size: 1rem;}
+		.btn {min-width: 80px;}
+	}
+	
+}
+
+/* Threats*/
+
+.threats-wrap{
+	h2 {color: $ochre_5;}
+	.threat-icons {
+	.image-wrap { position: relative;  padding: 0 20%;
+		@include media('>=575px') {
+            padding: 0;
+        }
+		@include media('>=1200px') {
+            padding: 0 15px;
+        }
+		
+		}
+	h2 {
+		&.threat-text-hd {color: #fff; margin-top: 0;position: absolute; top: 75%; width: 100%;
+  left: 50%;
+  transform: translate(-50%, -75%)}
+	}
+	p {padding: 0; margin-top: .5rem; margin-bottom: 1.25rem;
+		@include media('>=576px') {
+            padding: 0 10%;
+        	}
+		}
+	img {border-radius: 50%;}
+	}
+}
+
+.solutions-wrap {padding: 1rem 1rem 6rem; background: $yellow_5; color: $white_5;
+	h2 {color: $ochre_5;}
+}
+
+.sign-up {
+	.sign-up-wrap {background: $ochre_5; border-radius: 12px; color: $white_5; margin-top: -4rem; margin-bottom: -4rem; padding: 15px;
+		h2 {margin-top: .5rem;}
+	}
+}
+
+.bottom-hero-pic {padding: 0;}

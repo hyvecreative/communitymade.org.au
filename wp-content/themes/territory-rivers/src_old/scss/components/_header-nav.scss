@@ -1,0 +1,202 @@
+@media (min-width: 992px) {	
+	#header {z-index: 10; width: 100%; position: absolute;
+		&.lo-shadow {box-shadow: none;}
+		.home-header {background: transparent;}
+}
+}
+
+ul{
+	&#mymenu {display: none;}
+}
+
+.flexmenu{
+	&.fm-lg{
+		ul{
+			&#mymenu {display: block;}
+		}
+	}
+	&.fm-sm{
+		ul{
+			&#mymenu {display: block;}
+		}
+	}
+}
+
+.menu-ft {
+	ul{margin: .4rem 0; padding-left: 0;
+	&#mymenu {display: block;
+		li {list-style: none; padding: .2rem 0;
+			&:first-child {}
+			a {text-transform: none; font-weight: $bold; color: $white_5; }
+		}
+		
+		}
+}
+}
+
+.fm-button {float: left; margin: 4px 0 2px 8px;
+	.fm-bar {background-color: #999; height: 3px;}
+}
+
+.home-header {height: 53px; transition: all .3s ease-out;
+	.header-signup{display: none;}
+}
+
+#logo {width: 280px; position: absolute; z-index: 1; left: 4rem; top: 4px; transition: all .3s ease-out;
+	a{
+		&.logo{display: inline-block; height: 43px;}
+		img {height: 100%; width: auto;}
+	}
+}
+
+@media (min-width: 992px) {	
+	#logo {width: 400px; left: 0; top: 0px; padding: 12px 20px 0;
+		a{
+			&.logo{height: 55px;}
+		}
+	}
+	
+	.home-header {height: 80px; background:#fff;
+	.header-items {
+		.header-signup {display: block; width: 240px; position: absolute; right: 20px; top: 40px;}
+		}
+	}
+}
+
+@media (min-width: 1200px) {	
+	#logo {
+		a{
+			&.logo{height: 70px;}
+		}
+	}
+	.home-header {height: 100px;
+		.header-items {top: 20px;
+			.header-signup{top: 60px;}
+			}
+	}
+}
+
+/* Menus */
+
+.flexmenu.fm-lg {
+	li {
+		a{color: #fff;}
+	}
+}
+
+@media (min-width: 992px) {
+
+.flexmenu.fm-lg > ul > li {
+    padding: 0 8px;
+	Height: 30px;
+}
+
+.flexmenu.fm-lg { width: auto; float: right; padding-top: 1.5rem; padding-right: 2rem;
+	
+	li {padding: 0 10px;
+	
+	
+	a {font-size: 1.1rem; color:$ochre_5; font-family: $headline; font-weight: $light; padding: 3px 10px 2px; /*text-transform: uppercase;*/
+	&:hover {background: $ochre_5; color: $white_5; border-radius: 6px; }
+	}
+	
+	ul {border: none; background: transparent; border-radius: 4px; left: 20px;
+		li{background: $purple_15; border-top: solid 1px $white_5; border-radius: 4px; padding: .4rem 1rem;
+			&:hover {background: $purple_10;}
+			a { border-bottom: none; border-top: none;
+				&:hover {color:$white_5; border-bottom: none;}	
+		}
+		}
+	}
+		
+	&.menu-item-100 {background: rgba($orange_5, 1); border-radius: 30px; margin-top: 3px; margin-left: 20px;
+		&:hover {background: $green_5;}
+		a {color: #fff; padding: 0; border-bottom: none;
+			&:hover{color: #fff; border-bottom: none;}
+		} 
+	}
+}
+	
+}
+}
+
+@media (min-width: 1130px) {
+	.flexmenu.fm-lg > ul > li {
+    padding: 7px 8px;
+	height: auto;
+}
+}
+
+
+
+@media (min-width: 1300px) {
+	.flexmenu.fm-lg > ul > li {
+    
+}
+
+.flexmenu.fm-lg li {padding: 0 20px;}
+}
+
+/* Header form */
+
+#wrapper {
+	.header-signup{
+	.gform_wrapper{
+		.gform_heading {margin: 0;}
+		
+		.gform_body {width: 75%; float: left; }
+		ul {
+			&.gform_fields {
+				li{
+					&.gfield {padding-right: 0px;}
+				}
+			}
+			li {
+				&.gfield {margin-top: 0;}
+			}
+		}
+		label {display:none;}
+		input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]):not([type="button"]):not([type="image"]):not([type="file"]) {padding: 4px 4px 4px 38px; border: 1px solid #ccc; border-radius: 4px 0 0 4px; border-right: none; margin-top: 0; height: 40px;}
+		input#input_1_1 {
+		background-image: url("https://coalimpactsindex.com.au/wp/wp-content/themes/coaltracker/images/icon-email.svg");
+		background-position: 3px 5px;
+		background-repeat: no-repeat;width: 100%;}
+		span.gform_description {color: $grey_10; margin-bottom: 0px; width: 100%; text-align: center; }
+
+		.gform_footer {width: 25%; float: left; margin-top: 0; clear: none; padding: 0;
+		input.button {
+			width: 100%;
+			height: 40px;
+			line-height: 40px;
+			font-size: 1rem;
+			padding: 0 .5rem;
+			border-radius: 0px 4px 4px 0px;
+			background-color: $yellow_5;
+			&:hover {color: #333; background-color: $yellow_5;}
+		}
+		}
+	}
+	}
+}
+
+#wrapper {
+	.header-signup{
+	.gform_wrapper{
+		.top_label {
+			div{
+			&.ginput_container {margin-top: 0px;}
+			}
+		}
+		}
+	}
+}
+
+.scroll-to-top {
+	i {color:$white_5;
+		&:hover{color:$green_5;}
+	}
+}
+
+
+
+
