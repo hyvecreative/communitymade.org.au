@@ -59,6 +59,51 @@ Template Name: front-page-temp
 
 <article id="content">
     
+<div id="section-issues" class="container-fluid section-issues">
+    
+	<div  class="container" style="position: relative;">
+		
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2><?php the_field('issues_head'); ?></h2>
+            </div>
+        </div>
+            
+        <div class="row issues_wrap">
+
+         <?php $count = 1; ?>
+         <?php $count2 = 1; ?>
+
+         <?php if( have_rows('issues_items') ): while ( have_rows('issues_items') ) : the_row(); ?>
+        
+             <div class="col-lg-6 issues-item">
+
+                        <?php
+                        $image = get_sub_field('issue_icon');
+                        $size = 'full'; // (thumbnail, medium, large, full or custom size)
+                        if( $image ) {
+                            echo wp_get_attachment_image( $image, $size );
+                        }
+                        ?>
+                 
+                        <h3><?php the_sub_field('issues_item_hd'); ?></h3>
+
+                        
+                        <?php if (get_sub_field('issues_sub_head')) : ?>
+                            <p style="margin-bottom: -.5rem"><strong><?php the_sub_field('issues_sub_head'); ?></strong></p>
+                        <?php endif; ?>
+
+                        <?php the_sub_field('issues_item_txt'); ?> <a href="<?php the_sub_field('issues_target_url'); ?>" style="margin-top: 0;"><?php the_sub_field('issues_link_text'); ?> <i class="fa-light fa-arrow-right"></i></a>
+                        
+                </div>
+  
+            <?php endwhile; else: endif; ?>
+            </div> <!-- end issues items -->
+
+    </div>
+</div>
+
+    
 <div id="section-intro" class="container-fluid section-intro">
     
 	<div  class="container" style="position: relative;">

@@ -61,10 +61,7 @@
 
 </div> <!-- end container -->
 </div><!-- end container-fluid -->
-    
-    <div class="footer-star">
-        <img src="<?php bloginfo('template_directory'); ?>/images/footer-bundle.svg" / alt="">
-    </div>
+
     
 </footer><!-- end footer -->
 
