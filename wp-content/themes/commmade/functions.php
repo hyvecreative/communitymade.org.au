@@ -312,14 +312,11 @@ add_action( 'after_setup_theme', 'mytheme_setup' );
  THUMBNAIL SUPPORT
 ********************************/
 
-add_action('after_setup_theme', function () {
-    add_theme_support('post-thumbnails');
-    add_image_size('news', 565, 367, true);
-});
-
+add_theme_support('post-thumbnails');
+add_image_size('news', 565, 367, true );
 
 /*******************************
- EXCERPT LENGTH ADJUST
+EXCERPT LENGTH ADJUST
 ********************************/
 
 function home_excerpt_length($length) {
@@ -327,6 +324,30 @@ function home_excerpt_length($length) {
 }
 add_filter('excerpt_length', 'home_excerpt_length');
 
+
+/*******************************
+CUSTOM QUERY MOD
+********************************/
+
+add_filter( 'pre_get_posts', 'my_get_posts' );
+
+function my_get_posts( $query ) {
+
+    if (
+        is_admin() ||
+        ! $query->is_main_query() ||
+        wp_doing_ajax() ||
+        ( defined('REST_REQUEST') && REST_REQUEST )
+    ) {
+        return $query;
+    }
+
+    if ( $query->is_home() || $query->is_feed() ) {
+        $query->set( 'post_type', array( 'post', 'my_articles' ) );
+    }
+
+    return $query;
+}
 
 /*******************************
  EXCERPT "READ MORE" LINK (SAFE FOR WP 7)

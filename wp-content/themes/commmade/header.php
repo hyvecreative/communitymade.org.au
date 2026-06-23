@@ -25,7 +25,7 @@
 
         <div class="header__logo col-auto">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="logo" aria-label="Back to home page">
-                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/images/takeyoursuperback.svg" alt="">
+                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/images/community-made-logo-lozonge.svg" alt="">
             </a>
         </div>
 
