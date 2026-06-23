@@ -38,7 +38,7 @@ function theme_enqueue_assets() {
      * --------------------------- */
     wp_enqueue_script(
         'fontawesome',
-        'https://kit.fontawesome.com/d7b2e24a18.js',
+        'https://kit.fontawesome.com/9767d0ec16.js',
         [],
         null,
         true

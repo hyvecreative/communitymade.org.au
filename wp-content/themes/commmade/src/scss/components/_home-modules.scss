@@ -15,10 +15,33 @@
     @include breakpoint-up(mobile) {
         padding: 5rem 0;
     }
-
-    h1 {
-        color: $blue_20;
+    
+    .hero-text-wrap {margin-bottom: 1.5rem;
+        @include breakpoint-up(tablet) {margin-bottom: 0;}
+        h1 {
+            color: $blue_20;
+        }
     }
+    
+    .hero-image-wrap {
+    display: flex;
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 30px;
+            }
+        
+    }
+
+
+}
+
+.hm-spruik { background: $blue_15; padding: 1.5rem 0; position: relative;
+    @include breakpoint-up(mobile) {
+        padding: 3rem 0;
+    }
+    h2 {color: $c-white!important; margin: 0; padding-right: 4rem;}
 }
 
 /* end hero on home */
@@ -49,11 +72,14 @@
 }
 
 .hm-down-arrow {
-    color: $yellow_5;
+    color: $c-white;
     margin-top: 1rem;
     font-size: 2rem;
     animation: bounce 2s infinite;
     cursor: pointer; /* <-- makes cursor show as link */
+    position: absolute;
+    right: 1rem; bottom: 0;
+    @include breakpoint-up(mobile) {font-size: 4rem; right: 0;}
 }
 
 /* simple bounce animation for arrow */
@@ -69,8 +95,8 @@
     }
 }
 
-.section-intro {margin-bottom: 1rem; position: relative;
-     @include breakpoint-up(mobile-medium) {margin-bottom: 1rem;}
+.section-intro {margin-bottom: 1rem; position: relative; padding: 1.5rem 0;
+     @include breakpoint-up(mobile-medium) {margin-bottom: 1rem; padding: 2rem 0;}
     
     .intro-text-wrapper {
         @include breakpoint-up(mobile-medium) {}

@@ -860,8 +860,34 @@ ul#mymenu {
   @media (min-width: 767.02px) {
     .hm-hero {
       padding: 5rem 0; } }
-  .hm-hero h1 {
-    color: #003349; }
+  .hm-hero .hero-text-wrap {
+    margin-bottom: 1.5rem; }
+    @media (min-width: 1023.02px) {
+      .hm-hero .hero-text-wrap {
+        margin-bottom: 0; } }
+    .hm-hero .hero-text-wrap h1 {
+      color: #003349; }
+  .hm-hero .hero-image-wrap {
+    display: -ms-flexbox;
+    display: flex; }
+    .hm-hero .hero-image-wrap .hero-img {
+      width: 100%;
+      height: 100%;
+      -o-object-fit: cover;
+         object-fit: cover;
+      border-radius: 30px; }
+
+.hm-spruik {
+  background: #006A8C;
+  padding: 1.5rem 0;
+  position: relative; }
+  @media (min-width: 767.02px) {
+    .hm-spruik {
+      padding: 3rem 0; } }
+  .hm-spruik h2 {
+    color: #fff !important;
+    margin: 0;
+    padding-right: 4rem; }
 
 /* end hero on home */
 .hm-quick-stats {
@@ -888,12 +914,19 @@ ul#mymenu {
   margin-top: 1rem; }
 
 .hm-down-arrow {
-  color: #E59B3F;
+  color: #fff;
   margin-top: 1rem;
   font-size: 2rem;
   animation: bounce 2s infinite;
   cursor: pointer;
-  /* <-- makes cursor show as link */ }
+  /* <-- makes cursor show as link */
+  position: absolute;
+  right: 1rem;
+  bottom: 0; }
+  @media (min-width: 767.02px) {
+    .hm-down-arrow {
+      font-size: 4rem;
+      right: 0; } }
 
 /* simple bounce animation for arrow */
 @keyframes bounce {
@@ -917,10 +950,12 @@ ul#mymenu {
 
 .section-intro {
   margin-bottom: 1rem;
-  position: relative; }
+  position: relative;
+  padding: 1.5rem 0; }
   @media (min-width: 575.02px) {
     .section-intro {
-      margin-bottom: 1rem; } }
+      margin-bottom: 1rem;
+      padding: 2rem 0; } }
   .section-intro .intro-text-wrapper h2 {
     color: #006A8C;
     line-height: 1.2; }

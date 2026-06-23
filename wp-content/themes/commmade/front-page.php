@@ -10,19 +10,19 @@ Template Name: front-page-temp
 <div class="container-fluid hm-hero">
     <div class="container">
         <div class="row">
-             <div class="col-lg-5">
+             <div class="col-lg-5 hero-text-wrap">
                             <h1><?php the_field('hm_hero_title'); ?></h1>
                             <p><?php the_field('hm_hero_sub'); ?></p>
-                            <a href="#" class="btn btn-green">Send a message to your local MP</a>
+                            <a href="#" class="btn btn-green">Send a message to your local MP <i class="fa-light fa-arrow-right"></i></a>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-7 hero-image-wrap" style="display: flex;">
             <?php if (has_post_thumbnail()) : 
                 $thumb_id = get_post_thumbnail_id($post->ID);
                 $img_full = wp_get_attachment_image_src($thumb_id, 'full')[0];
                 $img_large = wp_get_attachment_image_src($thumb_id, 'large')[0];
                 $img_medium = wp_get_attachment_image_src($thumb_id, 'medium')[0];
             ?>
-                <div class="hero-img">
+               
                     <img 
                         src="<?php echo esc_url($img_large); ?>" 
                         srcset="<?php echo esc_url($img_medium); ?> 480w, 
@@ -32,16 +32,29 @@ Template Name: front-page-temp
                                (max-width: 1024px) 100vw, 
                                1920px"
                         alt="<?php the_title_attribute(); ?>"
-                        class="hm-feature-img">
-                </div>
+                        class="hero-img">
+             
             <?php endif; ?>
 
             </div>
             </div>
         </div>
 </div>
+    
+    	
+<div class="container-fluid hm-spruik">
+    <div class="container">
+        <div class="row">
+             <div class="col-12">
+                 <h2>Community Housing:<br />
+                    A solution that is for the people, by the people. </h2>
+                    <i class="hm-down-arrow fa-light fa-circle-arrow-down fa-xl"></i>
+            </div>
+        </div>
+    </div>
+</div>
 
-<i class="hm-down-arrow fa-solid fa-arrow-down fa-4x"></i>
+
 <!-- begin introduction -->
 
 <article id="content">
