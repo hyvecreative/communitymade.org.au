@@ -1,52 +1,59 @@
 <?php
 /*
-Template Name: front-page-temp
+Template Name: front-page-orig
 */
 ?><?php get_header(); ?>
 
 
 <main>
 	
-<div class="container-fluid hm-hero">
-    <div class="container">
-        <div class="row">
-             <div class="col-lg-5">
-                            <h1><?php the_field('hm_hero_title'); ?></h1>
-                            <p><?php the_field('hm_hero_sub'); ?></p>
-                            <a href="#" class="btn btn-green">Send a message to your local MP</a>
-            </div>
-            <div class="col-lg-7">
-            <?php if (has_post_thumbnail()) : 
-                $thumb_id = get_post_thumbnail_id($post->ID);
-                $img_full = wp_get_attachment_image_src($thumb_id, 'full')[0];
-                $img_large = wp_get_attachment_image_src($thumb_id, 'large')[0];
-                $img_medium = wp_get_attachment_image_src($thumb_id, 'medium')[0];
-            ?>
-                <div class="hero-img">
-                    <img 
-                        src="<?php echo esc_url($img_large); ?>" 
-                        srcset="<?php echo esc_url($img_medium); ?> 480w, 
-                                <?php echo esc_url($img_large); ?> 1024w, 
-                                <?php echo esc_url($img_full); ?> 1920w"
-                        sizes="(max-width: 768px) 100vw, 
-                               (max-width: 1024px) 100vw, 
-                               1920px"
-                        alt="<?php the_title_attribute(); ?>"
-                        class="hm-feature-img">
+<div class="container-fluid page-feature hm-feature">
+    <?php if (has_post_thumbnail()) : 
+        $thumb_id = get_post_thumbnail_id($post->ID);
+        $img_full = wp_get_attachment_image_src($thumb_id, 'full')[0];
+        $img_large = wp_get_attachment_image_src($thumb_id, 'large')[0];
+        $img_medium = wp_get_attachment_image_src($thumb_id, 'medium')[0];
+    ?>
+        <div class="hm-feature-img-wrap">
+            <img 
+                src="<?php echo esc_url($img_large); ?>" 
+                srcset="<?php echo esc_url($img_medium); ?> 480w, 
+                        <?php echo esc_url($img_large); ?> 1024w, 
+                        <?php echo esc_url($img_full); ?> 1920w"
+                sizes="(max-width: 768px) 100vw, 
+                       (max-width: 1024px) 100vw, 
+                       1920px"
+                alt="<?php the_title_attribute(); ?>"
+                class="hm-feature-img">
+        
+           
+            
+        </div>
+    <?php endif; ?>
+    
+    
+     <div class="hmpgtxt-wrap">
+            <div class="title-block-wrap">
+                <div class="title-block">
+                    <h1><span class="h1-intro-sm">Take your super back</span><?php the_field('hm_hero_title'); ?></h1>
+                    <p><?php the_field('hm_hero_sub'); ?></p>
+                    <i class="hm-down-arrow fa-solid fa-arrow-down fa-4x"></i>
                 </div>
-            <?php endif; ?>
-
-            </div>
             </div>
         </div>
+
+        
 </div>
 
-<i class="hm-down-arrow fa-solid fa-arrow-down fa-4x"></i>
+
 <!-- begin introduction -->
 
 <article id="content">
     
 <div id="section-intro" class="container-fluid section-intro">
+    <div style="top: -6rem;" class="top-star-bg">
+        <img src="<?php bloginfo('template_directory'); ?>/images/star-bundle_1.svg" / alt="">
+    </div>
     
 	<div  class="container" style="position: relative;">
 		

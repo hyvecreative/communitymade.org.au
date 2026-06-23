@@ -29,4 +29,9 @@
         &:hover {background-color: $blue_15; color: $c-white; transform: scale(1.05);}
         &:active, &:focus  {color: $c-black; background-color: $yellow_10;}
     }
+    
+    &.btn-green {background-color: $green_5; color: $blue_20; transition: transform .2s;
+        &:hover {background-color: $green_5; color: $c-white; transform: scale(1.05);}
+        &:active, &:focus  {color: $c-black; background-color: $yellow_10;}
+    }
 }
