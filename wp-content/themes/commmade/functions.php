@@ -232,14 +232,18 @@ add_action( 'wp_enqueue_scripts', function() {
 
 
 
-acf_register_block_type([
-    'name'              => 'anchor-nav',
-    'title'             => 'Anchor Navigation',
-    'render_template'   => 'template-parts/blocks/anchor-nav.php',
-    'category'          => 'formatting',
-    'icon'              => 'menu',
-    'keywords'          => ['anchor','navigation','menu'],
-]);
+add_action('acf/init', function() {
+    if ( function_exists('acf_register_block_type') ) {
+        acf_register_block_type([
+            'name'              => 'anchor-nav',
+            'title'             => 'Anchor Navigation',
+            'render_template'   => 'template-parts/blocks/anchor-nav.php',
+            'category'          => 'formatting',
+            'icon'              => 'menu',
+            'keywords'          => ['anchor','navigation','menu'],
+        ]);
+    }
+});
 
 
 add_action('acf/init', function() {
@@ -688,13 +692,14 @@ function emm_paginate_loop($start, $max, $page = 0) {
 ACF options page
 *******************/
 
-if(function_exists('acf_add_options_page')) { 
-
-	acf_add_options_page('');
-	acf_add_options_sub_page('Collection Statement');
-	acf_add_options_sub_page('Footer');
-    acf_add_options_sub_page('Site wide options');
-}
+add_action('acf/init', function() {
+    if(function_exists('acf_add_options_page')) { 
+        acf_add_options_page('');
+        acf_add_options_sub_page('Collection Statement');
+        acf_add_options_sub_page('Footer');
+        acf_add_options_sub_page('Site wide options');
+    }
+});
 
 /*********************
 INCLUDE NEEDED FILES

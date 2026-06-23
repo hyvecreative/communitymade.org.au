@@ -79,7 +79,7 @@ $table_prefix  = 'wp_';
  */
 define('WP_DEBUG', true);
 define('WP_DEBUG_LOG', true);
-define('WP_DEBUG_DISPLAY', false);
+define('WP_DEBUG_DISPLAY', true);
 @ini_set('display_errors', 0);
 
 // If we're behind a proxy server and using HTTPS, we need to alert Wordpress of that fact
