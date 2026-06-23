@@ -36,8 +36,12 @@ class Symfony_EventDispatcher_EventDispatcher implements Symfony_EventDispatcher
      * @see EventDispatcherInterface::dispatch
      *
      * @api
+     *
+     * Note: Type hint removed from $event parameter to fix PHP 8.4+ deprecation warning
+     * about implicitly nullable parameters while maintaining backward compatibility with PHP 5.5+.
+     * The nullable type syntax (?Symfony_EventDispatcher_Event) is not supported in PHP 5.5-7.0.
      */
-    public function dispatch($eventName, Symfony_EventDispatcher_Event $event = null)
+    public function dispatch($eventName, $event = null)
     {
         if (null === $event) {
             $event = new Symfony_EventDispatcher_Event();

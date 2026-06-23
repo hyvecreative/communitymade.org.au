@@ -194,6 +194,7 @@ function primarymenu(){ ?>
 Force css blocks - wp 6.9 temp fix
 **/
 
+
 add_filter( 'should_load_separate_core_block_assets', '__return_false', 100 );
 
 
@@ -228,7 +229,7 @@ add_action( 'wp_enqueue_scripts', function() {
 
  Gutenberg blocks
 
-********************************/
+
 
 
 
@@ -258,6 +259,8 @@ add_action('acf/init', function() {
     ]);
 
 });
+
+********************************/
 
 
 /*******************************
@@ -305,8 +308,62 @@ function mytheme_setup() {
 }
 add_action( 'after_setup_theme', 'mytheme_setup' );
 
+/*******************************
+ THUMBNAIL SUPPORT
+********************************/
+
+add_action('after_setup_theme', function () {
+    add_theme_support('post-thumbnails');
+    add_image_size('news', 565, 367, true);
+});
 
 
+/*******************************
+ EXCERPT LENGTH ADJUST
+********************************/
+
+function home_excerpt_length($length) {
+    return 32;
+}
+add_filter('excerpt_length', 'home_excerpt_length');
+
+
+/*******************************
+ EXCERPT "READ MORE" LINK (SAFE FOR WP 7)
+********************************/
+
+add_filter('the_excerpt', function ($text) {
+
+    // IMPORTANT: prevent breaking admin + Gutenberg REST calls
+    if (is_admin() || wp_is_json_request()) {
+        return $text;
+    }
+
+    global $post;
+
+    if (!$post) {
+        return $text;
+    }
+
+    $link = get_permalink($post);
+
+    if (strpos($text, '[...]') !== false) {
+        $text = str_replace('[...]', '...', $text);
+    }
+
+    return $text . '&nbsp;<a href="' . esc_url($link) . '" class="readmore">Read more <i class="fa-solid fa-arrow-right"></i></a>';
+
+}, 20);
+
+
+/*******************************
+ ENABLE EXCERPTS ON PAGES
+********************************/
+
+function my_add_excerpts_to_pages() {
+    add_post_type_support('page', 'excerpt');
+}
+add_action('init', 'my_add_excerpts_to_pages');
 
 /**
  * Load Editor + Front-End Styles
@@ -337,7 +394,7 @@ add_action( 'admin_init', 'mytheme_editor_styles' );
 
 /**
  * Register Block Patterns (optional)
- */
+
 function mytheme_block_patterns() {
     register_block_pattern_category(
         'mytheme',
@@ -354,46 +411,7 @@ function mytheme_block_patterns() {
 }
 add_action( 'init', 'mytheme_block_patterns' );
 
-
-/*******************************
-
- THUMBNAIL SUPPORT
-
-********************************/
-
-
-add_theme_support('post-thumbnails');
-add_image_size('news', 565, 367, true );
-
-/*******************************
-
- EXCERPT LENGTH ADJUST
-
-********************************/
-
-
-function home_excerpt_length($length) {
-	return 32;
-}
-add_filter('excerpt_length', 'home_excerpt_length');
-
-// Replaces the excerpt "more" text by a link
-
-function custom_excerpt($text) {  // custom 'read more' link
-   if (strpos($text, '[...]')) {
-      $excerpt = strip_tags(str_replace('[...]', '...&nbsp;<a href="'.get_permalink().'" class="read&nbsp;more">Read more&nbsp;<i class="fa-solid fa-arrow-right"></i></a>', $text), "<a>");
-   } else {
-      $excerpt = '' . strip_tags($text) . '&nbsp;<a href="'.get_permalink().'" class="readmore">Read&nbsp;more&nbsp;<i class="fa-solid fa-arrow-right"></i></a>';
-   }
-   return $excerpt;
-}
-add_filter('the_excerpt', 'custom_excerpt');
-
-add_action( 'init', 'my_add_excerpts_to_pages' );
-function my_add_excerpts_to_pages() {
-     add_post_type_support( 'page', 'excerpt' );
-}
-
+ */
 
 /*******************************
 
@@ -401,16 +419,16 @@ ADD CUSTOM POST TO CATEGORY
 
 ********************************/
  
-add_filter( 'pre_get_posts', 'my_get_posts' );
+add_action('pre_get_posts', function ($query) {
 
-		function my_get_posts( $query ) {
+    if (is_admin() || ! $query->is_main_query()) {
+        return;
+    }
 
-			if ( ( is_home() && $query->is_main_query() ) || is_feed() )
-			$query->set( 'post_type', array( 'post', 'my_articles' ) );
-
-		return $query;
-		}
-
+    if (is_home() || is_feed()) {
+        $query->set('post_type', ['post', 'my_articles']);
+    }
+});
 
 
 /*******************************

@@ -16,8 +16,58 @@ class MWP_Action_DownloadFile extends MWP_Action_Abstract
     {
         $requestedFiles = $params['files'];
 
-        if (count($params['files']) > 1 || is_dir($requestedFiles[0])) {
-            $requestedFile = $this->archiveFiles($params['files']);
+        // Validate that every requested path sits within the WordPress installation
+        // root (ABSPATH). This prevents path traversal attacks where a crafted path
+        // like ../../etc/passwd could escape the intended directory boundary.
+        //
+        // We deliberately avoid realpath() for the boundary check because it follows
+        // symlinks, which would block legitimate sites that symlink directories outside
+        // ABSPATH (e.g. an uploads folder pointing to network storage). Instead we
+        // collapse . and .. via string operations only, preserving intentional symlinks.
+        // realpath() is still called afterwards, but only to verify the file exists —
+        // its resolved value is not used for the security comparison.
+        //
+        // DIRECTORY_SEPARATOR is appended to $allowedBase so that a sibling path like
+        // /var/www/html-other cannot pass a prefix check intended for /var/www/html.
+        $allowedBase = rtrim(ABSPATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+
+        // Collect normalised paths so that all file operations below use the
+        // same values that were security-checked. Using the raw input after
+        // validation (validate-then-use-different-value) would be unsafe.
+        $normalisedFiles = array();
+        foreach ($requestedFiles as $filePath) {
+            // Make relative paths absolute so the boundary check works correctly.
+            if (!path_is_absolute($filePath)) {
+                $filePath = ABSPATH . $filePath;
+            }
+
+            // Collapse . and .. segments without following symlinks.
+            $parts      = explode('/', str_replace('\\', '/', $filePath));
+            $normalised = array();
+            foreach ($parts as $part) {
+                if ($part === '..') {
+                    array_pop($normalised);
+                } elseif ($part !== '' && $part !== '.') {
+                    $normalised[] = $part;
+                }
+            }
+            $normalisedPath = DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $normalised);
+
+            // Boundary check against the .. -clean path (symlinks left intact).
+            if (strpos($normalisedPath . DIRECTORY_SEPARATOR, $allowedBase) !== 0) {
+                return array('message' => self::DOWNLOAD_FAILED);
+            }
+
+            // Verify the file actually exists on disk.
+            if (realpath($filePath) === false) {
+                return array('message' => self::DOWNLOAD_FAILED);
+            }
+
+            $normalisedFiles[] = $normalisedPath;
+        }
+
+        if (count($normalisedFiles) > 1 || is_dir($normalisedFiles[0])) {
+            $requestedFile = $this->archiveFiles($requestedFiles);
         } else {
             $requestedFile = $requestedFiles[0];
         }

@@ -6,6 +6,8 @@
  * @copyright 2024 Google LLC
  * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
  * @link      https://sitekit.withgoogle.com
+ *
+ * phpcs:disable PHPCS.Commenting.RequireDocTagDescription -- Pre-existing violations; tracked for follow-up cleanup.
  */
 
 namespace Google\Site_Kit\Core\Tags;
@@ -307,10 +309,8 @@ JS;
 	 */
 	protected function get_gtg_src( $tag_id ) {
 		return add_query_arg(
-			array(
-				'id' => $tag_id,
-				's'  => '/gtag/js',
-			),
+			'id',
+			$tag_id,
 			plugins_url( 'gtg/measurement.php', GOOGLESITEKIT_PLUGIN_MAIN_FILE )
 		);
 	}
@@ -319,6 +319,8 @@ JS;
 	 * Checks if Google tag gateway is active.
 	 *
 	 * @since 1.142.0
+	 * @since 1.162.0 Updated to use Google_Tag_Gateway_Settings->is_google_tag_gateway_active
+	 * instead of inline logic.
 	 *
 	 * @return bool True if Google tag gateway is active, false otherwise.
 	 */
@@ -329,17 +331,7 @@ JS;
 
 		$google_tag_gateway_settings = new Google_Tag_Gateway_Settings( $this->options );
 
-		$settings = $google_tag_gateway_settings->get();
-
-		$required_settings = array( 'isEnabled', 'isGTGHealthy', 'isScriptAccessEnabled' );
-
-		foreach ( $required_settings as $setting ) {
-			if ( ! isset( $settings[ $setting ] ) || ! $settings[ $setting ] ) {
-				return false;
-			}
-		}
-
-		return true;
+		return $google_tag_gateway_settings->is_google_tag_gateway_active();
 	}
 
 	/**

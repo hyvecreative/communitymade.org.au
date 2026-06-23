@@ -1,9 +1,4 @@
-<?php
-/**
- * @license MIT
- *
- * Modified using {@see https://github.com/BrianHenryIE/strauss}.
- */ declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the Monolog package.
@@ -68,7 +63,7 @@ class MercurialProcessor implements ProcessorInterface
             return self::$cache;
         }
 
-        $result = explode(' ', trim(`hg id -nb`));
+        $result = explode(' ', trim((string) shell_exec('hg id -nb')));
 
         if (count($result) >= 3) {
             return self::$cache = [

@@ -344,7 +344,7 @@ class MWP_EventListener_PublicRequest_AddConnectionKeyInfo implements Symfony_Ev
                     $time = time();
                     foreach ($communicationKeys as $siteId => $communicationKey) { ?>
                         <tr>
-                            <td><?php echo $siteId !== 'any' ? $siteId : '*'; ?></td>
+                            <td><?php echo esc_html($siteId !== 'any' ? $siteId : '*'); ?></td>
                             <td><?php
                                 if ($communicationKey['added'] != null) {
                                     /** @handled function */
@@ -368,7 +368,7 @@ class MWP_EventListener_PublicRequest_AddConnectionKeyInfo implements Symfony_Ev
                                 } ?>
                             </td>
                             <td style="text-align: right">
-                                <a href="<?php echo $this->context->wpNonceUrl($this->context->getAdminUrl('plugins.php?worker_connections=1&action=mwp_deactivate_key&connection_id='.$siteId), 'mwp_deactivation_key', 'mwp_nonce'); ?>">
+                                <a href="<?php echo esc_url($this->context->wpNonceUrl($this->context->getAdminUrl('plugins.php?worker_connections=1&action=mwp_deactivate_key&connection_id='.urlencode($siteId)), 'mwp_deactivation_key', 'mwp_nonce')); ?>">
                                     <?php
                                     /** @handled function */
                                     echo esc_html__('Disconnect', 'worker'); ?>
@@ -410,21 +410,28 @@ class MWP_EventListener_PublicRequest_AddConnectionKeyInfo implements Symfony_Ev
                     if ($refreshedKeys['success'] === true) {
                         echo 'Keys successfully refreshed!';
                     } else {
-                        echo 'Keys were not successfully refreshed. Error: '.$refreshedKeys['message'];
+                        // Escape the error message before output to prevent XSS.
+                        // $refreshedKeys['message'] is built from raw OS/network data (e.g. PHP's
+                        // $errstr from stream_socket_client, DNS resolution strings, or server
+                        // response content) inside mwp_get_public_keys_from_live_fallback().
+                        // None of that input is sanitized at the source, so it must be escaped
+                        // here before being rendered into the admin page HTML.
+                        echo 'Keys were not successfully refreshed. Error: '.esc_html($refreshedKeys['message']);
                     } ?>
                 </p>
                 <p>
-                    <?php echo 'Last communication error: '.$this->context->optionGet('mwp_last_communication_error', '') ?>
+                    <?php echo 'Last communication error: '.esc_html($this->context->optionGet('mwp_last_communication_error', '')) ?>
                 </p>
                 <p><?php
                     /** @handled function */
                     echo esc_html__('Currently loaded keys:', 'worker'); ?>
                 </p>
                 <pre><?php
+                    $publicKeys = $this->context->optionGet('mwp_public_keys', null);
                     if (version_compare(PHP_VERSION, '5.4', '>=') && defined('JSON_PRETTY_PRINT')) {
-                        echo trim(json_encode($this->context->optionGet('mwp_public_keys', null), JSON_PRETTY_PRINT));
+                        echo esc_html(trim(json_encode($publicKeys, JSON_PRETTY_PRINT)));
                     } else {
-                        echo trim(json_encode($this->context->optionGet('mwp_public_keys', null)));
+                        echo esc_html(trim(json_encode($publicKeys)));
                     }
                     ?></pre>
                 <?php

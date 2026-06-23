@@ -46,6 +46,8 @@ class MWP_EventListener_MasterRequest_AuthenticateServiceRequest implements Symf
         }
 
         $algorithm = $request->getSignatureAlgorithm();
+        // Sanitize algorithm to prevent XSS when displayed in debug output
+        $sanitizedAlgorithm = sanitize_text_field($algorithm);
 
         if ($algorithm == 'SHA256') {
             $serviceSignature = $request->getServiceSignatureV2();
@@ -56,9 +58,11 @@ class MWP_EventListener_MasterRequest_AuthenticateServiceRequest implements Symf
         }
 
         $keyName = $request->getKeyName();
+        // Sanitize key name to prevent XSS when displayed in debug output
+        $sanitizedKeyName = sanitize_text_field($keyName);
 
         if (empty($serviceSignature) || empty($keyName)) {
-            $this->context->optionSet('mwp_last_communication_error', 'Unexpected: service signature or key name are empty. Key name: '.$keyName.', Signature: '.$serviceSignature.', Algorithm: '.($algorithm ? $algorithm : 'SHA1'));
+            $this->context->optionSet('mwp_last_communication_error', 'Unexpected: service signature or key name are empty. Key name: '.$sanitizedKeyName.', Signature: '.$serviceSignature.', Algorithm: '.($sanitizedAlgorithm ? $sanitizedAlgorithm : 'SHA1'));
             return;
         }
 
@@ -67,7 +71,7 @@ class MWP_EventListener_MasterRequest_AuthenticateServiceRequest implements Symf
         if (empty($publicKey)) {
             // for now do not throw an exception, just do not authenticate the request
             // later we should start throwing an exception here when this becomes the main communication method
-            $this->context->optionSet('mwp_last_communication_error', 'Could not find the appropriate communication key. Searched for: '.$keyName);
+            $this->context->optionSet('mwp_last_communication_error', 'Could not find the appropriate communication key. Searched for: '.$sanitizedKeyName);
             return;
         }
 
@@ -75,7 +79,7 @@ class MWP_EventListener_MasterRequest_AuthenticateServiceRequest implements Symf
         $messageToCheck   = '';
 
         if (empty($communicationKey)) {
-            $this->context->optionSet('mwp_last_communication_error', 'Unexpected: communication key is empty. Key name: '.$keyName);
+            $this->context->optionSet('mwp_last_communication_error', 'Unexpected: communication key is empty. Key name: '.$sanitizedKeyName);
             return;
         }
 
@@ -88,7 +92,7 @@ class MWP_EventListener_MasterRequest_AuthenticateServiceRequest implements Symf
         if (empty($messageToCheck)) {
             // for now do not throw an exception, just do not authenticate the request
             // later we should start throwing an exception here when this becomes the main communication method
-            $this->context->optionSet('mwp_last_communication_error', 'Unexpected: message to check is empty. Host: '.$request->server['HTTP_HOST']);
+            $this->context->optionSet('mwp_last_communication_error', 'Unexpected: message to check is empty. Host: '.sanitize_text_field($request->server['HTTP_HOST']));
             return;
         }
 
@@ -101,7 +105,7 @@ class MWP_EventListener_MasterRequest_AuthenticateServiceRequest implements Symf
         if (!$verify) {
             // for now do not throw an exception, just do not authenticate the request
             // later we should start throwing an exception here when this becomes the main communication method
-            $this->context->optionSet('mwp_last_communication_error', 'Message signature invalid. Tried to verify: '.$messageToCheck.', Signature: '.base64_encode($serviceSignature));
+            $this->context->optionSet('mwp_last_communication_error', 'Message signature invalid. Tried to verify: '.base64_encode($messageToCheck).', Signature: '.base64_encode($serviceSignature));
             return;
         }
 

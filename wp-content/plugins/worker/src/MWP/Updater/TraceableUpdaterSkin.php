@@ -29,6 +29,11 @@ class MWP_Updater_TraceableUpdaterSkin
 
     public $done_header = false;
 
+    /**
+     * @var bool Whether the plugin is currently active
+     */
+    public $plugin_active;
+
     protected $messages = array();
 
     private $startedImplicit = false;

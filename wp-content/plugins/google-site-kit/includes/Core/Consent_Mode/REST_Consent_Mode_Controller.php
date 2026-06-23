@@ -6,6 +6,8 @@
  * @copyright 2024 Google LLC
  * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
  * @link      https://sitekit.withgoogle.com
+ *
+ * phpcs:disable PHPCS.Commenting.RequireDocTagDescription -- Pre-existing violations; tracked for follow-up cleanup.
  */
 
 namespace Google\Site_Kit\Core\Consent_Mode;
@@ -27,7 +29,7 @@ use WP_REST_Server;
 use WP_Error;
 
 /**
- * Class for handling Consent Mode.
+ * Class for handling consent mode.
  *
  * @since 1.122.0
  * @access private
@@ -286,7 +288,7 @@ class REST_Consent_Mode_Controller {
 	 *
 	 * @return false|string
 	 */
-	protected function get_consent_api_plugin_file() {
+	public function get_consent_api_plugin_file() {
 		// Check the default location first.
 		if ( Plugin_Status::is_plugin_installed( 'wp-consent-api/wp-consent-api.php' ) ) {
 			return 'wp-consent-api/wp-consent-api.php';

@@ -1,9 +1,4 @@
-<?php
-/**
- * @license MIT
- *
- * Modified using {@see https://github.com/BrianHenryIE/strauss}.
- */ declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the Monolog package.
@@ -85,6 +80,7 @@ class SignalHandler
      */
     public function handleSignal(int $signo, $siginfo = null): void
     {
+        /** @var array<int, string> $signals */
         static $signals = [];
 
         if (!$signals && extension_loaded('pcntl')) {

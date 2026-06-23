@@ -6,6 +6,8 @@
  * @copyright 2021 Google LLC
  * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
  * @link      https://sitekit.withgoogle.com
+ *
+ * phpcs:disable PHPCS.Commenting.RequireDocTagDescription -- Pre-existing violations; tracked for follow-up cleanup.
  */
 
 namespace Google\Site_Kit\Core\Modules;
@@ -122,6 +124,14 @@ abstract class Module {
 	private $google_services;
 
 	/**
+	 * Memoized datapoint definitions map.
+	 *
+	 * @since 1.181.0
+	 * @var array|null
+	 */
+	private $datapoint_definitions;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 1.0.0
@@ -134,10 +144,10 @@ abstract class Module {
 	 */
 	public function __construct(
 		Context $context,
-		Options $options = null,
-		User_Options $user_options = null,
-		Authentication $authentication = null,
-		Assets $assets = null
+		?Options $options = null,
+		?User_Options $user_options = null,
+		?Authentication $authentication = null,
+		?Assets $assets = null
 	) {
 		$this->context        = $context;
 		$this->options        = $options ?: new Options( $this->context );
@@ -281,20 +291,35 @@ abstract class Module {
 	 * Gets the datapoint definition instance.
 	 *
 	 * @since 1.77.0
+	 * @since 1.181.0 Changed visibility to public so REST permission checks can
+	 *               inspect a datapoint (e.g. for Permission_Aware_Datapoint).
 	 *
-	 * @param string $datapoint_id Datapoint ID.
+	 * @param string $datapoint_id Datapoint ID, in the `METHOD:datapoint` form (e.g. `GET:report`).
 	 * @return Datapoint Datapoint instance.
 	 * @throws Invalid_Datapoint_Exception Thrown if no datapoint exists by the given ID.
 	 */
-	protected function get_datapoint_definition( $datapoint_id ) {
-		$definitions = $this->get_datapoint_definitions();
+	public function get_datapoint_definition( $datapoint_id ) {
+		// Memoize the definitions map: a single module data request resolves the
+		// same datapoint twice (once for the permission check, once to execute),
+		// and rebuilding the full map instantiates every datapoint object.
+		if ( null === $this->datapoint_definitions ) {
+			$this->datapoint_definitions = $this->get_datapoint_definitions();
+		}
+
+		$definitions = $this->datapoint_definitions;
 
 		// All datapoints must be defined.
 		if ( empty( $definitions[ $datapoint_id ] ) ) {
 			throw new Invalid_Datapoint_Exception();
 		}
 
-		return new Datapoint( $definitions[ $datapoint_id ] );
+		$datapoint = $definitions[ $datapoint_id ];
+
+		if ( $datapoint instanceof Datapoint ) {
+			return $datapoint;
+		}
+
+		return new Datapoint( $datapoint );
 	}
 
 	/**
@@ -359,7 +384,11 @@ abstract class Module {
 				$current_user = wp_get_current_user();
 			}
 
-			$request = $this->create_data_request( $data );
+			if ( $datapoint instanceof Executable_Datapoint ) {
+				$request = $datapoint->create_request( $data );
+			} else {
+				$request = $this->create_data_request( $data );
+			}
 
 			if ( is_wp_error( $request ) ) {
 				return $request;
@@ -384,6 +413,10 @@ abstract class Module {
 
 		if ( is_wp_error( $response ) ) {
 			return $response;
+		}
+
+		if ( $datapoint instanceof Executable_Datapoint ) {
+			return $datapoint->parse_response( $response, $data );
 		}
 
 		return $this->parse_data_response( $data, $response );
@@ -739,7 +772,20 @@ abstract class Module {
 	 * @return bool TRUE if the request is for shared data, otherwise FALSE.
 	 */
 	protected function is_shared_data_request( Data_Request $data ) {
-		$datapoint    = $this->get_datapoint_definition( "{$data->method}:{$data->datapoint}" );
+		$datapoint = $this->get_datapoint_definition( "{$data->method}:{$data->datapoint}" );
+
+		return $this->is_shared_datapoint_request( $datapoint );
+	}
+
+	/**
+	 * Determines whether the current datapoint request is for shared data.
+	 *
+	 * @since 1.177.0
+	 *
+	 * @param Datapoint $datapoint Datapoint instance.
+	 * @return bool TRUE if the request is for shared data, otherwise FALSE.
+	 */
+	protected function is_shared_datapoint_request( Datapoint $datapoint ) {
 		$oauth_client = $this->get_oauth_client_for_datapoint( $datapoint );
 
 		if ( $this->authentication->get_oauth_client() !== $oauth_client ) {
@@ -770,8 +816,12 @@ abstract class Module {
 	public function is_shareable() {
 		if ( $this instanceof Module_With_Owner && $this->is_connected() ) {
 			$datapoints = $this->get_datapoint_definitions();
-			foreach ( $datapoints as $details ) {
-				if ( ! empty( $details['shareable'] ) ) {
+			foreach ( $datapoints as $datapoint ) {
+				if ( $datapoint instanceof Datapoint && $datapoint->is_shareable() ) {
+					return true;
+				}
+
+				if ( is_array( $datapoint ) && ! empty( $datapoint['shareable'] ) ) {
 					return true;
 				}
 			}

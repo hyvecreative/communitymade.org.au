@@ -74,7 +74,7 @@ add_action( 'init', 'wpa_taxonomies', 0 );
  * @param int|string $post_ID ID of the post if singular.
  */
 function wpa_add_stats( $stats, $title, $type = 'view', $post_ID = 0 ) {
-	$admin_only = ( '' === get_option( 'wpa_track_stats' ) ) ? true : false;
+	$admin_only = ( '' === get_option( 'wpa_track_stats', '' ) ) ? true : false;
 	if ( $admin_only && ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
@@ -221,7 +221,11 @@ function wpa_stats_action() {
 		if ( ! wp_verify_nonce( $security, 'wpa-stats-action' ) ) {
 			wp_die();
 		}
-		$stats   = map_deep( $_REQUEST['stats'], 'sanitize_text_field' );
+		$stats = json_decode( wp_unslash( $_REQUEST['stats'] ) );
+		$stats = map_deep( $stats, 'sanitize_text_field' );
+		if ( is_object( $stats ) ) {
+			$stats = (array) $stats;
+		}
 		$post_id = absint( $_REQUEST['post_id'] );
 		$title   = ( wpa_is_url( $_REQUEST['title'] ) ) ? esc_url( $_REQUEST['title'] ) : sanitize_text_field( $_REQUEST['title'] );
 		$type    = ( 'view' === $_REQUEST['type'] ) ? 'view' : 'event';
@@ -686,8 +690,10 @@ function wpa_custom_column( $column_name, $post_id ) {
 				$data  = ( property_exists( $event, 'contrast' ) ) ? 'contrast' : 'fontsize';
 				$icon  = ( 'contrast' === $data ) ? ' aticon aticon-adjust' : ' aticon aticon-font';
 				$label = ( property_exists( $event, 'contrast' ) ) ? __( 'High Contrast', 'wp-accessibility' ) : __( 'Large Font Size', 'wp-accessibility' );
-				// translators: Action taken. High Contrast or Large Font Size.
-				if ( 'fontsize' === $data && property_exists( $data, 'fontsize' ) ) {
+
+				$is_contrast = 'contrast' === $data && property_exists( $event, 'contrast' ) ? true : false;
+				$is_fontsize = 'fontsize' === $data && property_exists( $event, 'fontsize' ) ? true : false;
+				if ( $is_contrast || $is_fontsize ) {
 					// translators: Action enabled.
 					$last_action = ( 'enabled' === $event->{$data} ) ? sprintf( __( '%s enabled', 'wp-accessibility' ), $label ) : sprintf( __( '%s disabled', 'wp-accessibility' ), $label );
 				} else {

@@ -1,9 +1,4 @@
-<?php
-/**
- * @license MIT
- *
- * Modified using {@see https://github.com/BrianHenryIE/strauss}.
- */ declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the Monolog package.
@@ -172,7 +167,7 @@ class RotatingFileHandler extends StreamHandler
                 // suppress errors here as unlink() might fail if two processes
                 // are cleaning up/rotating at the same time
                 set_error_handler(function (int $errno, string $errstr, string $errfile, int $errline): bool {
-                    return false;
+                    return true;
                 });
                 unlink($file);
                 restore_error_handler();

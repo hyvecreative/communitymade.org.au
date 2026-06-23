@@ -33,12 +33,17 @@ class MWP_Extension_HitCounter
     /**
      * @param int      $incrementBy
      * @param DateTime $dateTime
+     *
+     * Note: Type hint removed from $dateTime parameter to fix PHP 8.4+ deprecation warning
+     * about implicitly nullable parameters while maintaining backward compatibility with PHP 5.5+.
+     * The nullable type syntax (?DateTime) is not supported in PHP 5.5-7.0.
      */
-    public function increment($incrementBy = 1, DateTime $dateTime = null)
+    public function increment($incrementBy = 1, $dateTime = null)
     {
         if ($dateTime === null) {
             $dateTime = new DateTime('now', new DateTimeZone('UTC'));
         }
+        /** @var DateTime $dateTime */
         $date = $dateTime->format('Y-m-d');
 
         $hitCount = (array)$this->getHitCount();

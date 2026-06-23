@@ -3,7 +3,7 @@
 Plugin Name: ManageWP - Worker
 Plugin URI: https://managewp.com
 Description: We help you efficiently manage all your WordPress websites. <strong>Updates, backups, 1-click login, migrations, security</strong> and more, on one dashboard. This service comes in two versions: standalone <a href="https://managewp.com">ManageWP</a> service that focuses on website management, and <a href="https://godaddy.com/pro">GoDaddy Pro</a> that includes additional tools for hosting, client management, lead generation, and more.
-Version: 4.9.24
+Version: 4.9.34
 Author: GoDaddy
 Author URI: https://godaddy.com
 License: GPL2
@@ -161,10 +161,14 @@ if (!class_exists('MwpWorkerResponder', false)):
          * @param MWP_Http_ResponseInterface|null $response
          *
          * @throws null
+         *
+         * Note: Type hint removed from $response parameter to fix PHP 8.4+ deprecation warning
+         * about implicitly nullable parameters while maintaining backward compatibility with PHP 5.5+.
+         * The nullable type syntax (?Type) is not supported in PHP 5.5-7.0.
          */
-        function callback($e = null, MWP_Http_ResponseInterface $response = null)
+        function callback($e = null, $response = null)
         {
-            if ($response !== null) {
+            if ($response !== null && $response instanceof MWP_Http_ResponseInterface) {
                 $responseEvent = new MWP_Event_MasterResponse($response);
                 $this->container->getEventDispatcher()->dispatch(MWP_Event_Events::MASTER_RESPONSE, $responseEvent);
                 $lastResponse = $responseEvent->getResponse();
@@ -575,8 +579,8 @@ if (!function_exists('mwp_init')):
         // reason (eg. the site can't ping itself). Handle that case early.
         register_activation_hook(__FILE__, 'mwp_activation_hook');
 
-        $GLOBALS['MMB_WORKER_VERSION']  = '4.9.24';
-        $GLOBALS['MMB_WORKER_REVISION'] = '2025-07-23 00:00:00';
+        $GLOBALS['MMB_WORKER_VERSION']  = '4.9.34';
+        $GLOBALS['MMB_WORKER_REVISION'] = '2026-05-11 00:00:00';
 
         // Ensure PHP version compatibility.
         if (version_compare(PHP_VERSION, '5.2', '<')) {

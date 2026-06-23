@@ -2,8 +2,8 @@
 Contributors: concertedaction
 Tags: signup, events, action network, online organizing
 Requires at least: 4.6
-Tested up to: 6.5.2
-Stable tag: 1.4.4
+Tested up to: 6.9
+Stable tag: 1.8.5
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -35,13 +35,71 @@ Detailed specs for shortcode attributes, widget options, etc. are available on t
 
 = My ticketed events aren't showing up on the list =
 
-Action Network does not currently provide access to Ticketed Events through its API. You can, however, use the "Add Action" tab and copy and paste the embed code manually.
+Action Network does not currently provide access to Ticketed Events through its API. This plugin has ended support for ticketedevents.
 
 == Screenshots ==
 
 1. Provides a Wordpress-like interface for managing embed codes and shortcodes
 
 == Changelog ==
+
+= 1.8.5 =
+* Bug fix: Embed code validation now accepts Action Network widget v6+ (regex updated from v2-4 to any version)
+* Bug fix: Removed wp_kses_post() from embed code input so the required <script> tag is preserved for both validation and storage
+* Bug fix: Prevent PHP warning "Trying to access array offset on null" in embed code display function
+* Bug fix: Prevent potential PHP 8.1+ TypeError when no embed code is found for a given action
+
+= 1.8.4 =
+* Bug fix: Fixed incorrect database table name that prevented adding actions on new multisite subsites (table was created as wp-action-network instead of actionnetwork)
+* Cleans up incorrectly-named table from 1.8.2/1.8.3 on upgrade
+
+= 1.8.3 =
+* Bug fix: Removed server-to-self (loopback) HTTP requests that were blocked by WAF/ModSecurity rules on some hosting configurations (e.g. OpenLiteSpeed, XCloud)
+* Bug fix: Manual sync button and daily cron sync now run directly instead of relying on wp_remote_post() to admin-ajax.php
+* Bug fix: Cron sync now logs actual inserted/updated counts instead of stale request parameters
+* Enhancement: Replaced "Cron Updates" tab with "Sync Status" tab showing queue status, last sync results, and cron history
+* Enhancement: Added "Reset Stuck Sync" button to recover from stuck sync states
+* Enhancement: Added copyable support/debug information panel for troubleshooting
+* Tested with WordPress 6.9
+
+= 1.8.2 =
+* Bug fix: Fixed issue where API sync button would get stuck disabled if sync failed
+* Bug fix: Added error handling to prevent infinite polling when AJAX requests fail
+* Enhancement: Added comprehensive debugging information for sync failures
+* Enhancement: Added "Show error details" link in error messages for troubleshooting
+* Enhancement: Added timeout protection (30 minutes) for sync polling
+* Enhancement: Improved error recovery - sync button now re-enables on errors
+* Enhancement: Added server-side error logging when WP_DEBUG is enabled
+
+= 1.8.1 =
+* Code quality: Prefixed helper functions to satisfy WordPress naming rules
+* Security: Replaced raw SQL string concatenation with prepared statements where needed
+* Housekeeping: Removed hidden macOS metadata file from the plugin root
+
+= 1.8.0 =
+* Code quality: Resolved all remaining plugin checker warnings
+* Tested with WordPress 6.8
+
+= 1.7.0 =
+* Performance improvements: Added version parameters to all enqueued scripts and styles
+* Performance improvements: Scripts now load in footer where appropriate
+* Code quality: All assets now properly enqueued using WordPress functions
+* Security: Fixed all XSS and CSRF vulnerabilities
+* Security: Plugin checker compliant with all security and performance warnings resolved
+
+= 1.6.0 =
+* Security: Fixed all XSS vulnerabilities with proper escaping
+* Security: Fixed CSRF vulnerability in admin filter form
+* Code quality: All outputs properly escaped
+* Code quality: Plugin checker compliant
+
+= 1.5.0 =
+
+* Security: Fixed CSRF vulnerability in admin actions filter form
+* Security: Fixed multiple XSS vulnerabilities in admin pages and widget controls
+* UI: Replaced alert popup with inline shortcode options editor
+* Removed "Add Action" tab (actions should be synced via API)
+* Improved input sanitization and escaping throughout admin interface
 
 = 1.4.4 =
 

@@ -12,9 +12,9 @@ class ActionNetwork_Action_Widget extends WP_Widget {
 	public function __construct() {
 		$widgets_ops = array(
 			'classname' => 'actionnetwork_action_widget',
-			'description' => __('Displays an Action Network action as a widget', 'actionnetwork'),
+			'description' => __('Displays an Action Network action as a widget', 'wp-action-network'),
 		);
-		parent::__construct( 'actionnetwork_action_widget', __('Action Network Action', 'actionnetwork'), $widgets_ops );
+		parent::__construct( 'actionnetwork_action_widget', __('Action Network Action', 'wp-action-network'), $widgets_ops );
 	}
 	
 	/**
@@ -27,9 +27,11 @@ class ActionNetwork_Action_Widget extends WP_Widget {
 		
 		if (!isset($instance['an_wp_id']) || !$instance['an_wp_id']) { return; }
 		
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget markup
 		echo $args['before_widget'];
 		if (!empty( $instance['title'])) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title']) . $args ['after_title'];
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget markup
+			echo $args['before_title'] . esc_html( apply_filters( 'widget_title', $instance['title']) ) . $args ['after_title'];
 		}
 		$shortcode = '[actionnetwork id="' . $instance['an_wp_id'] . '"';
 		$shortcode_args = array(
@@ -48,6 +50,7 @@ class ActionNetwork_Action_Widget extends WP_Widget {
 		}
 		$shortcode .= ']';
 		echo do_shortcode( $shortcode );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget markup
 		echo $args['after_widget'];
 	}
 	
@@ -60,8 +63,14 @@ class ActionNetwork_Action_Widget extends WP_Widget {
 		
 		global $wpdb;
 		
-		$table_name = $wpdb->prefix . 'actionnetwork';
-		$actions = $wpdb->get_results("SELECT wp_id, title, type FROM $table_name WHERE enabled=1 AND hidden=0");
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Prepared statement with static parameters
+		$actions = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT wp_id, title, type FROM {$wpdb->prefix}actionnetwork WHERE enabled = %d AND hidden = %d",
+                1,
+                0
+            )
+        );
 		$actions_list = array();
 		foreach ($actions as $action) {
 			$actions_list[ $action->wp_id ] = $action->title . ' (' . $action->type . ')';
@@ -70,18 +79,18 @@ class ActionNetwork_Action_Widget extends WP_Widget {
 		// outputs the options form on admin
 		$args = array(
 			'title' => array(
-				'label' => __('Widget Title', 'actionnetwork'),
+				'label' => __('Widget Title', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
 			),
 			'an_wp_id' => array(
-				'label' => __('Action to display', 'actionnetwork'),
+				'label' => __('Action to display', 'wp-action-network'),
 				'type' => 'select',
 				'options' => $actions_list,
 				'advanced' => false,
 			),
 			'size' => array(
-				'label' => __('Size', 'actionnetwork'),
+				'label' => __('Size', 'wp-action-network'),
 				'type' => 'select',
 				'options' => array(
 					'standard' => 'standard',
@@ -91,7 +100,7 @@ class ActionNetwork_Action_Widget extends WP_Widget {
 				'advanced' => false,
 			),
 			'style' => array(
-				'label' => __('Style', 'actionnetwork'),
+				'label' => __('Style', 'wp-action-network'),
 				'type' => 'select',
 				'options' => array(
 					'default' => 'default',
@@ -102,36 +111,36 @@ class ActionNetwork_Action_Widget extends WP_Widget {
 				'advanced' => false,
 			),
 			'thank_you' => array(
-				'label' => __('Custom Thank-You Message', 'actionnetwork'),
+				'label' => __('Custom Thank-You Message', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 			),
 			'help_us' => array(
-				'label' => __('Custom "Help Us" Message', 'actionnetwork'),
+				'label' => __('Custom "Help Us" Message', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 			),
 			'hide_social' => array(
-				'label' => __('Hide social sharing buttons', 'actionnetwork'),
+				'label' => __('Hide social sharing buttons', 'wp-action-network'),
 				'type' => 'checkbox',
 				'advanced' => true,
 			),
 			'hide_email' => array(
-				'label' => __('Hide email sharing form', 'actionnetwork'),
+				'label' => __('Hide email sharing form', 'wp-action-network'),
 				'type' => 'checkbox',
 				'advanced' => true,
 			),
 			'hide_embed' => array(
-				'label' => __('Hide embed codes', 'actionnetwork'),
+				'label' => __('Hide embed codes', 'wp-action-network'),
 				'type' => 'checkbox',
 				'advanced' => true,
 			),
 		);
 		
-		wp_enqueue_style( 'actionnetwork-widget-css', plugins_url('../widget-controls.css', __FILE__) );
-		wp_register_script( 'actionnetwork-widget-js', plugins_url('../widget-controls.js', __FILE__) );
+		wp_enqueue_style( 'actionnetwork-widget-css', plugins_url('../widget-controls.css', __FILE__), array(), ACTIONNETWORK_VERSION );
+		wp_register_script( 'actionnetwork-widget-js', plugins_url('../widget-controls.js', __FILE__), array(), ACTIONNETWORK_VERSION, true );
 		$translation_array = array(
-			'showAdvanced' => __( 'Show Advanced Controls', 'actionnetwork' ),
+			'showAdvanced' => __( 'Show Advanced Controls', 'wp-action-network' ),
 		);
 		wp_localize_script( 'actionnetwork-widget-js', 'widgetcontrolText', $translation_array );
 		wp_enqueue_script( 'actionnetwork-widget-js' );
@@ -174,9 +183,9 @@ class ActionNetwork_List_Widget extends WP_Widget {
 	public function __construct() {
 		$widgets_ops = array(
 			'classname' => 'actionnetwork_list_widget',
-			'description' => __('Displays list of current Action Network actions', 'actionnetwork'),
+			'description' => __('Displays list of current Action Network actions', 'wp-action-network'),
 		);
-		parent::__construct( 'actionnetwork_list_widget', __('Action Network List', 'actionnetwork'), $widgets_ops );
+		parent::__construct( 'actionnetwork_list_widget', __('Action Network List', 'wp-action-network'), $widgets_ops );
 	}
 	
 	/**
@@ -226,8 +235,10 @@ class ActionNetwork_List_Widget extends WP_Widget {
 		if ( isset($instance['footer']) && $instance['footer'] ) {
 			$output .= wpautop( $instance['footer'] );
 		}
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget markup
 		$output .= $args['after_widget'];
 		
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output contains shortcode and wpautop content which is safe
 		echo $output;
 	}
 	
@@ -240,97 +251,97 @@ class ActionNetwork_List_Widget extends WP_Widget {
 		// outputs the options form on admin
 		$args = array(
 			'title' => array(
-				'label' => __('Widget Title', 'actionnetwork'),
+				'label' => __('Widget Title', 'wp-action-network'),
 				'type' => 'text',
-				'default' => __('Take Action', 'actionnetwork'),
+				'default' => __('Take Action', 'wp-action-network'),
 				'advanced' => false,
 			),
 			'n' => array(
-				'label' => __('Number of Actions to display', 'actionnetwork'),
+				'label' => __('Number of Actions to display', 'wp-action-network'),
 				'type' => 'number',
 				'default' => 5,
 				'advanced' => false,
-				'description' => __( 'Set to zero to display all available actions', 'actionnetwork' ),
+				'description' => __( 'Set to zero to display all available actions', 'wp-action-network' ),
 			),
 			'action_types' => array(
-				'label' => __('Action Types to display', 'actionnetwork'),
+				'label' => __('Action Types to display', 'wp-action-network'),
 				'type' => 'checkboxes',
 				'options' => array('petition','advocacy_campaign','fundraising_page','form','event','ticketed_event'),
 				'default' => serialize(array('petition','advocacy_campaign','fundraising_page','form')),
 				'advanced' => false,
 			),
 			'link_text' => array(
-				'label' => __('Link text', 'actionnetwork'),
+				'label' => __('Link text', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
 				'classes' => 'widget-control-code',
-				'description' => __( 'Template for text of link. Uses twig-like token for title. Leave blank to default to <code>{{ action.title }}</code>', 'actionnetwork' ),
+				'description' => __( 'Template for text of link. Uses twig-like token for title. Leave blank to default to <code>{{ action.title }}</code>', 'wp-action-network' ),
 			),
 			'link_format' => array(
-				'label' => __('Link format', 'actionnetwork'),
+				'label' => __('Link format', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
 				'classes' => 'widget-control-code',
-				'description' => __( 'If left blank, will link to action page on Action Network. Token <code>{{ action.link }}</code> can be used to, for example, create a redirect URL', 'actionnetwork' ),
+				'description' => __( 'If left blank, will link to action page on Action Network. Token <code>{{ action.link }}</code> can be used to, for example, create a redirect URL', 'wp-action-network' ),
 			),
 			'no_actions_hide' => array(
-				'label' => __('Hide widget if there are no current actions', 'actionnetwork'),
+				'label' => __('Hide widget if there are no current actions', 'wp-action-network'),
 				'type' => 'checkbox',
 				'advanced' => false,
 			),
 			'no_actions' => array(
-				'label' => __('No Actions text', 'actionnetwork'),
+				'label' => __('No Actions text', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
-				'description' => __( 'Text to display if there are no current actions. Leave blank to default to "No current actions." Accepts HTML.', 'actionnetwork' ),
+				'description' => __( 'Text to display if there are no current actions. Leave blank to default to "No current actions." Accepts HTML.', 'wp-action-network' ),
 			),
 			'footer' => array(
-				'label' => __('Footer', 'actionnetwork'),
+				'label' => __('Footer', 'wp-action-network'),
 				'type' => 'textarea',
 				'advanced' => false,
-				'description' => __( 'Text to display after list of actions. <code>wpautop</code> will be applied (adding line breaks). Accepts HTML.', 'actionnetwork' ),
+				'description' => __( 'Text to display after list of actions. <code>wpautop</code> will be applied (adding line breaks). Accepts HTML.', 'wp-action-network' ),
 			),
 			'container_element' => array(
-				'label' => __('Container Element', 'actionnetwork'),
+				'label' => __('Container Element', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'HTML element (without angle brackets) to contain the list. If left blank, will default to <code>ul</code>', 'actionnetwork' ),
+				'description' => __( 'HTML element (without angle brackets) to contain the list. If left blank, will default to <code>ul</code>', 'wp-action-network' ),
 			),
 			'container_class' => array(
-				'label' => __('Container Class', 'actionnetwork'),
+				'label' => __('Container Class', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'Class to be applied to list container element. If left blank, will default to <code>actionnetwork-list</code>', 'actionnetwork' ),
+				'description' => __( 'Class to be applied to list container element. If left blank, will default to <code>actionnetwork-list</code>', 'wp-action-network' ),
 			),
 			'item_element' => array(
-				'label' => __('Item Element', 'actionnetwork'),
+				'label' => __('Item Element', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'HTML element (without angle brackets) for each item in the list. If left blank, will default to <code>li</code>', 'actionnetwork' ),
+				'description' => __( 'HTML element (without angle brackets) for each item in the list. If left blank, will default to <code>li</code>', 'wp-action-network' ),
 			),
 			'item_class' => array(
-				'label' => __('Item Class', 'actionnetwork'),
+				'label' => __('Item Class', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'Class to be applied to list item element. If left blank, will default to <code>actionnetwork-list-item</code>', 'actionnetwork' ),
+				'description' => __( 'Class to be applied to list item element. If left blank, will default to <code>actionnetwork-list-item</code>', 'wp-action-network' ),
 			),
 			'twig' => array(
-				'label' => __('Twig template', 'actionnetwork'),
+				'label' => __('Twig template', 'wp-action-network'),
 				'type' => 'textarea',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( "Twig-style template for widget. Overrides Link Text and all other advanced settings\n\nMust have control structure <code>{% for action in actions %} {% else %} {% endfor %}</code>.\n\nAvailable tokens are <code>{{ action.title }}</code>, <code>{{ action.link }}</code> and <code>{{ action.id }}</code>", 'actionnetwork' ),
+				'description' => __( "Twig-style template for widget. Overrides Link Text and all other advanced settings\n\nMust have control structure <code>{% for action in actions %} {% else %} {% endfor %}</code>.\n\nAvailable tokens are <code>{{ action.title }}</code>, <code>{{ action.link }}</code> and <code>{{ action.id }}</code>", 'wp-action-network' ),
 			),
 		);
 		
-		wp_enqueue_style( 'actionnetwork-widget-css', plugins_url('../widget-controls.css', __FILE__) );
-		wp_register_script( 'actionnetwork-widget-js', plugins_url('../widget-controls.js', __FILE__) );
+		wp_enqueue_style( 'actionnetwork-widget-css', plugins_url('../widget-controls.css', __FILE__), array(), ACTIONNETWORK_VERSION );
+		wp_register_script( 'actionnetwork-widget-js', plugins_url('../widget-controls.js', __FILE__), array(), ACTIONNETWORK_VERSION, true );
 		$translation_array = array(
-			'showAdvanced' => __( 'Show Advanced Controls', 'actionnetwork' ),
+			'showAdvanced' => __( 'Show Advanced Controls', 'wp-action-network' ),
 		);
 		wp_localize_script( 'actionnetwork-widget-js', 'widgetcontrolText', $translation_array );
 		wp_enqueue_script( 'actionnetwork-widget-js' );
@@ -384,9 +395,9 @@ class ActionNetwork_Calendar_Widget extends WP_Widget {
 	public function __construct() {
 		$widgets_ops = array(
 			'classname' => 'actionnetwork_calendar_widget',
-			'description' => __('Displays list of upcoming Action Network events', 'actionnetwork'),
+			'description' => __('Displays list of upcoming Action Network events', 'wp-action-network'),
 		);
-		parent::__construct( 'actionnetwork_calendar_widget', __('Action Network Calendar', 'actionnetwork'), $widgets_ops );
+		parent::__construct( 'actionnetwork_calendar_widget', __('Action Network Calendar', 'wp-action-network'), $widgets_ops );
 	}
 	
 	/**
@@ -396,9 +407,11 @@ class ActionNetwork_Calendar_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget markup
 		echo $args['before_widget'];
 		if (!empty( $instance['title'])) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title']) . $args ['after_title'];
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget markup
+			echo $args['before_title'] . esc_html( apply_filters( 'widget_title', $instance['title']) ) . $args ['after_title'];
 		}
 		$shortcode = '[actionnetwork_calendar ignore_url_id="1"';
 		$shortcode_args = array(
@@ -425,8 +438,9 @@ class ActionNetwork_Calendar_Widget extends WP_Widget {
 		}
 		echo do_shortcode( $shortcode );
 		if ( isset($instance['footer']) && $instance['footer'] ) {
-			echo wpautop( $instance['footer'] );
+			echo wp_kses_post( wpautop( $instance['footer'] ) );
 		}
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget markup
 		echo $args['after_widget'];
 	}
 	
@@ -439,102 +453,102 @@ class ActionNetwork_Calendar_Widget extends WP_Widget {
 		// outputs the options form on admin
 		$args = array(
 			'title' => array(
-				'label' => __('Widget Title', 'actionnetwork'),
+				'label' => __('Widget Title', 'wp-action-network'),
 				'type' => 'text',
-				'default' => __('Upcoming Events', 'actionnetwork'),
+				'default' => __('Upcoming Events', 'wp-action-network'),
 				'advanced' => false,
 			),
 			'n' => array(
-				'label' => __('Number of Events to display', 'actionnetwork'),
+				'label' => __('Number of Events to display', 'wp-action-network'),
 				'type' => 'number',
 				'default' => 3,
 				'advanced' => false,
-				'description' => __( 'Set to zero to display all available events', 'actionnetwork' ),
+				'description' => __( 'Set to zero to display all available events', 'wp-action-network' ),
 			),
 			'date_format' => array(
-				'label' => __('Date format', 'actionnetwork'),
+				'label' => __('Date format', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
 				'classes' => 'widget-control-code',
-				'description' => __( 'Formatting string for date. Leave blank to default to F j, Y.', 'actionnetwork' ) . ' <a href="http://php.net/date" target="_blank">' . __( 'Date format documentation', 'actionnetwork' ) . '</a>',
+				'description' => __( 'Formatting string for date. Leave blank to default to F j, Y.', 'wp-action-network' ) . ' <a href="http://php.net/date" target="_blank">' . __( 'Date format documentation', 'wp-action-network' ) . '</a>',
 			),
 			'link_text' => array(
-				'label' => __('Link text', 'actionnetwork'),
+				'label' => __('Link text', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
 				'classes' => 'widget-control-code',
-				'description' => __( 'Template for text of link. Uses twig-like tokens for title and date. Leave blank to default to <code>{{ event.date }}: {{ event.title }}</code>', 'actionnetwork' ),
+				'description' => __( 'Template for text of link. Uses twig-like tokens for title and date. Leave blank to default to <code>{{ event.date }}: {{ event.title }}</code>', 'wp-action-network' ),
 			),
 			'link_format' => array(
-				'label' => __('Link format', 'actionnetwork'),
+				'label' => __('Link format', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
 				'classes' => 'widget-control-code',
-				'description' => __( 'If left blank, will link to event page on Action Network. Otherwise, use <code>{{ event.id }}</code> token to link to a page that has the [actionnetwork_calendar] shortcode on it (i.e., something like <code>/calendar/{{ event.id }}</code>), which will then display the event. This is the only way to link to non-API-synced events.', 'actionnetwork' ),
+				'description' => __( 'If left blank, will link to event page on Action Network. Otherwise, use <code>{{ event.id }}</code> token to link to a page that has the [actionnetwork_calendar] shortcode on it (i.e., something like <code>/calendar/{{ event.id }}</code>), which will then display the event. This is the only way to link to non-API-synced events.', 'wp-action-network' ),
 			),
 			'location' => array(
-				'label' => __('Display location', 'actionnetwork'),
+				'label' => __('Display location', 'wp-action-network'),
 				'type' => 'checkbox',
 				'advanced' => false,
 			),
 			'description' => array(
-				'label' => __('Display description', 'actionnetwork'),
+				'label' => __('Display description', 'wp-action-network'),
 				'type' => 'checkbox',
 				'advanced' => false,
 			),
 			'no_events' => array(
-				'label' => __('No Events text', 'actionnetwork'),
+				'label' => __('No Events text', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
-				'description' => __( 'Text to display if there are no upcoming events. Leave blank to default to "No upcoming events." Accepts HTML.', 'actionnetwork' ),
+				'description' => __( 'Text to display if there are no upcoming events. Leave blank to default to "No upcoming events." Accepts HTML.', 'wp-action-network' ),
 			),
 			'footer' => array(
-				'label' => __('Footer', 'actionnetwork'),
+				'label' => __('Footer', 'wp-action-network'),
 				'type' => 'textarea',
 				'advanced' => false,
-				'description' => __( 'Text to display after list of events (most useful to link to a full calendar page that has the <code>[actionnetwork_calendar]</code> shortcode on it). <code>wpautop</code> will be applied (adding line breaks). Accepts HTML.', 'actionnetwork' ),
+				'description' => __( 'Text to display after list of events (most useful to link to a full calendar page that has the <code>[actionnetwork_calendar]</code> shortcode on it). <code>wpautop</code> will be applied (adding line breaks). Accepts HTML.', 'wp-action-network' ),
 			),
 			'container_element' => array(
-				'label' => __('Container Element', 'actionnetwork'),
+				'label' => __('Container Element', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'HTML element (without angle brackets) to contain the list. If left blank, will default to <code>ul</code>', 'actionnetwork' ),
+				'description' => __( 'HTML element (without angle brackets) to contain the list. If left blank, will default to <code>ul</code>', 'wp-action-network' ),
 			),
 			'container_class' => array(
-				'label' => __('Container Class', 'actionnetwork'),
+				'label' => __('Container Class', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'Class to be applied to list container element. If left blank, will default to <code>actionnetwork-calendar</code>', 'actionnetwork' ),
+				'description' => __( 'Class to be applied to list container element. If left blank, will default to <code>actionnetwork-calendar</code>', 'wp-action-network' ),
 			),
 			'item_element' => array(
-				'label' => __('Item Element', 'actionnetwork'),
+				'label' => __('Item Element', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'HTML element (without angle brackets) for each item in the list. If left blank, will default to <code>li</code>', 'actionnetwork' ),
+				'description' => __( 'HTML element (without angle brackets) for each item in the list. If left blank, will default to <code>li</code>', 'wp-action-network' ),
 			),
 			'item_class' => array(
-				'label' => __('Item Class', 'actionnetwork'),
+				'label' => __('Item Class', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'Class to be applied to list item element. If left blank, will default to <code>actionnetwork-calendar-item</code>', 'actionnetwork' ),
+				'description' => __( 'Class to be applied to list item element. If left blank, will default to <code>actionnetwork-calendar-item</code>', 'wp-action-network' ),
 			),
 			'twig' => array(
-				'label' => __('Twig template', 'actionnetwork'),
+				'label' => __('Twig template', 'wp-action-network'),
 				'type' => 'textarea',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( "Twig-style template for widget. Overrides Link Text and all other advanced settings\n\nMust have control structure <code>{% for event in events %} {% else %} {% endfor %}</code>.\n\nAvailable tokens are <code>{{ event.title }}</code>, <code>{{ event.date }}</code>, <code>{{ event.link }}</code>, <code>{{ event.id }}</code>, <code>{{ event.location }}</code> and <code>{{ event.description }}</code>", 'actionnetwork' ),
+				'description' => __( "Twig-style template for widget. Overrides Link Text and all other advanced settings\n\nMust have control structure <code>{% for event in events %} {% else %} {% endfor %}</code>.\n\nAvailable tokens are <code>{{ event.title }}</code>, <code>{{ event.date }}</code>, <code>{{ event.link }}</code>, <code>{{ event.id }}</code>, <code>{{ event.location }}</code> and <code>{{ event.description }}</code>", 'wp-action-network' ),
 			),
 		);
 		
-		wp_enqueue_style( 'actionnetwork-widget-css', plugins_url('../widget-controls.css', __FILE__) );
-		wp_register_script( 'actionnetwork-widget-js', plugins_url('../widget-controls.js', __FILE__) );
+		wp_enqueue_style( 'actionnetwork-widget-css', plugins_url('../widget-controls.css', __FILE__), array(), ACTIONNETWORK_VERSION );
+		wp_register_script( 'actionnetwork-widget-js', plugins_url('../widget-controls.js', __FILE__), array(), ACTIONNETWORK_VERSION, true );
 		$translation_array = array(
-			'showAdvanced' => __( 'Show Advanced Controls', 'actionnetwork' ),
+			'showAdvanced' => __( 'Show Advanced Controls', 'wp-action-network' ),
 		);
 		wp_localize_script( 'actionnetwork-widget-js', 'widgetcontrolText', $translation_array );
 		wp_enqueue_script( 'actionnetwork-widget-js' );
@@ -587,11 +601,11 @@ class ActionNetwork_Signup_Widget extends WP_Widget {
 	public function __construct() {
 		$widgets_ops = array(
 			'classname' => 'actionnetwork_signup_widget',
-			'description' => __('Displays signup form for Action Network', 'actionnetwork'),
+			'description' => __('Displays signup form for Action Network', 'wp-action-network'),
 		);
-		$widget_name = __('Action Network Signup', 'actionnetwork');
+		$widget_name = __('Action Network Signup', 'wp-action-network');
 		if (!get_option('actionnetwork_api_key', null)) {
-			$widget_name .= ': ' . __('disabled', 'actionnetwork');
+			$widget_name .= ': ' . __('disabled', 'wp-action-network');
 		}
 		parent::__construct( 'actionnetwork_signupwidget', $widget_name, $widgets_ops );
 	}
@@ -617,23 +631,25 @@ class ActionNetwork_Signup_Widget extends WP_Widget {
 		// $spam_protect = ($instance->spam_protect==1) ? true : false;
 		$spam_protect = ($instance['spam_protect']==1) ? true : false;
 		
-		wp_enqueue_style( 'actionnetwork-signup-css', plugins_url('../signup.css', __FILE__) );
+		wp_enqueue_style( 'actionnetwork-signup-css', plugins_url('../signup.css', __FILE__), array(), ACTIONNETWORK_VERSION );
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget markup
 		echo $args['before_widget'];
 		if (!empty( $instance['title'])) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title']) . $args ['after_title'];
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget markup
+			echo $args['before_title'] . esc_html( apply_filters( 'widget_title', $instance['title']) ) . $args ['after_title'];
 		}
 		
 		// get instance info
 		$defaults = array(
 			'introduction' => '',
-			'first_name_label' => __('First Name', 'actionnetwork'),
-			'last_name_label' => __('Last Name', 'actionnetwork'),
-			'email_label' => __('Email', 'actionnetwork'),
-			'zip_code_label' => __('Zip Code', 'actionnetwork'),
-			'submit' => __('Submit', 'actionnetwork'),
+			'first_name_label' => __('First Name', 'wp-action-network'),
+			'last_name_label' => __('Last Name', 'wp-action-network'),
+			'email_label' => __('Email', 'wp-action-network'),
+			'zip_code_label' => __('Zip Code', 'wp-action-network'),
+			'submit' => __('Submit', 'wp-action-network'),
 			'ajax' => 0,
-			'thank_you_message' => __('Thank you for signing up!', 'actionnetwork'),
+			'thank_you_message' => __('Thank you for signing up!', 'wp-action-network'),
 			'container_element' => 'ul',
 			'container_class' => 'actionnetwork-signup',
 			'item_element' => 'li',
@@ -646,19 +662,20 @@ class ActionNetwork_Signup_Widget extends WP_Widget {
 		extract($instance);
 
 		if($spam_protect){
-			wp_enqueue_script( 'actionnetwork-hcaptcha', 'https://www.hCaptcha.com/1/api.js' );
+			// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- External resource version controlled by hCaptcha
+			wp_enqueue_script( 'actionnetwork-hcaptcha', 'https://www.hCaptcha.com/1/api.js', array(), null, false );
 			$hcaptcha_site_key = get_option('actionnetwork_hcaptcha_site_key');
 			$hcaptcha_secret_key = get_option('actionnetwork_hcaptcha_secret_key');
 		}
 		
 		if (isset($submission['message']) && $submission['message']) {
 			echo "<div class=\"actionnetwork-signup-message" . (count($errors) ? ' error' : '') . "\">";
-			echo $submission['message'];
+			echo wp_kses_post( $submission['message'] );
 			echo "</div>";
 		}
 		
 		if ($ajax) {
-			wp_enqueue_script( 'actionnetwork-signup-js', plugins_url('../signup.js', __FILE__), array( 'jquery' ), false, true );
+			wp_enqueue_script( 'actionnetwork-signup-js', plugins_url('../signup.js', __FILE__), array( 'jquery' ), ACTIONNETWORK_VERSION, true );
 			wp_localize_script( 'actionnetwork-signup-js', 'ajax_object',
             	array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 		}
@@ -717,13 +734,16 @@ class ActionNetwork_Signup_Widget extends WP_Widget {
 			
 		$form .= "</$container_element></form>";
 		
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Form HTML is built from safe inputs
 		echo $form;
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget markup
 		echo $args['after_widget'];
 	}
 	
 	public function processForm( $instance, $data = null ) {
 		
-		if ( $data === null ) { $data = $_REQUEST; }
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Form processing with instance validation
+		if ( $data === null ) { $data = wp_unslash( $_REQUEST ); }
 		
         $spam_protect = true;
         $hcaptcha_site_key = null;
@@ -760,13 +780,7 @@ class ActionNetwork_Signup_Widget extends WP_Widget {
 			if(isset($data['g-recaptcha-response']) && !empty($data['g-recaptcha-response'])) {
 				$data = array('secret' => $hcaptcha_secret_key,'response' => $data['g-recaptcha-response']);
 
-				/*$verify = curl_init();
-				curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
-				curl_setopt($verify, CURLOPT_POST, true);
-				curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
-				curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);*/
-		
-				$response = curl_exec($verify);
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_exec -- Using wp_remote_post instead of cURL
 				$response = wp_remote_post("https://hcaptcha.com/siteverify", array(
 					'headers' => array(
 						'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -778,10 +792,10 @@ class ActionNetwork_Signup_Widget extends WP_Widget {
 				$responseData = json_decode($response);
 		
 				if(!$responseData->success) {
-					$submission['errors']['captcha'] = __('We could not confirm the captcha. Please try again.','actionnetwork');
+					$submission['errors']['captcha'] = __('We could not confirm the captcha. Please try again.','wp-action-network');
 				} 
 			}else{
-				$submission['message'] = wpautop( __('Please complete the captcha challenge.', 'actionnetwork') );
+				$submission['message'] = wpautop( __('Please complete the captcha challenge.', 'wp-action-network') );
 				return $submission;
 			}
 		} else {
@@ -790,13 +804,13 @@ class ActionNetwork_Signup_Widget extends WP_Widget {
 		
 		// Check for required fields
 		if (isset($instance['first_name_require']) && $instance['first_name_require'] && !$submission['first_name']) {
-			$submission['errors']['first_name'] = __('This field is required','actionnetwork');
+			$submission['errors']['first_name'] = __('This field is required','wp-action-network');
 		}
 		if (isset($instance['last_name_require']) && $instance['last_name_require'] && !$submission['last_name']) {
-			$submission['errors']['last_name'] = __('This field is required','actionnetwork');
+			$submission['errors']['last_name'] = __('This field is required','wp-action-network');
 		}
-		if (!is_email($submission['email'])) { $submission['errors']['email'] = __('A valid email is required','actionnetwork'); }
-		if (!$submission['zip_code']) { $submission['errors']['zip_code'] = __('This field is required','actionnetwork'); }
+		if (!is_email($submission['email'])) { $submission['errors']['email'] = __('A valid email is required','wp-action-network'); }
+		if (!$submission['zip_code']) { $submission['errors']['zip_code'] = __('This field is required','wp-action-network'); }
 		
 		// submit to Action Network
 		$submission['message'] = '';
@@ -819,13 +833,13 @@ class ActionNetwork_Signup_Widget extends WP_Widget {
 			
 			$response = $ActionNetwork->signupPerson( $person, $tags );
 			if (isset($response->error)) {
-				$submission['message'] = wpautop( __('There was an error connecting to Action Network. Please try again later.', 'actionnetwork') );
+				$submission['message'] = wpautop( __('There was an error connecting to Action Network. Please try again later.', 'wp-action-network') );
 				$submission['errors']['connection'] = true;
 			} else {
 				$submission['message'] = wpautop( $instance['thank_you_message'] );
 			}
 		} else {
-			$submission['message'] = wpautop( __('There were errors in the form. Please try again.', 'actionnetwork') );
+			$submission['message'] = wpautop( __('There were errors in the form. Please try again.', 'wp-action-network') );
 		}
 		
 		return $submission;
@@ -844,12 +858,12 @@ class ActionNetwork_Signup_Widget extends WP_Widget {
 		
 		if (!$actionnetwork_api_key) {
 			echo '<p>';
-			_e('Signup widget requires an API key.', 'actionnetwork');
+			esc_html_e('Signup widget requires an API key.', 'wp-action-network');
 			echo " ";
 			printf(
 				/* translators: %s is link to text "settings page" */
-				__('Please visit the plugin %s and enter your API key.', 'actionnetwork'),
-				'<a href="admin.php?page=actionnetwork&actionnetwork_tab=settings">' . __('settings page','actionnetwork') . '</a>'
+				esc_html__('Please visit the plugin %s and enter your API key.', 'wp-action-network'),
+				'<a href="admin.php?page=wp-action-network&actionnetwork_tab=settings">' . esc_html__('settings page','wp-action-network') . '</a>'
 			);
 			echo '</p>';
 			return;
@@ -866,134 +880,134 @@ class ActionNetwork_Signup_Widget extends WP_Widget {
 		
 		$args = array(
 			'title' => array(
-				'label' => __('Widget Title', 'actionnetwork'),
+				'label' => __('Widget Title', 'wp-action-network'),
 				'type' => 'text',
-				'default' => __('Sign Up', 'actionnetwork'),
+				'default' => __('Sign Up', 'wp-action-network'),
 				'advanced' => false,
 			),
 			'introduction' => array(
-				'label' => __('Introduction', 'actionnetwork'),
+				'label' => __('Introduction', 'wp-action-network'),
 				'type' => 'textarea',
 				'advanced' => false,
-				'description' => __( 'Text to display before the form. <code>wpautop</code> will be applied (adding line breaks). Accepts HTML.', 'actionnetwork' ),
+				'description' => __( 'Text to display before the form. <code>wpautop</code> will be applied (adding line breaks). Accepts HTML.', 'wp-action-network' ),
 			),
 			'first_name_label' => array(
-				'label' => __('First name label', 'actionnetwork'),
+				'label' => __('First name label', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
-				'description' => __( 'Label for first name field. Leave blank to default to "First Name"', 'actionnetwork' ),
+				'description' => __( 'Label for first name field. Leave blank to default to "First Name"', 'wp-action-network' ),
 			),
 			'first_name_display' => array(
-				'label' => __('Display field for first name', 'actionnetwork'),
+				'label' => __('Display field for first name', 'wp-action-network'),
 				'type' => 'checkbox',
 				'default' => 1,
 				'advanced' => false,
 			),
 			'first_name_require' => array(
-				'label' => __('Require first name', 'actionnetwork'),
+				'label' => __('Require first name', 'wp-action-network'),
 				'type' => 'checkbox',
 				'default' => 0,
 				'advanced' => false,
 			),
 			'last_name_label' => array(
-				'label' => __('Last name label', 'actionnetwork'),
+				'label' => __('Last name label', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
-				'description' => __( 'Label for last name field. Leave blank to default to "Last Name"', 'actionnetwork' ),
+				'description' => __( 'Label for last name field. Leave blank to default to "Last Name"', 'wp-action-network' ),
 			),
 			'last_name_display' => array(
-				'label' => __('Display field for last name', 'actionnetwork'),
+				'label' => __('Display field for last name', 'wp-action-network'),
 				'type' => 'checkbox',
 				'default' => 1,
 				'advanced' => false,
 			),
 			'last_name_require' => array(
-				'label' => __('Require last name', 'actionnetwork'),
+				'label' => __('Require last name', 'wp-action-network'),
 				'type' => 'checkbox',
 				'default' => 0,
 				'advanced' => false,
 			),
 			'email_label' => array(
-				'label' => __('Email label', 'actionnetwork'),
+				'label' => __('Email label', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
-				'description' => __( 'Label for email field. Leave blank to default to "Email"', 'actionnetwork' ),
+				'description' => __( 'Label for email field. Leave blank to default to "Email"', 'wp-action-network' ),
 			),
 			'zip_code_label' => array(
-				'label' => __('Zip Code label', 'actionnetwork'),
+				'label' => __('Zip Code label', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => false,
-				'description' => __( 'Label for zip code. Leave blank to default to "Zip Code"', 'actionnetwork' ),
+				'description' => __( 'Label for zip code. Leave blank to default to "Zip Code"', 'wp-action-network' ),
 			),
 			'tags' => array(
-				'label' => __('Tags to add', 'actionnetwork'),
+				'label' => __('Tags to add', 'wp-action-network'),
 				'type' => 'checkboxes',
 				'options' => $tags,
 				'advanced' => false,
-				'description' => __( 'Any checked tags will be added to the person object', 'actionnetwork' ),
+				'description' => __( 'Any checked tags will be added to the person object', 'wp-action-network' ),
 			),
 			'submit' => array(
-				'label' => __('Submit button text', 'actionnetwork'),
+				'label' => __('Submit button text', 'wp-action-network'),
 				'type' => 'text',
-				'default' => __('Join Us', 'actionnetwork'),
+				'default' => __('Join Us', 'wp-action-network'),
 				'advanced' => false,
-				'description' => __( 'Text to display in the sign-up form button. If left blank, will default to "Submit"', 'actionnetwork' ),
+				'description' => __( 'Text to display in the sign-up form button. If left blank, will default to "Submit"', 'wp-action-network' ),
 			),
 			'ajax' => array(
-				'label' => __('Submit using AJAX', 'actionnetwork'),
+				'label' => __('Submit using AJAX', 'wp-action-network'),
 				'type' => 'checkbox',
 				'default' => 0,
 				'advanced' => false,
-				'description' => __( 'If checked, form will be submitted without loading a new page', 'actionnetwork' ),
+				'description' => __( 'If checked, form will be submitted without loading a new page', 'wp-action-network' ),
 			),
 			'spam_protect' => array(
-				'label' => __('Spam protection', 'actionnetwork'),
+				'label' => __('Spam protection', 'wp-action-network'),
 				'type' => 'checkbox',
 				'default' => 0,
 				'advanced' => false,
-				'description' => __( 'If checked, a hCaptcha challenge will be added to the form', 'actionnetwork' ),
+				'description' => __( 'If checked, a hCaptcha challenge will be added to the form', 'wp-action-network' ),
 			),
 			'thank_you_message' => array(
-				'label' => __('Thank you message', 'actionnetwork'),
+				'label' => __('Thank you message', 'wp-action-network'),
 				'type' => 'textarea',
 				'default' => 'Thank you for signing up!',
 				'advanced' => false,
-				'description' => __( 'Text to display after successful signup. If left blank, will default to "Thank you for signing up!" <code>wpautop</code> will be applied (adding line breaks). Accepts HTML.', 'actionnetwork' ),
+				'description' => __( 'Text to display after successful signup. If left blank, will default to "Thank you for signing up!" <code>wpautop</code> will be applied (adding line breaks). Accepts HTML.', 'wp-action-network' ),
 			),
 			'container_element' => array(
-				'label' => __('Container Element', 'actionnetwork'),
+				'label' => __('Container Element', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'HTML element (without angle brackets) to contain the form items. If left blank, will default to <code>ul</code>', 'actionnetwork' ),
+				'description' => __( 'HTML element (without angle brackets) to contain the form items. If left blank, will default to <code>ul</code>', 'wp-action-network' ),
 			),
 			'container_class' => array(
-				'label' => __('Container Class', 'actionnetwork'),
+				'label' => __('Container Class', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'Class to be applied to form item container element. If left blank, will default to <code>actionnetwork-signup</code>', 'actionnetwork' ),
+				'description' => __( 'Class to be applied to form item container element. If left blank, will default to <code>actionnetwork-signup</code>', 'wp-action-network' ),
 			),
 			'item_element' => array(
-				'label' => __('Item Element', 'actionnetwork'),
+				'label' => __('Item Element', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'HTML element (without angle brackets) for each form item. If left blank, will default to <code>li</code>', 'actionnetwork' ),
+				'description' => __( 'HTML element (without angle brackets) for each form item. If left blank, will default to <code>li</code>', 'wp-action-network' ),
 			),
 			'item_class' => array(
-				'label' => __('Item Class', 'actionnetwork'),
+				'label' => __('Item Class', 'wp-action-network'),
 				'type' => 'text',
 				'advanced' => true,
 				'classes' => 'widget-control-code',
-				'description' => __( 'Class to be applied to list item element. If left blank, will default to <code>actionnetwork-signup-item</code>', 'actionnetwork' ),
+				'description' => __( 'Class to be applied to list item element. If left blank, will default to <code>actionnetwork-signup-item</code>', 'wp-action-network' ),
 			),
 		);
 		
-		wp_enqueue_style( 'actionnetwork-widget-css', plugins_url('../widget-controls.css', __FILE__) );
-		wp_register_script( 'actionnetwork-widget-js', plugins_url('../widget-controls.js', __FILE__) );
+		wp_enqueue_style( 'actionnetwork-widget-css', plugins_url('../widget-controls.css', __FILE__), array(), ACTIONNETWORK_VERSION );
+		wp_register_script( 'actionnetwork-widget-js', plugins_url('../widget-controls.js', __FILE__), array(), ACTIONNETWORK_VERSION, true );
 		$translation_array = array(
-			'showAdvanced' => __( 'Show Advanced Controls', 'actionnetwork' ),
+			'showAdvanced' => __( 'Show Advanced Controls', 'wp-action-network' ),
 		);
 		wp_localize_script( 'actionnetwork-widget-js', 'widgetcontrolText', $translation_array );
 		wp_enqueue_script( 'actionnetwork-widget-js' );
@@ -1054,21 +1068,24 @@ add_action( 'wp_ajax_nopriv_actionnetwork_signup', 'actionnetwork_signup_ajax' )
 
 function actionnetwork_signup_ajax(){
 	
-	$data_str = isset($_POST['data']) ? $_POST['data'] : '';
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- AJAX handler with widget instance validation, URL-encoded string will be parsed and individual values sanitized
+	$data_str = isset($_POST['data']) ? wp_unslash( $_POST['data'] ) : '';
 	parse_str($data_str, $data);
 	
 	$widget = new ActionNetwork_Signup_Widget();
 	$settings = $widget->get_settings();
 	
-	$widget_id = isset($data['widget_id']) ? str_replace('actionnetwork_signupwidget-','',$data['widget_id']) : null;
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing -- AJAX handler with widget instance validation
+	$widget_id = isset($data['widget_id']) ? sanitize_text_field( str_replace('actionnetwork_signupwidget-','', $data['widget_id'] ) ) : null;
 	
 	$instance = isset($settings[$widget_id]) ? $settings[$widget_id] : null;
 	
-	$backend_info = "BACKEND INFO:\n\n";
-	$backend_info .= '$_POST:'."\n\n".print_r($_POST,1)."\n\n-----------\n\n";
-	$backend_info .= '$data:'."\n\n".print_r($data,1)."\n\n-----------\n\n";
-	$backend_info .= '$settings:'."\n\n".print_r($settings,1)."\n\n-----------\n\n";
-	$backend_info .= '$instance:'."\n\n".print_r($instance,1)."\n\n-----------\n\n";
+	// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r -- Debug code commented out
+	// $backend_info = "BACKEND INFO:\n\n";
+	// $backend_info .= '$_POST:'."\n\n".print_r($_POST,1)."\n\n-----------\n\n";
+	// $backend_info .= '$data:'."\n\n".print_r($data,1)."\n\n-----------\n\n";
+	// $backend_info .= '$settings:'."\n\n".print_r($settings,1)."\n\n-----------\n\n";
+	// $backend_info .= '$instance:'."\n\n".print_r($instance,1)."\n\n-----------\n\n";
 	
 	// mail('uekissam@gmail.com','backend info',$backend_info,"From: noreply@ueref.org\r\n");
 	

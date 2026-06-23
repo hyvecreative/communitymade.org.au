@@ -3,8 +3,8 @@ Contributors: wordpress@sucuri.net
 Donate Link: https://sucuri.net/
 Tags: malware, security, firewall, scan, spam, virus, sucuri, protection, blocklist, detection, hardening, file integrity
 Requires at least: 3.6
-Tested up to: 6.8
-Stable tag: 2.3
+Tested up to: 6.9
+Stable tag: 2.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -259,6 +259,38 @@ This version removes the API communication service dependency on https://wordpre
 This version adds an option to refresh the malware scan results on demand, as well as several small bug fixes and improvements.
 
 == Changelog ==
+= 2.7.3 =
+* Refactor AJAX handler to an explicit dispatch map for improved security and efficiency.
+* Improve 2FA section with more UI clarity.
+* Make light-mode default when no preference is defined. Correct inverted dark/light mode icons.
+* Fix i18n regression in 2FA status and setup templates.
+* Fix duplicate CSS property declarations.
+
+= 2.7.2 =
+* Fix salt bug in the wp-config file.
+
+= 2.7.1 =
+* Update on the encryption process for the WAF API key due to problems reported on some users.
+
+
+= 2.7 =
+* Fixes a lot of readiness warning/errors from PCP.
+* Updates how the plugin stores WAF API key.
+
+= 2.6 =
+* Create new permissions library.
+* Fix error causing deletion of WAF API key on clearing cache.
+
+= 2.5 =
+* Add support for two-factor authentication.
+
+This plugin bundles qrcode-generator (MIT) by Kazuhiko Arase.
+Vendored copy due to npm package-injection concerns. We'll switch back to npm when feasible.
+Source: https://github.com/kazuhikoarase/qrcode-generator
+
+= 2.4 =
+* Update list of files to ignore in integrity check.
+
 = 2.3 =
 * Add theme toggle switch.
 * Remove an unnecessary section for users without WAF key.

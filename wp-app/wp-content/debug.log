@@ -18291,3 +18291,21 @@ Stack trace:
 [23-Jun-2026 00:59:27 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/functions.php:6121) in /var/www/html/wp-includes/rest-api/class-wp-rest-server.php on line 1896
 [23-Jun-2026 00:59:27 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/functions.php:6121) in /var/www/html/wp-includes/rest-api/class-wp-rest-server.php on line 1920
 [23-Jun-2026 01:00:27 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>acf</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /var/www/html/wp-includes/functions.php on line 6121
+[23-Jun-2026 03:17:21 UTC] PHP Warning:  mysqli_real_connect(): php_network_getaddresses: getaddrinfo for db failed: Name or service not known in /var/www/html/wp-includes/class-wpdb.php on line 1988
+[23-Jun-2026 03:17:21 UTC] PHP Warning:  mysqli_real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo for db failed: Name or service not known in /var/www/html/wp-includes/class-wpdb.php on line 1988
+[23-Jun-2026 03:17:39 UTC] PHP Warning:  mysqli_real_connect(): php_network_getaddresses: getaddrinfo for db failed: Name or service not known in /var/www/html/wp-includes/class-wpdb.php on line 1988
+[23-Jun-2026 03:17:39 UTC] PHP Warning:  mysqli_real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo for db failed: Name or service not known in /var/www/html/wp-includes/class-wpdb.php on line 1988
+[23-Jun-2026 03:17:47 UTC] PHP Warning:  mysqli_real_connect(): php_network_getaddresses: getaddrinfo for db failed: Name or service not known in /var/www/html/wp-includes/class-wpdb.php on line 1988
+[23-Jun-2026 03:17:47 UTC] PHP Warning:  mysqli_real_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo for db failed: Name or service not known in /var/www/html/wp-includes/class-wpdb.php on line 1988
+[23-Jun-2026 03:20:36 UTC] Automatic updates starting...
+[23-Jun-2026 03:20:37 UTC]   Automatic plugin updates starting...
+[23-Jun-2026 03:20:37 UTC]   Automatic plugin updates complete.
+[23-Jun-2026 03:20:38 UTC]   Automatic theme updates starting...
+[23-Jun-2026 03:20:38 UTC]   Automatic theme updates complete.
+[23-Jun-2026 03:20:38 UTC] Automatic updates complete.
+[23-Jun-2026 03:20:41 UTC] PHP Deprecated:  Creation of dynamic property Actionnetwork_Sync::$new_only is deprecated in /var/www/html/wp-content/plugins/wp-action-network/actionnetwork.php on line 762
+[23-Jun-2026 03:28:42 UTC] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-action-network' at line 1 for query DROP TABLE IF EXISTS wp_wp-action-network made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, actionnetwork_update_version_check, actionnetwork_install
+[23-Jun-2026 03:28:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/class-wpdb.php:1851) in /var/www/html/wp-admin/admin-ajax.php on line 27
+[23-Jun-2026 03:28:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/class-wpdb.php:1851) in /var/www/html/wp-admin/admin-ajax.php on line 28
+[23-Jun-2026 03:28:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/class-wpdb.php:1851) in /var/www/html/wp-includes/functions.php on line 7079
+[23-Jun-2026 03:28:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/wp-includes/class-wpdb.php:1851) in /var/www/html/wp-includes/functions.php on line 7220

@@ -18,7 +18,14 @@ abstract class MWP_Stream_Decorator implements MWP_Stream_Interface
      */
     private $stream;
 
-    public function __construct(MWP_Stream_Interface $stream = null)
+    /**
+     * @param MWP_Stream_Interface|null $stream
+     *
+     * Note: Type hint removed from $stream parameter to fix PHP 8.4+ deprecation warning
+     * about implicitly nullable parameters while maintaining backward compatibility with PHP 5.5+.
+     * The nullable type syntax (?MWP_Stream_Interface) is not supported in PHP 5.5-7.0.
+     */
+    public function __construct($stream = null)
     {
         $this->stream = $stream;
 

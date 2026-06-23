@@ -6,6 +6,8 @@
  * @copyright 2024 Google LLC
  * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
  * @link      https://sitekit.withgoogle.com
+ *
+ * phpcs:disable PHPCS.Commenting.RequireDocTagDescription -- Pre-existing violations; tracked for follow-up cleanup.
  */
 
 namespace Google\Site_Kit\Modules\Sign_In_With_Google;
@@ -86,12 +88,12 @@ class Settings extends Module_Settings {
 	 */
 	protected function get_default() {
 		return array(
-			'clientID'         => '',
-			'text'             => self::TEXT_SIGN_IN_WITH_GOOGLE['value'],
-			'theme'            => self::THEME_LIGHT['value'],
-			'shape'            => self::SHAPE_RECTANGULAR['value'],
-			'oneTapEnabled'    => false,
-			'oneTapOnAllPages' => false,
+			'clientID'                  => '',
+			'text'                      => self::TEXT_SIGN_IN_WITH_GOOGLE['value'],
+			'theme'                     => self::THEME_LIGHT['value'],
+			'shape'                     => self::SHAPE_RECTANGULAR['value'],
+			'oneTapEnabled'             => false,
+			'showNextToCommentsEnabled' => false,
 		);
 	}
 
@@ -152,8 +154,8 @@ class Settings extends Module_Settings {
 				$option['oneTapEnabled'] = (bool) $option['oneTapEnabled'];
 			}
 
-			if ( isset( $option['oneTapOnAllPages'] ) ) {
-				$option['oneTapOnAllPages'] = (bool) $option['oneTapOnAllPages'];
+			if ( isset( $option['showNextToCommentsEnabled'] ) ) {
+				$option['showNextToCommentsEnabled'] = (bool) $option['showNextToCommentsEnabled'];
 			}
 
 			return $option;

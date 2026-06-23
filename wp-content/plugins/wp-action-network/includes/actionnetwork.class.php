@@ -15,6 +15,7 @@ class ActionNetwork {
 
 	public function __construct($api_key = null) {
 		//if(!extension_loaded('curl')) trigger_error('ActionNetwork requires PHP cURL', E_USER_ERROR);
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Error handling for missing required parameter
 		if(is_null($api_key)) trigger_error('api key must be supplied', E_USER_ERROR);
 		$this->api_key = $api_key;
 	}
@@ -226,9 +227,14 @@ class ActionNetwork {
 
 	public function getEmbed($type, $id, $size = 'standard', $style = 'default') {
 		if (!in_array($type, array('petitions', 'events', 'fundraising_pages', 'advocacy_campaigns', 'forms')))
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Error handling for invalid parameter
 			trigger_error('getEmbed must be passed a type of petitions, events, fundraising_pages, advocacy_campaigns or forms', E_USER_ERROR);
-		if (!in_array($size, array('standard', 'full'))) trigger_error('getEmbed must be passed a size of standard or full', E_USER_ERROR);
-		if (!in_array($style, array('default', 'layout_only', 'no'))) trigger_error('getEmbed must be passed a style of default, layout_only or no', E_USER_ERROR);
+		if (!in_array($size, array('standard', 'full'))) 
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Error handling for invalid parameter
+			trigger_error('getEmbed must be passed a size of standard or full', E_USER_ERROR);
+		if (!in_array($style, array('default', 'layout_only', 'no'))) 
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Error handling for invalid parameter
+			trigger_error('getEmbed must be passed a style of default, layout_only or no', E_USER_ERROR);
 		$embeds = $this->call($type.'/'.$id.'/embed');
 		$selector = 'embed_'.$size.'_'.$style.'_styles';
 		return $embeds->$selector;
@@ -298,6 +304,7 @@ class ActionNetworkPerson {
 
 	public function __construct($person = null) {
 		if (is_array($person)) { $person = (object) $person; }
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Error handling for invalid parameter
 		if (!is_object($person)) trigger_error('person must be passed as an associative array or object', E_USER_ERROR);
 		if (isset($person->email) && filter_var($person->email, FILTER_VALIDATE_EMAIL)) {
 			$person->email_addresses[0] = (object) array('address' => $person->email);
@@ -307,6 +314,7 @@ class ActionNetworkPerson {
 				if (is_array($email_address)) { $person->email_addresses[$index] = (object) $email_address; }
 			}
 		}
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Error handling for invalid parameter
 		if (!isset($person->email_addresses[0]->address) || !filter_var($person->email_addresses[0]->address, FILTER_VALIDATE_EMAIL)) trigger_error('person must include a valid email address', E_USER_ERROR);
 		$this->email_addresses = $person->email_addresses;
 
@@ -332,6 +340,7 @@ class ActionNetworkPerson {
 		if (isset($person->address)) {
 			$address = $person->address;
 			if (is_array($address)) { $address = (object) $address; }
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Error handling for invalid parameter
 			if (!is_object($address)) trigger_error('address must be passed as an associative array or object', E_USER_ERROR);
 			if (!isset($address->primary)) { $address->primary = true; }
 			$valid_address = new stdClass();
@@ -388,6 +397,7 @@ class ActionNetworkPerson {
 	// pass address as an associative array or object
 	public function addPostalAddress($address = null) {
 		if (is_array($address)) { $address = (object) $address; }
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Error handling for invalid parameter
 		if (!is_object($address)) trigger_error('address must be passed as an associative array or object', E_USER_ERROR);
 		$valid_address = new stdClass();
 		foreach($this->valid_address_fields as $field) {

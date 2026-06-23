@@ -1,9 +1,4 @@
-<?php
-/**
- * @license MIT
- *
- * Modified using {@see https://github.com/BrianHenryIE/strauss}.
- */ declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the Monolog package.
@@ -69,7 +64,7 @@ class GitProcessor implements ProcessorInterface
             return self::$cache;
         }
 
-        $branches = `git branch -v --no-abbrev`;
+        $branches = shell_exec('git branch -v --no-abbrev');
         if ($branches && preg_match('{^\* (.+?)\s+([a-f0-9]{40})(?:\s|$)}m', $branches, $matches)) {
             return self::$cache = [
                 'branch' => $matches[1],

@@ -353,8 +353,12 @@ class Symfony_Filesystem_Filesystem
      *                               - $options['delete'] Whether to delete files that are not in the source directory (defaults to false)
      *
      * @throws Symfony_Filesystem_Exception_IOException When file type is unknown
+     *
+     * Note: Type hint removed from $iterator parameter to fix PHP 8.4+ deprecation warning
+     * about implicitly nullable parameters while maintaining backward compatibility with PHP 5.5+.
+     * The nullable type syntax (?Traversable) is not supported in PHP 5.5-7.0.
      */
-    public function mirror($originDir, $targetDir, Traversable $iterator = null, $options = array())
+    public function mirror($originDir, $targetDir, $iterator = null, $options = array())
     {
         $targetDir = rtrim($targetDir, '/\\');
         $originDir = rtrim($originDir, '/\\');

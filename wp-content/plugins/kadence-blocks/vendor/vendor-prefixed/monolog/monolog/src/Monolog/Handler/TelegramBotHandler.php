@@ -1,9 +1,4 @@
-<?php
-/**
- * @license MIT
- *
- * Modified using {@see https://github.com/BrianHenryIE/strauss}.
- */ declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the Monolog package.
@@ -238,6 +233,10 @@ class TelegramBotHandler extends AbstractProcessingHandler
 
     protected function sendCurl(string $message): void
     {
+        if ('' === trim($message)) {
+            return;
+        }
+        
         $ch = curl_init();
         $url = self::BOT_API . $this->apiKey . '/SendMessage';
         curl_setopt($ch, CURLOPT_URL, $url);

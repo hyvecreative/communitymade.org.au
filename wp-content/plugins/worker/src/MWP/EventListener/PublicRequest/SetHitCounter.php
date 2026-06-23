@@ -89,6 +89,10 @@ class MWP_EventListener_PublicRequest_SetHitCounter implements Symfony_EventDisp
             return;
         }
 
+        if (!$this->isConnectedToManageWP()) {
+            return;
+        }
+
         if ($this->isBlacklisted($request)) {
             return;
         }
@@ -153,5 +157,18 @@ class MWP_EventListener_PublicRequest_SetHitCounter implements Symfony_EventDisp
     private function isDisabled()
     {
         return $this->context->optionGet('disabled_hit_count');
+    }
+
+    /**
+     * Check if the site is connected to ManageWP.
+     *
+     * @return bool
+     */
+    private function isConnectedToManageWP()
+    {
+        $communicationKey = mwp_get_communication_key();
+        $communicationKeys = mwp_get_communication_keys();
+
+        return !empty($communicationKey) || !empty($communicationKeys);
     }
 }

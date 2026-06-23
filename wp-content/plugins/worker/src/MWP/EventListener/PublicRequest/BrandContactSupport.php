@@ -154,7 +154,21 @@ class MWP_EventListener_PublicRequest_BrandContactSupport implements Symfony_Eve
         <div id="mwp_support_dialog" style="display: none;">
             <?php if (!empty($contactText)): ?>
                 <div>
-                    <p><?php echo $contactText ?></p>
+                    <p><?php
+                        // $contactText is brand-provided and may contain links and basic
+                        // formatting. We use wp_kses() rather than esc_html() so that
+                        // legitimate markup (anchor tags, bold/italic, line breaks) is
+                        // preserved while any executable or dangerous elements are stripped.
+                        echo wp_kses($contactText, array(
+                            'a'      => array('href' => array(), 'target' => array(), 'rel' => array()),
+                            'b'      => array(),
+                            'strong' => array(),
+                            'em'     => array(),
+                            'i'      => array(),
+                            'br'     => array(),
+                            'span'   => array('class' => array()),
+                        ));
+                    ?></p>
                 </div>
             <?php endif ?>
             <?php if ($contactType == MWP_Worker_Brand::CONTACT_TYPE_TEXT_PLUS_FORM): ?>

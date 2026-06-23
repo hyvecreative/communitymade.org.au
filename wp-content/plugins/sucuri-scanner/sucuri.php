@@ -8,7 +8,7 @@
  * Author: Sucuri Inc.
  * Text Domain: sucuri-scanner
  * Domain Path: /lang
- * Version: 2.3
+ * Version: 2.7.3
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
@@ -54,8 +54,8 @@ $sucuriscan_dependencies = array(
 );
 
 /* terminate execution if dependencies are not met */
-foreach ($sucuriscan_dependencies as $dependency) {
-    if (!function_exists($dependency)) {
+foreach ($sucuriscan_dependencies as $sucuriscan_dependency) {
+    if (!function_exists($sucuriscan_dependency)) {
         /* Report invalid access if possible. */
         header('HTTP/1.1 403 Forbidden');
         exit(0);
@@ -87,7 +87,7 @@ define('SUCURISCAN', 'sucuriscan');
 /**
  * Current version of the plugin's code.
  */
-define('SUCURISCAN_VERSION', '2.3');
+define('SUCURISCAN_VERSION', '2.7.3');
 
 /**
  * Defines the human readable name of the plugin.
@@ -201,11 +201,13 @@ add_action('plugins_loaded', 'sucuriscan_load_plugin_textdomain');
 /* Load all classes before anything else. */
 require_once 'src/base.lib.php';
 require_once 'src/request.lib.php';
+require_once 'src/cookie.lib.php';
 require_once 'src/fileinfo.lib.php';
 require_once 'src/cache.lib.php';
 require_once 'src/option.lib.php';
 require_once 'src/cron.lib.php';
 require_once 'src/event.lib.php';
+require_once 'src/permissions.lib.php';
 require_once 'src/hook.lib.php';
 require_once 'src/api.lib.php';
 require_once 'src/mail.lib.php';
@@ -223,6 +225,8 @@ require_once 'src/installer-skin.lib.php';
 require_once 'src/cachecontrol.lib.php';
 require_once 'src/csp.lib.php';
 require_once 'src/cors.lib.php';
+require_once 'src/totp.core.php';
+require_once 'src/topt.lib.php';
 
 /* Load page and ajax handlers */
 require_once 'src/pagehandler.php';
@@ -252,6 +256,8 @@ require_once 'src/globals.php';
 if (defined('WP_CLI') && WP_CLI) {
     include_once 'src/cli.lib.php';
 }
+
+SucuriScanTwoFactor::add_hooks();
 
 add_action('send_headers', 'sucuriscanSetSecurityHeaders');
 function sucuriscanSetSecurityHeaders()

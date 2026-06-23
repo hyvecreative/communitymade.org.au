@@ -6,6 +6,8 @@
  * @copyright 2021 Google LLC
  * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
  * @link      https://sitekit.withgoogle.com
+ *
+ * phpcs:disable PHPCS.Commenting.RequireDocTagDescription -- Pre-existing violations; tracked for follow-up cleanup.
  */
 
 namespace Google\Site_Kit\Core\Notifications;
@@ -81,7 +83,7 @@ class Notifications {
 	 * @param Options        $options Options instance.
 	 * @param Authentication $authentication Authentication instance.
 	 */
-	public function __construct( Context $context, Options $options = null, Authentication $authentication = null ) {
+	public function __construct( Context $context, ?Options $options = null, ?Authentication $authentication = null ) {
 		$this->context        = $context;
 		$this->options        = $options ?: new Options( $context );
 		$this->google_proxy   = new Google_Proxy( $this->context );

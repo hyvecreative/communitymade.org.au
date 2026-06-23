@@ -579,41 +579,156 @@ class MMB_Installer extends MMB_Core
 
         $additional_updates = array();
 
-        if (array_key_exists('woocommerce/woocommerce.php', $plugin_upgrades) && is_plugin_active('woocommerce/woocommerce.php') && $this->has_woocommerce_db_update()) {
-            $additional_updates['woocommerce/woocommerce.php'] = 1;
+        // WooCommerce - check if DB update is needed
+        if (array_key_exists('woocommerce/woocommerce.php', $plugin_upgrades) && is_plugin_active('woocommerce/woocommerce.php')) {
+            if ($this->has_woocommerce_db_update()) {
+                $additional_updates['woocommerce/woocommerce.php'] = 1;
+            }
+        }
+
+        // Elementor - check if DB update is needed
+        if (array_key_exists('elementor/elementor.php', $plugin_upgrades) && is_plugin_active('elementor/elementor.php')) {
+            if ($this->has_elementor_db_update()) {
+                $additional_updates['elementor/elementor.php'] = 1;
+            }
+        }
+
+        // Elementor Pro - check if DB update is needed
+        if (array_key_exists('elementor-pro/elementor-pro.php', $plugin_upgrades) && is_plugin_active('elementor-pro/elementor-pro.php')) {
+            if ($this->has_elementor_pro_db_update()) {
+                $additional_updates['elementor-pro/elementor-pro.php'] = 1;
+            }
         }
 
         return $additional_updates;
     }
 
+    /**
+     * Check if WooCommerce needs a database update.
+     *
+     * @return bool
+     */
     private function has_woocommerce_db_update()
     {
-        $current_db_version = get_option('woocommerce_db_version', null);
-        $current_wc_version = get_option('woocommerce_version');
-        if (version_compare($current_wc_version, '3.0.0', '<')) {
-            return true;
+        // Caller (get_additional_plugin_updates) already verified plugin is active.
+        $dbVersion = get_option('woocommerce_db_version', '');
+
+        if (empty($dbVersion)) {
+            return false;
         }
 
-        $latestUpdate = $this->get_wc_db_latest_update();
+        // IMPORTANT: After an upgrade, WC_VERSION constant still holds the OLD version
+        // because it was defined when the old plugin loaded at request start.
+        // We must read the NEW version directly from the upgraded plugin file.
+        $pluginVersion = $this->get_plugin_version_from_file('woocommerce/woocommerce.php');
 
-        return !is_null($current_db_version) && !is_null($latestUpdate) &&
-            version_compare($current_db_version, $latestUpdate, '<');
+        if (empty($pluginVersion)) {
+            $pluginVersion = defined('WC_VERSION') ? WC_VERSION : '';
+        }
+
+        if (empty($pluginVersion)) {
+            return false;
+        }
+
+        // Compare the actual file version with stored DB version
+        return version_compare($pluginVersion, $dbVersion, '>');
     }
 
-    private function get_wc_db_latest_update()
+    /**
+     * Check if Elementor needs a database update.
+     *
+     * @return bool
+     */
+    private function has_elementor_db_update()
     {
-        $regexp   = "{'(\d+\.)(\d+\.)(\d+)'}"; // version in single quote '1.0.0', '2.1.3', '3.1.22' etc
-        $fileName = WP_PLUGIN_DIR.'/woocommerce/includes/class-wc-install.php';
+        // Caller (get_additional_plugin_updates) already verified plugin is active.
+        $dbVersion = get_option('elementor_db_version', '');
 
-        if (file_exists($fileName)) {
-            $fileContent = file_get_contents($fileName);
-            preg_match_all($regexp, $fileContent, $matches);
-
-            if (!empty($matches[0])) {
-                $latestUpdate = trim(end($matches[0]), "'");
-                return $latestUpdate;
-            }
+        // New install - no DB update needed
+        if (empty($dbVersion)) {
+            return false;
         }
+
+        // IMPORTANT: After an upgrade, ELEMENTOR_VERSION constant still holds the OLD version
+        // because it was defined when the old plugin loaded at request start.
+        // We must read the NEW version directly from the upgraded plugin file.
+        $pluginVersion = $this->get_plugin_version_from_file('elementor/elementor.php');
+
+        if (empty($pluginVersion)) {
+            // Fallback to constant if file read fails
+            $pluginVersion = defined('ELEMENTOR_VERSION') ? ELEMENTOR_VERSION : '';
+        }
+
+        if (empty($pluginVersion)) {
+            return false;
+        }
+
+        // Compare the actual file version with stored DB version
+        return version_compare($pluginVersion, $dbVersion, '>');
+    }
+
+    /**
+     * Check if Elementor Pro needs a database update.
+     *
+     * @return bool
+     */
+    private function has_elementor_pro_db_update()
+    {
+        // Caller (get_additional_plugin_updates) already verified plugin is active.
+        $dbVersion = get_option('elementor_pro_db_version', '');
+
+        // New install - no DB update needed
+        if (empty($dbVersion)) {
+            return false;
+        }
+
+        // IMPORTANT: After an upgrade, ELEMENTOR_PRO_VERSION constant still holds the OLD version
+        // because it was defined when the old plugin loaded at request start.
+        // We must read the NEW version directly from the upgraded plugin file.
+        $pluginVersion = $this->get_plugin_version_from_file('elementor-pro/elementor-pro.php');
+
+        if (empty($pluginVersion)) {
+            // Fallback to constant if file read fails
+            $pluginVersion = defined('ELEMENTOR_PRO_VERSION') ? ELEMENTOR_PRO_VERSION : '';
+        }
+
+        if (empty($pluginVersion)) {
+            return false;
+        }
+
+        // Compare the actual file version with stored DB version
+        return version_compare($pluginVersion, $dbVersion, '>');
+    }
+
+    /**
+     * Read the version number directly from a plugin's main file.
+     * This is necessary after an upgrade because PHP constants are still
+     * set to the OLD version (they were defined when the old plugin loaded).
+     *
+     * @param string $pluginFile Plugin file path relative to plugins directory (e.g., 'woocommerce/woocommerce.php')
+     * @return string|null Version string or null if not found
+     */
+    private function get_plugin_version_from_file($pluginFile)
+    {
+        $pluginPath = WP_PLUGIN_DIR . '/' . $pluginFile;
+
+        if (!file_exists($pluginPath)) {
+            return null;
+        }
+
+        // Read only the first 8KB of the file (plugin headers are at the top)
+        $fileContent = file_get_contents($pluginPath, false, null, 0, 8192);
+
+        if (empty($fileContent)) {
+            return null;
+        }
+
+        // Look for "Version:" in the plugin header
+        // Standard format: " * Version: 1.2.3" or "Version: 1.2.3"
+        if (preg_match('/^[\s\*]*Version:\s*([0-9]+\.[0-9]+(?:\.[0-9]+)?(?:-[a-zA-Z0-9.]+)?)/mi', $fileContent, $matches)) {
+            return trim($matches[1]);
+        }
+
         return null;
     }
 

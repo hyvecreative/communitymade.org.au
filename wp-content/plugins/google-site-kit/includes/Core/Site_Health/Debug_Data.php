@@ -6,6 +6,8 @@
  * @copyright 2021 Google LLC
  * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
  * @link      https://sitekit.withgoogle.com
+ *
+ * phpcs:disable PHPCS.Commenting.RequireDocTagDescription -- Pre-existing violations; tracked for follow-up cleanup.
  */
 
 namespace Google\Site_Kit\Core\Site_Health;
@@ -13,8 +15,11 @@ namespace Google\Site_Kit\Core\Site_Health;
 use Google\Site_Kit\Context;
 use Google\Site_Kit\Core\Authentication\Authentication;
 use Google\Site_Kit\Core\Authentication\Clients\OAuth_Client;
-use Google\Site_Kit\Core\Conversion_Tracking\Conversion_Event_Providers\WooCommerce;
 use Google\Site_Kit\Core\Conversion_Tracking\Conversion_Tracking;
+use Google\Site_Kit\Core\Email_Reporting\Email_Reporting_Settings as Site_Email_Reporting_Settings;
+use Google\Site_Kit\Core\Email_Reporting\Email_Reporting_Site_Health;
+use Google\Site_Kit\Core\Email_Reporting\Subscribed_Users_Query;
+use Google\Site_Kit\Core\User\Email_Reporting_Settings as User_Email_Reporting_Settings;
 use Google\Site_Kit\Core\Key_Metrics\Key_Metrics_Settings;
 use Google\Site_Kit\Core\Key_Metrics\Key_Metrics_Setup_Completed_By;
 use Google\Site_Kit\Core\Modules\Module;
@@ -23,6 +28,7 @@ use Google\Site_Kit\Core\Modules\Modules;
 use Google\Site_Kit\Core\Storage\Options;
 use Google\Site_Kit\Core\Storage\User_Options;
 use Google\Site_Kit\Core\Permissions\Permissions;
+use Google\Site_Kit\Core\Tags\Google_Tag_Gateway\Google_Tag_Gateway;
 use Google\Site_Kit\Core\Util\Feature_Flags;
 use Google\Site_Kit\Core\Util\Scopes;
 
@@ -199,6 +205,11 @@ class Debug_Data {
 		$fields = array_merge( $fields, $this->get_consent_mode_fields() );
 		$fields = array_merge( $fields, $this->get_module_sharing_settings_fields() );
 		$fields = array_merge( $fields, $this->get_key_metrics_fields() );
+		$fields = array_merge( $fields, $this->get_gtg_fields() );
+
+		if ( Feature_Flags::enabled( 'proactiveUserEngagement' ) ) {
+			$fields = array_merge( $fields, $this->get_email_reports_fields() );
+		}
 
 		$fields = array_filter(
 			array_merge(
@@ -606,7 +617,7 @@ class Debug_Data {
 
 		return array(
 			'consent_mode' => array(
-				'label' => __( 'Consent Mode', 'google-site-kit' ),
+				'label' => __( 'Consent mode', 'google-site-kit' ),
 				'value' => 'enabled' === $consent_mode_status ? __( 'Enabled', 'google-site-kit' ) : __( 'Disabled', 'google-site-kit' ),
 				'debug' => $consent_mode_status,
 			),
@@ -682,5 +693,40 @@ class Debug_Data {
 				'value' => $key_metrics_source,
 			),
 		);
+	}
+
+	/**
+	 * Gets Email Reports Site Health fields.
+	 *
+	 * @since 1.166.0
+	 *
+	 * @return array
+	 */
+	private function get_email_reports_fields() {
+		$subscribed_users_query = new Subscribed_Users_Query(
+			new User_Email_Reporting_Settings( $this->user_options ),
+			$this->modules
+		);
+
+		$site_health = new Email_Reporting_Site_Health(
+			new Site_Email_Reporting_Settings( $this->options ),
+			$subscribed_users_query
+		);
+
+		return $site_health->get_debug_fields();
+	}
+
+	/**
+	 * Gets debug fields for Google tag gateway.
+	 *
+	 * @since 1.162.0
+	 * @return array
+	 */
+	private function get_gtg_fields() {
+		if ( ! Feature_Flags::enabled( 'googleTagGateway' ) ) {
+			return array();
+		}
+
+		return ( new Google_Tag_Gateway( $this->context, $this->options ) )->get_debug_fields();
 	}
 }

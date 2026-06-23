@@ -24,8 +24,12 @@ class MWP_WordPress_Context
     /**
      * @param array $globals The context to work with. Defaults to $GLOBALS, using the same global variables as WordPress.
      * @param array $constants The list of constants to use. Defaults to global constants.
+     *
+     * Note: Type hints removed from nullable parameters to fix PHP 8.4+ deprecation warning
+     * about implicitly nullable parameters while maintaining backward compatibility with PHP 5.5+.
+     * The nullable type syntax (?array) is not supported in PHP 5.5-7.0.
      */
-    public function __construct(array &$globals = null, array $constants = null)
+    public function __construct(&$globals = null, $constants = null)
     {
         if ($globals !== null) {
             $this->context = $globals;

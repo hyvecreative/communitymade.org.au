@@ -1,9 +1,4 @@
-<?php
-/**
- * @license GPL-2.0-or-later
- *
- * Modified using {@see https://github.com/BrianHenryIE/strauss}.
- */ declare( strict_types=1 );
+<?php declare( strict_types=1 );
 
 namespace KadenceWP\KadenceBlocks\StellarWP\Uplink\API;
 
@@ -525,6 +520,8 @@ class Validation_Response {
 		} else {
 			$info->sections = [ 'description' => '' ];
 		}
+		$slug   = ! empty( $info->slug ) ? $info->slug : 'unknown';
+		$info = apply_filters('stellarwp/uplink/' . $slug . '/to_wp_format', $info);
 		return $info;
 	}
 
