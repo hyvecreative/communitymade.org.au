@@ -55,19 +55,25 @@ Template Name: front-page-temp
 </div>
 
 
-<!-- begin introduction -->
-
 <article id="content">
+    
+<!-- Issues Block -->
     
 <div id="section-issues" class="container-fluid section-issues">
     
 	<div  class="container" style="position: relative;">
-		
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<h2><?php the_field('issues_head'); ?></h2>
-            </div>
-        </div>
+        
+		<?php
+            $issues_head = get_field('issues_head');
+
+            if ($issues_head) :
+            ?>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2><?php echo esc_html($issues_head); ?></h2>
+                    </div>
+                </div>
+        <?php endif; ?>
             
         <div class="row issues_wrap">
 
@@ -76,7 +82,8 @@ Template Name: front-page-temp
 
          <?php if( have_rows('issues_items') ): while ( have_rows('issues_items') ) : the_row(); ?>
         
-             <div class="col-lg-6 issues-item">
+             <div class="col-lg-6 issues-item-wrap">
+                 <div class="issues-item">
 
                         <?php
                         $image = get_sub_field('issue_icon');
@@ -90,21 +97,62 @@ Template Name: front-page-temp
 
                         
                         <?php if (get_sub_field('issues_sub_head')) : ?>
-                            <p style="margin-bottom: -.5rem"><strong><?php the_sub_field('issues_sub_head'); ?></strong></p>
+                            <p class="issue-sub"><strong><?php the_sub_field('issues_sub_head'); ?></strong></p>
                         <?php endif; ?>
 
-                        <?php the_sub_field('issues_item_txt'); ?> <a href="<?php the_sub_field('issues_target_url'); ?>" style="margin-top: 0;"><?php the_sub_field('issues_link_text'); ?> <i class="fa-light fa-arrow-right"></i></a>
+                        <p><?php the_sub_field('issues_item_txt'); ?><p>
+                     
+                         <?php if (get_sub_field('issues_target_url')) : ?>
+                         <a class="btn btn-blue" href="<?php the_sub_field('issues_target_url'); ?>" style="margin-top: 0;"><?php the_sub_field('issues_link_text'); ?> <i class="fa-light fa-arrow-right"></i></a>
+                         <?php endif; ?>
                         
                 </div>
+             </div>
   
             <?php endwhile; else: endif; ?>
             </div> <!-- end issues items -->
 
     </div>
 </div>
-
     
-<div id="section-intro" class="container-fluid section-intro">
+<!-- Quick stats  --> 
+    
+<div id="section-stats" class="container-fluid hm-quick-stats">
+    
+	<div  class="container" style="position: relative;">
+		
+		<div class="row">
+				<div class="col-12 text-center">
+                    <h2 class="text-center">Quick Stats<?php the_field('stats_head'); ?></h2>
+                </div>
+                
+                
+                <div class="col-lg-4 text-center stats-wrap">
+                    <div class="stats-item">
+                    <p>Stats 1</p>
+                     </div>
+                </div>
+                <div class="col-lg-4 text-center stats-wrap">
+                    <div class="stats-item">
+                    <p>Stats 2</p>
+                     </div>
+                </div>
+                <div class="col-lg-4 text-center stats-wrap">
+                    <div class="stats-item">
+                    <p>Stats 3</p>
+                     </div>
+                </div>
+
+            </div>
+                
+		</div>
+			
+</div>
+
+
+<!-- Intro  -->
+    
+<div id="section-intro" class="container-fluid section-intro" style="display: none">
     
 	<div  class="container" style="position: relative;">
 		
@@ -139,7 +187,7 @@ Template Name: front-page-temp
         
         <div class="row happened-title">
 			<div class="col-md-12 intro-text-wrapper">
-				<h2><?php the_field('what_head'); ?></h2>
+				<h2 class="text-center"><?php the_field('what_head'); ?></h2>
 			</div>
 		</div>
         
@@ -184,214 +232,7 @@ Template Name: front-page-temp
         
  </div>
 </div>
-        
-
     
-    
-    
-<!-- Impact questions -->
-    
-<div id="impactAction" class="container-fluid impact-actions">
-	<div  class="container" style="position: relative;">
-        
-        <div class="row impact-title">
-            
-            <div class="col-md-12">
-            <span class="impact-rule"></span>
-            </div>
-            
-            <!-- How do I know? -->
-            
-            <div class="col-md-6 impact-left">
-                <h2><?php the_field('how_know_head'); ?></h2>
-               <?php if( have_rows('how_know') ): while ( have_rows('how_know') ) : the_row(); ?>
-        
-
-                <div class="row icon-row">
-                    <div class="col-3 impact-item-img">
-                        <?php
-                            $image = get_sub_field('happ_icon');
-                            $size  = 'full'; // thumbnail, medium, large, full or custom size
-
-                            if ( $image ) {
-                                echo wp_get_attachment_image(
-                                    $image,
-                                    $size,
-                                    false,
-                                    array(
-                                        'class' => 'impact-icon'
-                                    )
-                                );
-                            }
-                            ?>
-                    </div>
-                    
-                   
-                    <div class="col-9 impact-item-text">
-                        
-                    <?php if (get_sub_field('happ_sub')) : ?>
-                            <p style="line-height: 1.25;"><strong><?php the_sub_field('happ_sub'); ?></strong></p>
-                        <?php endif; ?>
-
-                        <?php the_sub_field('happ_content'); ?>
-                        
-                        <a href="<?php the_sub_field('happ_url'); ?>" class="btn btn-<?php the_sub_field('button_colour'); ?>" style="margin-top: 0; margin-bottom: .5rem;"><?php the_sub_field('happ_link_text'); ?> <i class="fa-solid fa-arrow-right"></i></a>
-                        
-                    </div>
-                </div>
-                
-
-            <?php endwhile; else: endif; ?>
-                
-            </div>
-            
-            <!-- Ho do i get my Super back? -->
-
-            <div class="col-md-6 impact-right">
-                <div class="impact-rule-div"></div>
-                <h2><?php the_field('super_back_head'); ?></h2>
-               <?php if( have_rows('super_back') ): while ( have_rows('super_back') ) : the_row(); ?>
-        
-
-                <div class="row icon-row">
-                    <div class="col-3 impact-item-img">
-                        <?php
-                            $image = get_sub_field('happ_icon');
-                            $size  = 'full'; // thumbnail, medium, large, full or custom size
-
-                            if ( $image ) {
-                                echo wp_get_attachment_image(
-                                    $image,
-                                    $size,
-                                    false,
-                                    array(
-                                        'class' => 'impact-icon'
-                                    )
-                                );
-                            }
-                            ?>
-                    </div>
-                    
-                   
-                    <div class="col-9 impact-item-text">
-                        
-                    <?php if (get_sub_field('happ_sub')) : ?>
-                            <p style="line-height: 1.25;"><strong><?php the_sub_field('happ_sub'); ?></strong></p>
-                        <?php endif; ?>
-
-                        <?php the_sub_field('happ_content'); ?>
-                        
-                        <a href="<?php the_sub_field('happ_url'); ?>" class="btn btn-<?php the_sub_field('button_colour'); ?>" style="margin-top: 0; margin-bottom: .5rem;"><?php the_sub_field('happ_link_text'); ?> <i class="fa-solid fa-arrow-right"></i></a>
-                        
-                    </div>
-                </div>
-                
-
-            <?php endwhile; else: endif; ?>
-                
-            </div>
-        </div>
-        
-        </div>
-   </div>
-            
-    
-
-    
-
-
-                        
-                      
-<div id="newsUpdates" class="container-fluid news-and-updates">
-	<div  class="container" style="position: relative;">
-        
-    <!-- start news on/off --> 
-        <?php if ( get_field('display_news_section') ) : ?>
-            <div class="news-on">
-
-                    <div class="row news-title">
-                        <div class="col-md-12">
-                            <h2>News and updates</h2>
-                            <?php the_field('news_intro', 'option'); ?>
-                        </div>
-                    </div>
-
-
-                            <?php
-                            $featured_posts = get_field('report_questions');
-                            if( $featured_posts ): ?>
-                                <div class="row hm-work">
-
-                                <?php foreach( $featured_posts as $post ): 
-
-                                    // Setup this post for WP functions (variable must be named $post).
-                                    setup_postdata($post); ?>
-
-
-                                    <!-- begin storypost -->
-
-
-                                        <div class="col-md-4 feedcont text-left" style="display:flex; ">
-
-                                            <div class="feedcont-wrap" style="flex: 0 1 100%; padding: 0;"> 
-
-
-                                            <div class="feedcont-content" style="padding: 1rem 2rem 1.5rem;"> 
-
-                                                <a class="cat-text" aria-label="Published on <?php echo esc_html( get_the_date() ); ?>">
-                                                    <?php echo esc_html( get_the_date() ); ?>
-                                                </a>
-                                                <h3><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
-                                                <?php echo esc_html( get_the_excerpt() ); ?>
-                                            </div>
-
-                                            </div>
-                                         </div><!-- END feedcont-->
-
-                                    <?php endforeach; ?>
-                                </div>
-                                <?php 
-                                // Reset the global post object so that the rest of the page works correctly.
-                                wp_reset_postdata(); ?>
-                            <?php endif; ?>
-                
-              </div> <!-- end news on/off -->
-            <?php endif; ?>  
-        
-    <div class="row" style="">
-        <div class="col-12 updates-form-col">
-                        
-                    <div class="row updates-form-wrap" style="">
-                    
-                        <div class="col-lg-6 updates-form-head">
-                        <h2>Sign up for updates</h2>
-                        </div>
-                    
-                       <div class="col-lg-6 updates-form">
-                            <?php
-                            $sw_form = get_field('sw_form', 'option'); // full AN embed
-
-                            if ($sw_form) {
-                                // 1️⃣ Remove any <script> tags so JS doesn't run immediately
-                                $sw_form_no_script = preg_replace('/<script.*?<\/script>/is', '', $sw_form);
-
-                                // 2️⃣ Echo the remaining HTML (CSS link + placeholder div)
-                                echo $sw_form_no_script;
-                            }
-                            ?>
-                        </div>
-                    
-                    </div>
-                        
-    </div>
-                    
-    </div>
-        
-        
-</div>
-</div>
-                    
-
 	
 </article>
 </main>

@@ -29,7 +29,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 30px;
+            border-radius: 2rem;;
             }
         
     }
@@ -46,12 +46,30 @@
 
 /* end hero on home */
 
-.hm-quick-stats {padding: 3rem 0;
+.hm-quick-stats {padding: 1.5rem 0;
     background: -webkit-linear-gradient(top left, #0f6f94 0%, #388fb5 25%, #5fb3d1 50%, #78beb6 75%, #8bc46d 100%);
     background: -o-linear-gradient(top left, #0f6f94 0%, #388fb5 25%, #5fb3d1 50%, #78beb6 75%, #8bc46d 100%);
     background: linear-gradient(to bottom right, #0f6f94 0%, #388fb5 25%, #5fb3d1 50%, #78beb6 75%, #8bc46d 100%);
-     @include breakpoint-up(mobile) {padding: 5rem 0;}
-    h1 {color: $blue_20;}
+     @include breakpoint-up(mobile) {padding: 3rem 0;}
+    
+    h2 {color: $blue_20; margin-bottom: 3rem;}
+    
+    .stats-wrap {display: flex; margin-bottom: 1.5rem;
+        
+       
+        .stats-item {width: 100%; background: $c-white; padding: 1.5rem; border-radius: 2rem;
+            h3 {color: $blue_20; margin-top: 1rem; margin-bottom: .75rem;
+                @include breakpoint-up(mobile) {
+                    font-size: 2.25rem;
+                }
+            }
+            p {margin: .25rem 0;
+                &.issue-sub {color: $blue_15;}
+            }
+           
+            img {width: 120px;}
+        }
+    }
 }
 
 
@@ -64,6 +82,33 @@
     
     @include breakpoint-up(mobile) {margin-bottom: 4rem;}
     
+}
+
+/* issues elements */
+
+.section-issues {padding: 1.5rem 0;
+    @include breakpoint-up(mobile) {
+        padding: 3rem 0;
+    }
+    
+     h2 {margin-bottom: 3rem;}
+    
+    .issues-item-wrap {display: flex; margin-bottom: 1.5rem;
+        
+       
+        .issues-item {width: 100%; background: $grey_5; padding: 1.5rem; border-radius: 2rem;
+            h3 {color: $blue_20; margin-top: 1rem; margin-bottom: .75rem;
+                @include breakpoint-up(mobile) {
+                    font-size: 2.25rem;
+                }
+            }
+            p {margin: .25rem 0;
+                &.issue-sub {color: $blue_15;}
+            }
+           
+            img {width: 120px;}
+        }
+    }
 }
 
 .privacy-txt {

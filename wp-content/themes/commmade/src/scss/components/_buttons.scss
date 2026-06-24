@@ -5,13 +5,13 @@
 	height: auto;
 	line-height: 20px;
 	font-size: .85rem;
-	border-radius: .25rem;
+	border-radius: 1rem;
 	background-color: $yellow_5;
 	text-decoration: none;
 	text-align: center;
 	font-weight:700;
 	margin: 1rem auto 0;
-	padding: .5rem 1rem;
+	padding: .75rem 1rem;
     transition: transform .2s;
 	&:hover {background-color: $yellow_10; transform: scale(1.05);}
 	&:active, &:focus  {color: $c-black; background-color: $yellow_10;}
