@@ -233,6 +233,96 @@ Template Name: front-page-temp
  </div>
 </div>
     
+    
+    <div id="newsUpdates" class="container-fluid news-and-updates">
+	<div  class="container" style="position: relative;">
+        
+    <!-- start news on/off --> 
+        <?php if ( get_field('display_news_section') ) : ?>
+            <div class="news-on">
+
+                    <div class="row news-title">
+                        <div class="col-md-12">
+                            <h2>News and updates</h2>
+                            <?php the_field('news_intro', 'option'); ?>
+                        </div>
+                    </div>
+
+
+                            <?php
+                            $featured_posts = get_field('report_questions');
+                            if( $featured_posts ): ?>
+                                <div class="row hm-work">
+
+                                <?php foreach( $featured_posts as $post ): 
+
+                                    // Setup this post for WP functions (variable must be named $post).
+                                    setup_postdata($post); ?>
+
+
+                                    <!-- begin storypost -->
+
+
+                                        <div class="col-md-4 feedcont text-left" style="display:flex; ">
+
+                                            <div class="feedcont-wrap" style="flex: 0 1 100%; padding: 0;"> 
+
+
+                                            <div class="feedcont-content" style="padding: 1rem 2rem 1.5rem;"> 
+
+                                                <a class="cat-text" aria-label="Published on <?php echo esc_html( get_the_date() ); ?>">
+                                                    <?php echo esc_html( get_the_date() ); ?>
+                                                </a>
+                                                <h3><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
+                                                <?php echo esc_html( get_the_excerpt() ); ?>
+                                            </div>
+
+                                            </div>
+                                         </div><!-- END feedcont-->
+
+                                    <?php endforeach; ?>
+                                </div>
+                                <?php 
+                                // Reset the global post object so that the rest of the page works correctly.
+                                wp_reset_postdata(); ?>
+                            <?php endif; ?>
+                
+              </div> <!-- end news on/off -->
+            <?php endif; ?>  
+        
+    <div class="row" style="">
+        <div class="col-12 updates-form-col">
+                        
+                    <div class="row updates-form-wrap" style="">
+                    
+                        <div class="col-lg-6 updates-form-head">
+                        <h2>Sign up for updates</h2>
+                        </div>
+                    
+                       <div class="col-lg-6 updates-form">
+                            <?php
+                            $sw_form = get_field('sw_form', 'option'); // full AN embed
+
+                            if ($sw_form) {
+                                // 1️⃣ Remove any <script> tags so JS doesn't run immediately
+                                $sw_form_no_script = preg_replace('/<script.*?<\/script>/is', '', $sw_form);
+
+                                // 2️⃣ Echo the remaining HTML (CSS link + placeholder div)
+                                echo $sw_form_no_script;
+                            }
+                            ?>
+                        </div>
+                    
+                    </div>
+                        
+    </div>
+                    
+    </div>
+        
+        
+</div>
+</div>
+    
 	
 </article>
 </main>
