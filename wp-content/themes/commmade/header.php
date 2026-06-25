@@ -23,10 +23,16 @@
     <div class="shell d-flex justify-content-between">
 
         <div class="header__logo col-auto">
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="logo" aria-label="Back to home page">
-                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/images/community-made-logo-lozonge.svg" alt="">
-            </a>
-        </div>
+    <a href="<?php echo esc_url(home_url('/')); ?>" class="logo" aria-label="Back to home page">
+        <img
+            src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/images/community-made-logo-lozonge.svg"
+            alt=""
+            width="331"
+            height="146"
+            loading="eager"
+        >
+    </a>
+</div>
 
         <div class="header__menu col-auto d-flex">
             <div class="header__nav col-auto">

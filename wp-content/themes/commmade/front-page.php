@@ -18,22 +18,19 @@ Template Name: front-page-temp
             <div class="col-lg-7 hero-image-wrap" style="display: flex;">
             <?php if (has_post_thumbnail()) : 
                 $thumb_id = get_post_thumbnail_id($post->ID);
-                $img_full = wp_get_attachment_image_src($thumb_id, 'full')[0];
-                $img_large = wp_get_attachment_image_src($thumb_id, 'large')[0];
-                $img_medium = wp_get_attachment_image_src($thumb_id, 'medium')[0];
+
+                $img_full   = wp_get_attachment_image_src($thumb_id, 'full');
+                $img_large  = wp_get_attachment_image_src($thumb_id, 'large');
+                $img_medium = wp_get_attachment_image_src($thumb_id, 'medium');
             ?>
-               
-                    <img 
-                        src="<?php echo esc_url($img_large); ?>" 
-                        srcset="<?php echo esc_url($img_medium); ?> 480w, 
-                                <?php echo esc_url($img_large); ?> 1024w, 
-                                <?php echo esc_url($img_full); ?> 1920w"
-                        sizes="(max-width: 768px) 100vw, 
-                               (max-width: 1024px) 100vw, 
-                               1920px"
-                        alt="<?php the_title_attribute(); ?>"
-                        class="hero-img">
-             
+                <img 
+                    src="<?php echo esc_url($img_large[0]); ?>" 
+                    srcset="<?php echo esc_url($img_medium[0]); ?> <?php echo $img_medium[1]; ?>w, 
+                            <?php echo esc_url($img_large[0]); ?> <?php echo $img_large[1]; ?>w, 
+                            <?php echo esc_url($img_full[0]); ?> <?php echo $img_full[1]; ?>w"
+                    sizes="(max-width: 768px) 100vw, 58vw"
+                    alt="<?php the_title_attribute(); ?>"
+                    class="hero-img">
             <?php endif; ?>
 
             </div>
