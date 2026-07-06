@@ -4702,6 +4702,22 @@ msgstr "You are using a %1$s drop-in which might mean that a %2$s database is no
 msgid "https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions"
 msgstr "https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions"
 
+#. translators: 1: The amount of inactive themes. 2: The default theme for
+#. WordPress. 3: The currently active theme.
+#: wp-admin/includes/class-wp-site-health.php:689
+msgid "Your site has %1$d inactive theme, other than %2$s, the default WordPress theme, and %3$s, your active theme."
+msgid_plural "Your site has %1$d inactive themes, other than %2$s, the default WordPress theme, and %3$s, your active theme."
+msgstr[0] "Your site has %1$d inactive theme, other than %2$s, the default WordPress theme, and %3$s, your active theme."
+msgstr[1] "Your site has %1$d inactive themes, other than %2$s, the default WordPress theme, and %3$s, your active theme."
+
+#. translators: 1: The amount of inactive themes. 2: The currently active
+#. theme.
+#: wp-admin/includes/class-wp-site-health.php:674
+msgid "Your site has %1$d inactive theme, other than %2$s, your active theme."
+msgid_plural "Your site has %1$d inactive themes, other than %2$s, your active theme."
+msgstr[0] "Your site has %1$d inactive theme, other than %2$s, your active theme."
+msgstr[1] "Your site has %1$d inactive themes, other than %2$s, your active theme."
+
 #: wp-admin/about.php:140 wp-admin/includes/class-wp-site-health.php:259
 #: wp-admin/includes/class-wp-site-health.php:737
 #: wp-admin/includes/class-wp-site-health.php:908
@@ -4719,22 +4735,6 @@ msgstr "https://make.wordpress.org/hosting/handbook/handbook/server-environment/
 #: wp-admin/includes/class-wp-site-health.php:2814
 msgid "Performance"
 msgstr "Performance"
-
-#. translators: 1: The amount of inactive themes. 2: The default theme for
-#. WordPress. 3: The currently active theme.
-#: wp-admin/includes/class-wp-site-health.php:689
-msgid "Your site has %1$d inactive theme, other than %2$s, the default WordPress theme, and %3$s, your active theme."
-msgid_plural "Your site has %1$d inactive themes, other than %2$s, the default WordPress theme, and %3$s, your active theme."
-msgstr[0] "Your site has %1$d inactive theme, other than %2$s, the default WordPress theme, and %3$s, your active theme."
-msgstr[1] "Your site has %1$d inactive themes, other than %2$s, the default WordPress theme, and %3$s, your active theme."
-
-#. translators: 1: The amount of inactive themes. 2: The currently active
-#. theme.
-#: wp-admin/includes/class-wp-site-health.php:674
-msgid "Your site has %1$d inactive theme, other than %2$s, your active theme."
-msgid_plural "Your site has %1$d inactive themes, other than %2$s, your active theme."
-msgstr[0] "Your site has %1$d inactive theme, other than %2$s, your active theme."
-msgstr[1] "Your site has %1$d inactive themes, other than %2$s, your active theme."
 
 #. translators: 1: Link to the hosting group page about recommended PHP
 #. modules. 2: Additional link attributes. 3: Accessibility text.
@@ -4755,10 +4755,6 @@ msgid_plural "Your site has %d inactive themes."
 msgstr[0] "Your site has %d inactive theme."
 msgstr[1] "Your site has %d inactive themes."
 
-#: wp-admin/erase-personal-data.php:96
-msgid "Erase personal data list"
-msgstr "Erase personal data list"
-
 #: wp-admin/includes/class-wp-site-health.php:320
 #: wp-admin/includes/class-wp-site-health.php:360
 #: wp-admin/includes/class-wp-site-health.php:494
@@ -4776,6 +4772,10 @@ msgstr "Erase personal data list"
 #: wp-admin/includes/class-wp-site-health.php:2391
 msgid "Security"
 msgstr "Security"
+
+#: wp-admin/erase-personal-data.php:96
+msgid "Erase personal data list"
+msgstr "Erase personal data list"
 
 #: wp-admin/erase-personal-data.php:95
 msgid "Erase personal data list navigation"
@@ -10683,14 +10683,6 @@ msgstr "Image rotation is not supported by your web host."
 msgid "If you are looking to use the link manager, please install the <a href=\"%s\">Link Manager plugin</a>."
 msgstr "If you are looking to use the link manager, please install the <a href=\"%s\">Link Manager plugin</a>."
 
-#: wp-admin/edit-form-advanced.php:360
-msgid "Inserting Media"
-msgstr "Inserting Media"
-
-#: wp-admin/edit-form-advanced.php:367
-msgid "Several boxes on this screen contain settings for how your content will be published, including:"
-msgstr "Several boxes on this screen contain settings for how your content will be published, including:"
-
 #: wp-admin/includes/class-custom-background.php:102
 msgid "To use a background image, simply upload it or choose an image that has already been uploaded to your Media Library by clicking the &#8220;Choose Image&#8221; button. You can display a single instance of your image, or tile it to fill the screen. You can have your background fixed in place, so your site content moves on top of it, or you can have it scroll with your site."
 msgstr "To use a background image, simply upload it or choose an image that has already been uploaded to your Media Library by clicking the &#8220;Choose Image&#8221; button. You can display a single instance of your image, or tile it to fill the screen. You can have your background fixed in place, so your site content moves on top of it, or you can have it scroll with your site."
@@ -10698,6 +10690,14 @@ msgstr "To use a background image, simply upload it or choose an image that has 
 #: wp-admin/edit-form-advanced.php:275
 msgid "The title field and the big Post Editing Area are fixed in place, but you can reposition all the other boxes using drag and drop. You can also minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
 msgstr "The title field and the big Post Editing Area are fixed in place, but you can reposition all the other boxes using drag and drop. You can also minimise or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
+
+#: wp-admin/edit-form-advanced.php:360
+msgid "Inserting Media"
+msgstr "Inserting Media"
+
+#: wp-admin/edit-form-advanced.php:367
+msgid "Several boxes on this screen contain settings for how your content will be published, including:"
+msgstr "Several boxes on this screen contain settings for how your content will be published, including:"
 
 #: wp-admin/widgets-form.php:65
 msgid "When changing themes, there is often some variation in the number and setup of widget areas/sidebars and sometimes these conflicts make the transition a bit less smooth. If you changed themes and seem to be missing widgets, scroll down on this screen to the Inactive Widgets area, where all of your widgets and their settings will have been saved."
@@ -11446,14 +11446,14 @@ msgstr "Screenshots"
 msgid "Plugin Homepage &#187;"
 msgstr "Plugin Homepage &#187;"
 
-#: wp-admin/export.php:52
-msgid "You can export a file of your site&#8217;s content in order to import it into another installation or platform. The export file will be an XML file format called WXR. Posts, pages, comments, custom fields, categories, and tags can be included. You can choose for the WXR file to include only certain posts or pages by setting the dropdown filters to limit the export by category, author, date range by month, or publishing status."
-msgstr "You can export a file of your site&#8217;s content in order to import it into another installation or platform. The export file will be an XML file format called WXR. Posts, pages, comments, custom fields, categories, and tags can be included. You can choose for the WXR file to include only certain posts or pages by setting the dropdown filters to limit the export by category, author, date range by month, or publishing status."
-
 #. translators: 1: Table name, 2: Error message.
 #: wp-admin/maint/repair.php:129
 msgid "Failed to repair the %1$s table. Error: %2$s"
 msgstr "Failed to repair the %1$s table. Error: %2$s"
+
+#: wp-admin/export.php:52
+msgid "You can export a file of your site&#8217;s content in order to import it into another installation or platform. The export file will be an XML file format called WXR. Posts, pages, comments, custom fields, categories, and tags can be included. You can choose for the WXR file to include only certain posts or pages by setting the dropdown filters to limit the export by category, author, date range by month, or publishing status."
+msgstr "You can export a file of your site&#8217;s content in order to import it into another installation or platform. The export file will be an XML file format called WXR. Posts, pages, comments, custom fields, categories, and tags can be included. You can choose for the WXR file to include only certain posts or pages by setting the dropdown filters to limit the export by category, author, date range by month, or publishing status."
 
 #: wp-admin/user-new.php:281
 msgid "New users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain their password. Check the box if you do not want the user to receive a welcome email."
@@ -11760,13 +11760,13 @@ msgstr "Managing pages is very similar to managing posts, and the screens can be
 msgid "All the files you&#8217;ve uploaded are listed in the Media Library, with the most recent uploads listed first. You can use the Screen Options tab to customize the display of this screen."
 msgstr "All the files you&#8217;ve uploaded are listed in the Media Library, with the most recent uploads listed first. You can use the Screen Options tab to customise the display of this screen."
 
-#: wp-admin/edit-form-advanced.php:316 wp-admin/edit.php:311
-msgid "Pages are similar to posts in that they have a title, body text, and associated metadata, but they are different in that they are not part of the chronological blog stream, kind of like permanent posts. Pages are not categorized or tagged, but can have a hierarchy. You can nest pages under other pages by making one the &#8220;Parent&#8221; of the other, creating a group of pages."
-msgstr "Pages are similar to posts in that they have a title, body text, and associated metadata, but they are different in that they are not part of the chronological blog stream, kind of like permanent posts. Pages are not categorised or tagged, but can have a hierarchy. You can nest pages under other pages by making one the &#8220;Parent&#8221; of the other, creating a group of pages."
-
 #: wp-admin/edit-comments.php:223
 msgid "Many people take advantage of keyboard shortcuts to moderate their comments more quickly. Use the link to the side to learn more."
 msgstr "Many people take advantage of keyboard shortcuts to moderate their comments more quickly. Use the link to the side to learn more."
+
+#: wp-admin/edit-form-advanced.php:316 wp-admin/edit.php:311
+msgid "Pages are similar to posts in that they have a title, body text, and associated metadata, but they are different in that they are not part of the chronological blog stream, kind of like permanent posts. Pages are not categorized or tagged, but can have a hierarchy. You can nest pages under other pages by making one the &#8220;Parent&#8221; of the other, creating a group of pages."
+msgstr "Pages are similar to posts in that they have a title, body text, and associated metadata, but they are different in that they are not part of the chronological blog stream, kind of like permanent posts. Pages are not categorised or tagged, but can have a hierarchy. You can nest pages under other pages by making one the &#8220;Parent&#8221; of the other, creating a group of pages."
 
 #: wp-admin/upload.php:396
 msgid "If a media file has not been attached to any content, you will see that in the Uploaded To column, and can click on Attach to launch a small popup that will allow you to search for existing content and attach the file."
@@ -13004,13 +13004,13 @@ msgstr "You can use categories to define sections of your site and group related
 msgid "You can change the display of this screen using the Screen Options tab to set how many items are displayed per screen and to display/hide columns in the table."
 msgstr "You can change the display of this screen using the Screen Options tab to set how many items are displayed per screen and to display/hide columns in the table."
 
-#: wp-admin/edit-tags.php:265
-msgid "What&#8217;s the difference between categories and tags? Normally, tags are ad-hoc keywords that identify important information in your post (names, subjects, etc) that may or may not recur in other posts, while categories are pre-determined sections. If you think of your site like a book, the categories are like the Table of Contents and the tags are like the terms in the index."
-msgstr "What&#8217;s the difference between categories and tags? Normally, tags are ad-hoc keywords that identify important information in your post (names, subjects, etc) that may or may not recur in other posts, while categories are pre-determined sections. If you think of your site like a book, the categories are like the Table of Contents and the tags are like the terms in the index."
-
 #: wp-admin/edit-tags.php:278
 msgid "When adding a new category on this screen, you&#8217;ll fill in the following fields:"
 msgstr "When adding a new category on this screen, you&#8217;ll fill in the following fields:"
+
+#: wp-admin/edit-tags.php:265
+msgid "What&#8217;s the difference between categories and tags? Normally, tags are ad-hoc keywords that identify important information in your post (names, subjects, etc) that may or may not recur in other posts, while categories are pre-determined sections. If you think of your site like a book, the categories are like the Table of Contents and the tags are like the terms in the index."
+msgstr "What&#8217;s the difference between categories and tags? Normally, tags are ad-hoc keywords that identify important information in your post (names, subjects, etc) that may or may not recur in other posts, while categories are pre-determined sections. If you think of your site like a book, the categories are like the Table of Contents and the tags are like the terms in the index."
 
 #: wp-admin/edit-tags.php:284
 msgid "<strong>Name</strong> &mdash; The name is how it appears on your site."
@@ -14689,13 +14689,13 @@ msgstr "Installing theme from uploaded file: %s"
 msgid "To post to WordPress by email, you must set up a secret email account with POP3 access. Any mail received at this address will be posted, so it&#8217;s a good idea to keep this address very secret. Here are three random strings you could use: %1$s, %2$s, %3$s."
 msgstr "To post to WordPress by email, you must set up a secret email account with POP3 access. Any mail received at this address will be posted, so it&#8217;s a good idea to keep this address very secret. Here are three random strings you could use: %1$s, %2$s, %3$s."
 
-#: wp-admin/options-discussion.php:195
-msgid "When a comment contains any of these words in its content, author name, URL, email, IP address, or browser&#8217;s user agent string, it will be held in the <a href=\"edit-comments.php?comment_status=moderated\">moderation queue</a>. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
-msgstr "When a comment contains any of these words in its content, author name, URL, email, IP address, or browser&#8217;s user agent string, it will be held in the <a href=\"edit-comments.php?comment_status=moderated\">moderation queue</a>. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
-
 #: wp-admin/options-discussion.php:205
 msgid "When a comment contains any of these words in its content, author name, URL, email, IP address, or browser&#8217;s user agent string, it will be put in the Trash. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
 msgstr "When a comment contains any of these words in its content, author name, URL, email, IP address, or browser&#8217;s user agent string, it will be put in the Bin. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
+
+#: wp-admin/options-discussion.php:195
+msgid "When a comment contains any of these words in its content, author name, URL, email, IP address, or browser&#8217;s user agent string, it will be held in the <a href=\"edit-comments.php?comment_status=moderated\">moderation queue</a>. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
+msgstr "When a comment contains any of these words in its content, author name, URL, email, IP address, or browser&#8217;s user agent string, it will be held in the <a href=\"edit-comments.php?comment_status=moderated\">moderation queue</a>. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
 
 #. translators: %s: web.config
 #: wp-admin/options-permalink.php:533

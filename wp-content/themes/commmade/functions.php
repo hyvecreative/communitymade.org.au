@@ -3,35 +3,17 @@
 /**
  * Theme Assets (Merged Legacy + dist/assets.json)
  */
+
 /**
  * Theme Assets (Merged Legacy + dist/assets.json)
  */
 function theme_enqueue_assets() {
 
-    /* ---------------------------
-     * 0. Bootstrap CSS (load efficiently)
-     * --------------------------- */
-    wp_enqueue_style(
-        'bootstrap-css',
-        'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css',
-        [],
-        '4.6.0'
-    );
 
     /* ---------------------------
      * 1. Load main theme stylesheet
      * --------------------------- */
     wp_enqueue_style('theme-style', get_stylesheet_uri());
-
-    /* ---------------------------
-     * 2. AOS CSS
-     * --------------------------- */
-    wp_enqueue_style(
-        'aos-css',
-        'https://unpkg.com/aos@next/dist/aos.css',
-        [],
-        null
-    );
 
     /* ---------------------------
      * 3. Font Awesome Kit
@@ -191,39 +173,31 @@ function primarymenu(){ ?>
 <?php }
 
 /**
-Force css blocks - wp 6.9 temp fix
-**/
+Force css blocks - wp 6.9 temp fix (YOAST ISSUE)
 
 
-add_filter( 'should_load_separate_core_block_assets', '__return_false', 100 );
 
-
+add_filter( 'should_load_separate_core_block_assets', '__return_false', 100 ); **/
 
 /*******************************
 
-Disable Gravity forms - to allow single page load
+Stop Gutenberg on home pg
 
-********************************/
+*******************************/
 
-// Disable GF CSS + JS everywhere EXCEPT the target page
-add_filter( 'gform_disable_css', function() {
-    // Only allow CSS on this page
-    return ! is_page( 'complaint-pathway' );
-});
+add_action('wp_enqueue_scripts', function () {
 
-add_filter( 'gform_disable_js', function() {
-    // Only allow JS on this page
-    return ! is_page( 'complaint-pathway' );
-});
+    // Only target frontend (not admin)
+    if (is_admin()) return;
 
-// Enqueue Gravity Forms scripts for the form ID (optional, ensures proper load)
-add_action( 'wp_enqueue_scripts', function() {
-    if ( is_page( 'complaint-pathway' ) ) { 
-        gravity_form_enqueue_scripts( 7, true ); // Replace 7 with your form ID
+    // Remove Gutenberg block library CSS on homepage
+    if (is_front_page()) {
+        wp_dequeue_style('wp-block-library');
+        wp_dequeue_style('wp-block-library-theme');
+        wp_dequeue_style('wc-block-style'); // WooCommerce blocks (if present)
     }
-});
 
-
+}, 100);
 
 /*******************************
 
@@ -282,9 +256,6 @@ function mytheme_setup() {
     add_theme_support( 'align-wide' );
     add_theme_support( 'appearance-tools' ); // modern WP features
 
-    // Add editor stylesheet
-    add_editor_style( 'assets/css/editor-style.css' );
-
     // Custom font sizes
     add_theme_support( 'editor-font-sizes', array(
         array(
@@ -326,43 +297,24 @@ add_filter('excerpt_length', 'home_excerpt_length');
 
 
 /*******************************
-CUSTOM QUERY MOD
-********************************/
-
-add_filter( 'pre_get_posts', 'my_get_posts' );
-
-function my_get_posts( $query ) {
-
-    if (
-        is_admin() ||
-        ! $query->is_main_query() ||
-        wp_doing_ajax() ||
-        ( defined('REST_REQUEST') && REST_REQUEST )
-    ) {
-        return $query;
-    }
-
-    if ( $query->is_home() || $query->is_feed() ) {
-        $query->set( 'post_type', array( 'post', 'my_articles' ) );
-    }
-
-    return $query;
-}
-
-/*******************************
  EXCERPT "READ MORE" LINK (SAFE FOR WP 7)
 ********************************/
 
 add_filter('the_excerpt', function ($text) {
 
-    // IMPORTANT: prevent breaking admin + Gutenberg REST calls
-    if (is_admin() || wp_is_json_request()) {
+    // NEVER touch REST API / admin / feeds / block editor requests
+    if (
+        is_admin() ||
+        wp_doing_ajax() ||
+        wp_is_json_request() ||
+        (defined('REST_REQUEST') && REST_REQUEST)
+    ) {
         return $text;
     }
 
     global $post;
 
-    if (!$post) {
+    if (!$post instanceof WP_Post) {
         return $text;
     }
 
@@ -376,80 +328,6 @@ add_filter('the_excerpt', function ($text) {
 
 }, 20);
 
-
-/*******************************
- ENABLE EXCERPTS ON PAGES
-********************************/
-
-function my_add_excerpts_to_pages() {
-    add_post_type_support('page', 'excerpt');
-}
-add_action('init', 'my_add_excerpts_to_pages');
-
-/**
- * Load Editor + Front-End Styles
- */
-function mytheme_enqueue() {
-
-    // Front-end styles
-    wp_enqueue_style(
-        'mytheme-style',
-        get_stylesheet_uri(),
-        array(),
-        wp_get_theme()->get('Version')
-    );
-}
-
-add_action( 'wp_enqueue_scripts', 'mytheme_enqueue' );
-
-
-/**
- * Editor-only CSS (to match Gutenberg editor with theme styles)
- */
-function mytheme_editor_styles() {
-    add_editor_style( 'assets/css/editor-style.css' ); // Create this file
-}
-add_action( 'admin_init', 'mytheme_editor_styles' );
-
-
-
-/**
- * Register Block Patterns (optional)
-
-function mytheme_block_patterns() {
-    register_block_pattern_category(
-        'mytheme',
-        array( 'label' => __( 'My Theme Patterns', 'mytheme' ) )
-    );
-
-    register_block_pattern(
-        'mytheme/hero-banner',
-        array(
-            'title'   => __( 'Hero Banner', 'mytheme' ),
-            'content' => '<!-- wp:group {"align":"full"} --><div class="wp-block-group"><h1>Your Hero Title</h1></div><!-- /wp:group -->',
-        )
-    );
-}
-add_action( 'init', 'mytheme_block_patterns' );
-
- */
-
-/*******************************
-
-ADD CUSTOM POST TO CATEGORY
-
-********************************/
- 
-add_action('pre_get_posts', function ($query) {
-
-    if (is_admin() || ! $query->is_main_query()) {
-        return;
-    }
-
-    if (is_home() || is_feed()) {
-        $query->set('post_type', ['post', 'my_articles']);
-    }
-});
 
 
 /*******************************
@@ -740,12 +618,6 @@ add_action('acf/init', function() {
     }
 });
 
-/*********************
-INCLUDE NEEDED FILES
-*********************/
-
-require_once('includes/gravity-incs.php');
-
 
 
 /*******************************
@@ -759,7 +631,7 @@ add_filter( 'get_the_content_limit_allowedtags', 'get_the_content_limit_custom_a
 */
 function get_the_content_limit_custom_allowedtags() {
 // Add custom tags to this string
-return '<script>,<style>,<br>,<span>,<em>,<i>,<ul>,<ol>,<li>,<a>';
+return '<br>,<span>,<em>,<i>,<ul>,<ol>,<li>,<a>';
 }
 
 

@@ -4,6 +4,8 @@
 @import "scss/variables/colors";
 @import "scss/variables/sitespecs";
 @import "scss/base";
+@import "scss/components/bootstrap-grid";
+@import "scss/components/bootstrap-reboot";
 @import "scss/components/header-nav";
 @import "scss/components/header-search";
 @import "scss/components/donate-form";
@@ -19,3 +21,4 @@
 @import "scss/components/menu-toggle";
 @import "scss/components/nav-footer";
 @import "scss/components/shell";
+@import "scss/components/aos.scss";
