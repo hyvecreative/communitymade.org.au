@@ -172,32 +172,11 @@ function primarymenu(){ ?>
 
 <?php }
 
-/**
-Force css blocks - wp 6.9 temp fix (YOAST ISSUE)
-
-
-
-add_filter( 'should_load_separate_core_block_assets', '__return_false', 100 ); **/
-
 /*******************************
+Force css blocks<br>
+********************************/
 
-Stop Gutenberg on home pg
-
-*******************************/
-
-add_action('wp_enqueue_scripts', function () {
-
-    // Only target frontend (not admin)
-    if (is_admin()) return;
-
-    // Remove Gutenberg block library CSS on homepage
-    if (is_front_page()) {
-        wp_dequeue_style('wp-block-library');
-        wp_dequeue_style('wp-block-library-theme');
-        wp_dequeue_style('wc-block-style'); // WooCommerce blocks (if present)
-    }
-
-}, 100);
+add_filter( 'should_load_separate_core_block_assets', '__return_false', 100 );
 
 /*******************************
 
@@ -278,6 +257,23 @@ function mytheme_setup() {
     // Color palette removed as requested
 }
 add_action( 'after_setup_theme', 'mytheme_setup' );
+
+/*********************
+RESPONSIVE VIEO AND RELATED VIDEO BEHAVIOUR
+*********************/
+
+// Add support for responsive embedded content (YouTube, Vimeo, etc.).
+add_theme_support( 'responsive-embeds' );
+
+// Add modestbranding to WP Gutenberg Video Blocks
+// https://wpforthewin.com/remove-related-videos-wp-gutenberg-embed-blocks/
+function wpftw_modest_youtube_player( $block_content, $block ) {
+  if( in_array($block['blockName'], ['core-embed/youtube', 'core-embed', 'core/embed'] ) ) {
+    $block_content = str_replace( '?feature=oembed', '?feature=oembed&modestbranding=1&showinfo=0&rel=0', $block_content );
+  }
+  return $block_content;
+}
+add_filter( 'render_block', 'wpftw_modest_youtube_player', 10, 3);
 
 /*******************************
  THUMBNAIL SUPPORT

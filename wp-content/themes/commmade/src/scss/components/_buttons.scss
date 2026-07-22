@@ -20,7 +20,7 @@
         &.btn-lg {font-size: 1.3rem; padding: .75rem 1.25rem;}
     }
     
-    &.btn-blue {background-color: $blue_15; color: $c-white; transition: transform .2s;
+    &.btn-blue {margin: .5rem 0; background-color: $blue_15; color: $c-white; transition: transform .2s;
         &:hover {background-color: $blue_5; color: $c-white; transform: scale(1.05);}
         &:active, &:focus  {color: $c-black; background-color: $yellow_10;}
     }

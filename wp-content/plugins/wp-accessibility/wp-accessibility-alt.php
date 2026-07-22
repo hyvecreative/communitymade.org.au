@@ -87,7 +87,7 @@ function wpa_long_alt( $alt ) {
 	 *
 	 * @hook wpa_long_alt
 	 *
-	 * @param {int} $limit Default length to call alt text long.
+	 * @param int $limit Default length to call alt text long.
 	 *
 	 * @return int
 	 */
@@ -127,7 +127,7 @@ function wpa_suspicious_alt( $alt ) {
 	 *
 	 * @hook wpa_case_insensitive
 	 *
-	 * @param {array} $case_insensitive Array of strings.
+	 * @param array $case_insensitive Array of strings.
 	 *
 	 * @return array
 	 */
@@ -141,7 +141,7 @@ function wpa_suspicious_alt( $alt ) {
 	 *
 	 * @hook wpa_case_sensitive
 	 *
-	 * @param {array} $case_sensitive Array of strings.
+	 * @param array $case_sensitive Array of strings.
 	 *
 	 * @return array
 	 */
@@ -256,8 +256,15 @@ add_action( 'init', 'wpa_add_editor_styles' );
  * Enqueue custom editor styles for WP Accessibility. Used in display of img replacements.
  */
 function wpa_add_editor_styles() {
-	$wpa_version = ( SCRIPT_DEBUG ) ? wp_rand( 10000, 100000 ) : wpa_check_version();
-	add_editor_style( plugins_url( 'css/editor-style.css', __FILE__ ), false, $wpa_version );
+	$version     = wpa_check_version();
+	$wpa_version = ( SCRIPT_DEBUG ) ? $version . '-' . wp_rand( 10000, 100000 ) : $version;
+	$url         = add_query_arg(
+		array(
+			'ver' => $wpa_version,
+		),
+		plugins_url( 'css/editor-style.css', __FILE__ )
+	);
+	add_editor_style( $url );
 }
 
 add_action( 'enqueue_block_assets', 'wpa_block_editor_assets' );
@@ -267,7 +274,12 @@ add_action( 'enqueue_block_assets', 'wpa_block_editor_assets' );
 function wpa_block_editor_assets() {
 	// Using enqueue_block_assets will enqueue on the front-end if not wrapped in conditional.
 	if ( is_admin() ) {
-		$wpa_version = ( SCRIPT_DEBUG ) ? wp_rand( 10000, 100000 ) : wpa_check_version();
+		$version     = wpa_check_version();
+		$wpa_version = ( SCRIPT_DEBUG ) ? $version . '-' . wp_rand( 10000, 100000 ) : $version;
 		wp_enqueue_style( 'wpa-block-styles', plugins_url( 'css/editor-style.css', __FILE__ ), false, $wpa_version );
+
+		if ( 'on' === get_option( 'wpa_enable_visibility' ) ) {
+			wp_enqueue_style( 'wpa-visibility-styles', plugins_url( 'css/editor-visibility.css', __FILE__ ), false, $wpa_version );
+		}
 	}
 }

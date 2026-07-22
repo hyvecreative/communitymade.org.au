@@ -33,14 +33,7 @@
 			</div>
         
             <div class="col-md-2 social-logos">
-                <h2>Share</h2>
-					<a href="<?php the_field('linkedin_url', 'option'); ?>" class="li-share" style="margin-right: 10px;"><i aria-hidden="true" class="fa-brands fa-linkedin fa-2x" title="Share on Linkedin"></i>
-					<span class="sr-only">See on Linkedin</span>
-					</a>
                 
-                    <a href="<?php the_field('facebook_url', 'option'); ?>" class="fb-share"><i aria-hidden="true" class="fa-brands fa-facebook-square fa-2x" title="See us on Facebook"></i>
-					<span class="sr-only">See us on Facebook</span>
-					</a>
 				
             </div>
 			
@@ -70,8 +63,8 @@
 
 <a id="scroll-to-top" title="Back To Top" class="scroll-to-top" href="#">
 <span class=" " aria-hidden="true">
-	<i class="fas fa-arrow-up"></i></span>
-<span class="sr-only">Error:</span>
+	<i class="fa-light fa-arrow-up"></i></span>
+<span class="sr-only">Back to Top</span>
 </a>
 
 <?= wp_footer() ?> 
@@ -112,34 +105,6 @@ document.querySelectorAll('a.btn[href^="#"]').forEach(anchor => {
       }, 300);
     }
   });
-</script>
-
-<script>
-
-    document.querySelectorAll('.schema-faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        const answer = q.nextElementSibling;
-
-        // Toggle clicked answer only
-        if (answer.style.height && answer.style.height !== '0px') {
-          // Collapse
-          answer.style.height = answer.scrollHeight + 'px'; // Start from current height
-          requestAnimationFrame(() => {
-            answer.style.height = '0';
-            answer.style.opacity = 0;
-          });
-        } else {
-          // Expand
-          answer.style.height = '0'; // Start from 0
-          answer.style.opacity = 0;
-          requestAnimationFrame(() => {
-            answer.style.height = answer.scrollHeight + 'px';
-            answer.style.opacity = 1;
-          });
-        }
-      });
-    });
-
 </script>
 
 

@@ -11,9 +11,10 @@ Template Name: front-page-temp
     <div class="container">
         <div class="row">
              <div class="col-lg-5 hero-text-wrap">
-                            <h1><?php the_field('hm_hero_title'); ?></h1>
-                            <p><?php the_field('hm_hero_sub'); ?></p>
-                            <a href="#" class="btn btn-green">Send a message to your local MP <i class="fa-light fa-arrow-right"></i></a>
+                            <h1 data-aos="fade-up"><?php the_field('hm_hero_title'); ?></h1>
+                            <h2 data-aos="fade-up" data-aos-delay="200" ><?php the_field('hm_hero_title_sm'); ?></h2>
+                            <p data-aos="fade-up" data-aos-delay="400" ><?php the_field('hm_hero_sub'); ?></p>
+                            <a href="#" class="btn btn-clear">Send a message to your local MP <i class="fa-light fa-arrow-right"></i></a>
             </div>
             <div class="col-lg-7 hero-image-wrap" style="display: flex;">
             <?php if (has_post_thumbnail()) : 
@@ -43,8 +44,7 @@ Template Name: front-page-temp
     <div class="container">
         <div class="row">
              <div class="col-12">
-                 <h2>Community Housing:<br />
-                    A solution that is for the people, by the people. </h2>
+                 <h2 data-aos="fade-up" data-aos-delay="800">Good homes and communities,<br />built by the people who know how</h2>
                     <i class="hm-down-arrow fa-light fa-circle-arrow-down fa-xl"></i>
             </div>
         </div>
@@ -97,10 +97,10 @@ Template Name: front-page-temp
                             <p class="issue-sub"><strong><?php the_sub_field('issues_sub_head'); ?></strong></p>
                         <?php endif; ?>
 
-                        <p><?php the_sub_field('issues_item_txt'); ?><p>
+                        <?php the_sub_field('issues_item_txt'); ?>
                      
                          <?php if (get_sub_field('issues_target_url')) : ?>
-                         <a class="btn btn-blue" href="<?php the_sub_field('issues_target_url'); ?>" style="margin-top: 0;"><?php the_sub_field('issues_link_text'); ?> <i class="fa-light fa-arrow-right"></i></a>
+                         <a class="btn btn-blue" href="<?php the_sub_field('issues_target_url'); ?>"><?php the_sub_field('issues_link_text'); ?> <i class="fa-light fa-arrow-right"></i></a>
                          <?php endif; ?>
                         
                 </div>
@@ -111,6 +111,45 @@ Template Name: front-page-temp
 
     </div>
 </div>
+    
+<!-- Video Block -->
+    
+<div id="video-section" class="container-fluid video-section">
+    
+	<div  class="container" style="position: relative;">
+        
+		<?php
+            $video_head = get_field('video_head');
+            $video_intro = get_field('video_intro');
+
+            if ($video_head) :
+            ?>
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center video-header-text">
+                        <h2><?php echo esc_html($video_head); ?></h2>
+                        <p><?php echo esc_html($video_intro); ?></p>
+                    </div>
+                </div>
+        <?php endif; ?>
+            
+        <div class="row">
+        
+             <div class="col video-item-wrap">
+                    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+		
+                        <?php the_content(__('(more...)')); ?>
+
+                        <?php endwhile; else: ?>
+                        <p><?php _e('Sorry, no video content is available.'); ?></p>
+                    <?php endif; ?>	
+             </div>
+
+        </div> <!-- end video wrap -->
+
+    </div>
+</div>
+    
+    
     
 <!-- Quick stats  --> 
     
@@ -126,17 +165,20 @@ Template Name: front-page-temp
                 
                 <div class="col-lg-4 text-center stats-wrap">
                     <div class="stats-item">
-                    <p>Stats 1</p>
+                        <h2>67,000+ </h2>
+                        <p>rental homes owned or managed </p>
                      </div>
                 </div>
                 <div class="col-lg-4 text-center stats-wrap">
                     <div class="stats-item">
-                    <p>Stats 2</p>
+                        <h2>8,800 </h2>
+                        <p>new homes built since 2012 </p>
                      </div>
                 </div>
                 <div class="col-lg-4 text-center stats-wrap">
                     <div class="stats-item">
-                    <p>Stats 3</p>
+                        <h2>81% </h2>
+                        <p>of residents satisfied with their home</p>
                      </div>
                 </div>
 
@@ -146,90 +188,6 @@ Template Name: front-page-temp
 			
 </div>
 
-
-<!-- Intro  -->
-    
-<div id="section-intro" class="container-fluid section-intro" style="display: none">
-    
-	<div  class="container" style="position: relative;">
-		
-		<div class="row">
-			<div class="col-md-12 intro-text-wrapper">
-				<h2><?php the_field('intro_head'); ?></h2>
-			</div>
-			
-		</div>
-        
-        <div class="row intro-holder">
-            <div class="col-lg-6 intro-content-wrap">
-                <?php the_field('intro_content'); ?>
-		    </div>
-            <div class="col-lg-6 deadline-wrapper">
-                <h2 style="color: #ffffff; margin-top: .5rem;"><?php the_field('deadline_heading'); ?></h2>
-                <?php if ( get_field('deadline_content') ) : ?>
-                    <?php the_field('deadline_content'); ?>
-                <?php endif; ?>
-			    <a class="btn btn-lg" style="margin-top: 0;" href="<?php the_field('deadline_button_url'); ?>" aria-label="View the About Us page"><?php the_field('deadline_button_text'); ?> <i class="fa-solid fa-arrow-right"></i></a>
-		    </div>
-            <div class="brand-pointer"></div>
-        </div> 
-        
-    </div>
-</div>
-    
-<!-- What Happened?  -->
- <div id="whatHappened" class="container-fluid what-happened">
-	<div  class="container" style="position: relative;">    
-
-        
-        <div class="row happened-title">
-			<div class="col-md-12 intro-text-wrapper">
-				<h2 class="text-center"><?php the_field('what_head'); ?></h2>
-			</div>
-		</div>
-        
-        <div class="row" style="margin-top:0; margin-bottom: 0;">
-
-         <?php $count = 1; ?>
-         <?php $count2 = 1; ?>
-
-         <?php if( have_rows('what_happened') ): while ( have_rows('what_happened') ) : the_row(); ?>
-        
-             <div class="col-lg-6 happened-left">
-                <div class="row happened-row">
-                    <div class="col-3 happened-item-img">
-                        <?php
-                        $image = get_sub_field('happ_icon');
-                        $size = 'full'; // (thumbnail, medium, large, full or custom size)
-                        if( $image ) {
-                            echo wp_get_attachment_image( $image, $size );
-                        }
-                        ?>
-                    </div>
-                    
-                   
-                    <div class="col-9 happened-item-text">
-                        
-                    <?php if (get_sub_field('happ_sub')) : ?>
-                            <p style="margin-bottom: -.5rem"><strong><?php the_sub_field('happ_sub'); ?></strong></p>
-                        <?php endif; ?>
-
-                        <?php the_sub_field('happ_content'); ?> <a href="<?php the_sub_field('happ_url'); ?>" style="margin-top: 0;"><?php the_sub_field('happ_link_text'); ?> <i class="fa-solid fa-arrow-right"></i></a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-            
-        
-        
-            <?php endwhile; else: endif; ?>
-            </div>
-
-        
- </div>
-</div>
-    
     
     <div id="newsUpdates" class="container-fluid news-and-updates">
 	<div  class="container" style="position: relative;">
@@ -293,7 +251,10 @@ Template Name: front-page-temp
                     <div class="row updates-form-wrap" style="">
                     
                         <div class="col-lg-6 updates-form-head">
-                        <h2>Sign up for updates</h2>
+                        <h2>Add your name</h2><br>
+                            <p>Building enough community housing is a choice, and the people elected in your seat will be the ones who make it for us all. 
+                            <p>Add your name to the growing list of supporters backing community housing.</
+                            </p>
                         </div>
                     
                        <div class="col-lg-6 updates-form">

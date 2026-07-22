@@ -30,10 +30,10 @@
 .container-fluid {
     &.page-feature {
         &.clean-header {background: $blue_15; padding: 2.25rem 0;
+            @include media('>=992px') {padding: 3.5rem 0;}
             h1 {padding-top: 0;
-                 @include media('>=992px') {max-width: 85%;}
+                 @include media('>=992px') {max-width: 85%; padding-top: .5rem;}
             }
-           
         }
         
         .page-container {position: relative;
