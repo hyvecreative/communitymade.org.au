@@ -18468,3 +18468,16 @@ AND `group_id` = 3
 [21-Jul-2026 21:59:46 UTC]   Automatic theme updates complete.
 [21-Jul-2026 21:59:46 UTC] Automatic updates complete.
 [21-Jul-2026 22:27:07 UTC] PHP Warning:  Undefined variable $video_head in /var/www/html/wp-content/themes/commmade/front-page.php on line 124
+[22-Jul-2026 08:50:32 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>events</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[22-Jul-2026 08:50:32 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>projects</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[22-Jul-2026 08:50:32 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>journalism</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[22-Jul-2026 08:50:32 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>submissions</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[22-Jul-2026 08:50:32 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>your-stories</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[22-Jul-2026 08:57:29 UTC] Automatic updates starting...
+[22-Jul-2026 08:57:29 UTC]   Automatic theme updates starting...
+[22-Jul-2026 08:57:29 UTC]   Automatic theme updates complete.
+[22-Jul-2026 08:57:29 UTC] Automatic updates complete.
+[22-Jul-2026 23:34:11 UTC] Automatic updates starting...
+[22-Jul-2026 23:34:13 UTC]   Automatic theme updates starting...
+[22-Jul-2026 23:34:13 UTC]   Automatic theme updates complete.
+[22-Jul-2026 23:34:13 UTC] Automatic updates complete.

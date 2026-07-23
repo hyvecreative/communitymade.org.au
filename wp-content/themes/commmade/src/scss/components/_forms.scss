@@ -80,7 +80,7 @@
 	label {color: $c-white; font-size: .9rem;}
 	#action_info {display: none;}
 	input {border-radius: 4px!important;
-		&[type="submit"] {color: #000!important; font-size: 1.2rem!important; border-radius: 4px!important; background-color: $yellow_5!important; font-weight: 700!important; height: 44px!important; line-height: 39px!important; transition: transform .2s;
+		&[type="submit"] {color: #000!important; font-size: 1.2rem!important; border-radius: 1.5rem!important; background-color: $green_5!important; font-weight: 700!important; height: 44px!important; line-height: 39px!important; transition: transform .2s;
 			&:hover {color: $c-white; background-color: $yellow_10!important; transform: scale(1.05);}
 		}
 		&[type="text"] {height: 44px; border: 2px solid $yellow_5;}

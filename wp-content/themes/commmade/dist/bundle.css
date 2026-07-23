@@ -176,7 +176,7 @@ h1 {
 
 h2 {
   color: #006A8C;
-  margin: 1rem 0 1rem !important;
+  margin: 1rem 0 1rem;
   font-size: 1.875rem;
   line-height: 1.1;
   font-weight: 700; }
@@ -4113,11 +4113,16 @@ ul#mymenu {
 
 /* hero on home */
 .hm-hero {
-  padding: 3rem 0;
+  padding: 3rem 0 7rem;
   background: linear-gradient(135deg, #5fb6d6 0%, #6dbcc7 45%, #79beb1 65%, #8ac576 100%); }
   @media (min-width: 767.02px) {
     .hm-hero {
+      padding: 7rem 0; } }
+  @media (min-width: 1023.02px) {
+    .hm-hero {
       padding: 5rem 0; } }
+  .hm-hero .hm-hero-wrap {
+    position: relative; }
   .hm-hero .hero-text-wrap {
     margin-bottom: 1.5rem; }
     @media (min-width: 1023.02px) {
@@ -4125,10 +4130,18 @@ ul#mymenu {
         margin-bottom: 0; } }
     .hm-hero .hero-text-wrap h1 {
       color: #003349;
-      margin-bottom: 0; }
+      margin-bottom: 0;
+      font-size: 2.5rem; }
+      @media (min-width: 1023.02px) {
+        .hm-hero .hero-text-wrap h1 {
+          font-size: 3.25rem; } }
     .hm-hero .hero-text-wrap h2 {
       color: #003349;
-      margin-top: 0 !important; }
+      margin-top: 0 !important;
+      font-size: 2.5rem; }
+      @media (min-width: 1023.02px) {
+        .hm-hero .hero-text-wrap h2 {
+          font-size: 2.5rem; } }
   .hm-hero .hero-image-wrap {
     display: -ms-flexbox;
     display: flex; }
@@ -4138,6 +4151,19 @@ ul#mymenu {
       -o-object-fit: cover;
          object-fit: cover;
       border-radius: 2rem; }
+
+.icon-strip {
+  position: absolute;
+  bottom: -7rem;
+  left: 1rem; }
+  @media (min-width: 768px) {
+    .icon-strip {
+      left: .5rem;
+      bottom: -7rem; } }
+  @media (min-width: 992px) {
+    .icon-strip {
+      left: .5rem;
+      bottom: -5rem; } }
 
 .hm-spruik {
   background: #006A8C;
@@ -4159,8 +4185,8 @@ ul#mymenu {
     .hm-quick-stats {
       padding: 3rem 0; } }
   .hm-quick-stats h2 {
-    color: #003349;
-    margin-bottom: 1.5rem; }
+    color: #fff;
+    margin-bottom: 2.5rem !important; }
 
 .stats-wrap {
   display: -ms-flexbox;
@@ -4174,7 +4200,7 @@ ul#mymenu {
     .stats-wrap .stats-item h2 {
       color: #be3087;
       margin-top: 1rem;
-      margin-bottom: .75rem;
+      margin-bottom: 0.75rem !important;
       font-size: 3rem; }
       @media (min-width: 767.02px) {
         .stats-wrap .stats-item h2 {
@@ -4355,6 +4381,40 @@ img.title-star {
   height: 5rem;
   margin-right: .5rem;
   padding-bottom: .25rem; }
+
+.holding-wrap {
+  height: 100vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: center;
+      justify-content: center;
+  background: linear-gradient(135deg, #5fb6d6 0%, #6dbcc7 45%, #79beb1 65%, #8ac576 100%); }
+  .holding-wrap h3 {
+    color: #fff;
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+    font-weight: 500; }
+    @media (min-width: 992px) {
+      .holding-wrap h3 {
+        font-size: 3.5rem;
+        max-width: 992px; } }
+  .holding-wrap p {
+    color: #fff;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    max-width: 992px; }
+    @media (min-width: 992px) {
+      .holding-wrap p {
+        font-size: 2rem; } }
+  .holding-wrap img {
+    width: 100%;
+    height: auto;
+    max-width: 992px;
+    padding: 2rem; }
 
 .page-feature.pg-feature {
   background-size: auto;
@@ -5013,6 +5073,22 @@ ul.basic-x li a.button-basic {
     .btn.btn-green:active, .btn.btn-green:focus {
       color: #000;
       background-color: #db861b; }
+  .btn.btn-clear {
+    background-color: transparent;
+    border: 4px solid rgba(255, 255, 255, 0.65);
+    border-radius: 1.5rem;
+    color: #003349;
+    transition: transform .2s;
+    font-size: 1.2rem;
+    text-decoration: none; }
+    .btn.btn-clear:hover {
+      background-color: #8DC066;
+      color: #fff;
+      -ms-transform: scale(1.07);
+          transform: scale(1.07); }
+    .btn.btn-clear:active, .btn.btn-clear:focus {
+      color: #000;
+      background-color: #db861b; }
 
 .searchandfilter ul {
   padding-left: 0; }
@@ -5110,8 +5186,8 @@ ul.basic-x li a.button-basic {
     #wrapper #can_embed_form input[type="submit"] {
       color: #000 !important;
       font-size: 1.2rem !important;
-      border-radius: 4px !important;
-      background-color: #E59B3F !important;
+      border-radius: 1.5rem !important;
+      background-color: #8DC066 !important;
       font-weight: 700 !important;
       height: 44px !important;
       line-height: 39px !important;

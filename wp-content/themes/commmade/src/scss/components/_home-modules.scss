@@ -2,7 +2,7 @@
 /* hero on home */
 
 .hm-hero {
-    padding: 3rem 0;
+    padding: 3rem 0 7rem;
 
     background: linear-gradient(
         135deg,
@@ -13,16 +13,24 @@
     );
 
     @include breakpoint-up(mobile) {
+        padding: 7rem 0;
+    }
+    
+    @include breakpoint-up(tablet) {
         padding: 5rem 0;
     }
+    
+    .hm-hero-wrap {position: relative;}
     
     .hero-text-wrap {margin-bottom: 1.5rem;
         @include breakpoint-up(tablet) {margin-bottom: 0;}
         h1 {
-            color: $blue_20; margin-bottom: 0;
+            color: $blue_20; margin-bottom: 0; font-size: 2.5rem;
+            @include breakpoint-up(tablet) {font-size: 3.25rem;}
         }
         h2 {
-            color: $blue_20; margin-top: 0!important;
+            color: $blue_20; margin-top: 0!important; font-size: 2.5rem;
+            @include breakpoint-up(tablet) {font-size: 2.5rem;}
         }
     }
     
@@ -40,6 +48,11 @@
 
 }
 
+.icon-strip {position: absolute; bottom: -7rem; left: 1rem;
+    @include media('>=768px') {left: .5rem; bottom: -7rem;}
+    @include media('>=992px') {left: .5rem; bottom: -5rem;}
+}
+
 .hm-spruik { background: $blue_15; padding: 1.5rem 0; position: relative;
     @include breakpoint-up(mobile) {
         padding: 3rem 0;
@@ -55,7 +68,7 @@
     background: linear-gradient(to bottom right, #0f6f94 0%, #388fb5 25%, #5fb3d1 50%, #78beb6 75%, #8bc46d 100%);
      @include breakpoint-up(mobile) {padding: 3rem 0;}
     
-        h2 {color: #003349; margin-bottom: 1.5rem;} 
+        h2 {color: $c-white; margin-bottom: 2.5rem!important;} 
             
     }
     
@@ -63,7 +76,7 @@
         
        
         .stats-item {width: 100%; background: $c-white; padding: 1.5rem; border-radius: 2rem;
-            h2 {color: #be3087; margin-top: 1rem; margin-bottom: .75rem; font-size: 3rem;
+            h2 {color: #be3087; margin-top: 1rem; margin-bottom: .75rem!important; font-size: 3rem;
                 @include breakpoint-up(mobile) {
                     font-size: 3.5rem;
                 }
@@ -234,6 +247,27 @@ img {
     &.title-star {width: 5rem; height: 5rem; margin-right: .5rem; padding-bottom: .25rem;}
 }
 
+
+//holding page
+
+.holding-wrap {height: 100vh; display: flex; align-items: center;flex-direction: column; justify-content: center;
+    background: linear-gradient(
+        135deg,
+        #5fb6d6 0%,
+        #6dbcc7 45%,
+        #79beb1 65%,
+        #8ac576 100%
+    );
+    
+    h3 {color: $c-white; font-size: 2.25rem; margin-bottom: 2rem; font-weight: 500;
+        @include media('>=992px') {font-size: 3.5rem; max-width:992px;}
+    }
+    
+    p {color: $c-white; font-size: 1.6rem; margin-bottom: 1rem; max-width:992px;
+    @include media('>=992px') {font-size: 2rem;}}
+    
+    img {width: 100%; height: auto; max-width:992px; padding: 2rem;}
+}
 
 
 

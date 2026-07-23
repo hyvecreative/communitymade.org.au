@@ -65,25 +65,16 @@ Template Name: holding-temp
 
 <!-- begin content -->
 
+    
+<div id="holding-intro" class="container-fluid holding-wrap">
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+		
+                        <?php the_content(__('(more...)')); ?>
 
-<div class="wp-site-blocks">
-<main id="wp--skip-link--target" class="wp-block-group has-global-padding is-layout-constrained wp-block-group-is-layout-constrained" style="margin-top:var(--wp--preset--spacing--60)">
-<div class="wp-block-group alignfull has-global-padding is-layout-constrained wp-container-core-group-is-layout-bd7bfa8f wp-block-group-is-layout-constrained" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><div class="entry-content alignfull wp-block-post-content has-global-padding is-layout-constrained wp-block-post-content-is-layout-constrained">
-<div class="wp-block-cover alignfull is-light has-parallax landingpg-content has-custom-css has-accent-1-color has-text-color has-link-color wp-elements-96eb15e961230100187bffc05c03e199 wp-custom-css-6be20f7f" style="margin-top:0;margin-bottom:0;padding-top:200px;padding-right:var(--wp--preset--spacing--50);padding-bottom:200px;padding-left:var(--wp--preset--spacing--50);min-height:100vh;aspect-ratio:unset;"><div class="wp-block-cover__image-background wp-image-33 size-full has-parallax" style="background-position:50% 50%;background-image:url(https://communitymade.org.au/wp-content/uploads/2026/06/spacer-pattern.png)"></div><span aria-hidden="true" class="wp-block-cover__background has-white-background-color has-background-dim-10 has-background-dim"></span><div class="wp-block-cover__inner-container has-global-padding is-layout-constrained wp-container-core-cover-is-layout-6714f75d wp-block-cover-is-layout-constrained">
-<p class="has-text-align-center has-base-color has-text-color has-link-color wp-elements-7acf96badc9771d58a7ce4d4976d9ad0 wp-block-paragraph">Something exciting is on the way.</p>
-
-
-
-<h3 class="wp-block-heading has-text-align-center has-base-color has-text-color has-link-color has-xx-large-font-size wp-elements-e3ff9bc037020c94c01573289bb7c0d8">The Community Made campaign launches soon – so stay tuned!</h3>
-
-
-
-<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="451" src="https://communitymade.org.au/wp-content/uploads/2026/06/community-made-logo-lozonge-1024x451.png" alt="" class="wp-image-16" srcset="https://communitymade.org.au/wp-content/uploads/2026/06/community-made-logo-lozonge-1024x451.png 1024w, https://communitymade.org.au/wp-content/uploads/2026/06/community-made-logo-lozonge-300x132.png 300w, https://communitymade.org.au/wp-content/uploads/2026/06/community-made-logo-lozonge-768x339.png 768w, https://communitymade.org.au/wp-content/uploads/2026/06/community-made-logo-lozonge.png 1200w" sizes="(max-width: 1024px) 100vw, 1024px"></figure>
-</div></div>
-</div></div>
-</main>
+                        <?php endwhile; else: ?>
+                        <p><?php _e('Sorry, no video content is available.'); ?></p>
+                    <?php endif; ?>	
 </div>
-
 
 
 <?= wp_footer() ?> 
