@@ -95,6 +95,61 @@ Template Name: front-page-option
                             echo wp_get_attachment_image( $image, $size );
                         }
                         ?>
+
+                        <?php if (get_sub_field('issues_sub_head')) : ?>
+                            <p class="issue-sub"><strong><?php the_sub_field('issues_sub_head'); ?></strong></p>
+                        <?php endif; ?>
+
+                        <?php the_sub_field('issues_item_txt'); ?>
+                     
+                         <?php if (get_sub_field('issues_target_url')) : ?>
+                         <a class="btn btn-blue" href="<?php the_sub_field('issues_target_url'); ?>"><?php the_sub_field('issues_link_text'); ?> <i class="fa-light fa-arrow-right"></i></a>
+                         <?php endif; ?>
+                        
+                </div>
+             </div>
+  
+            <?php endwhile; else: endif; ?>
+            </div> <!-- end issues items -->
+
+    </div>
+</div>
+    
+<div id="section-solutions" class="container-fluid section-issues">
+    
+	<div  class="container" style="position: relative;">
+        
+		<?php
+            $solutions_head = get_field('solutions_head');
+            $solutions_sub = get_field('solutions_sub');
+
+            if ($solutions_head) :
+            ?>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2><?php echo esc_html($solutions_head); ?></h2>
+                        <p><?php echo esc_html($solutions_sub); ?></p>
+                    </div>
+                </div>
+        <?php endif; ?>
+            
+        <div class="row issues_wrap">
+
+         <?php $count = 1; ?>
+         <?php $count2 = 1; ?>
+
+         <?php if( have_rows('solutions_items') ): while ( have_rows('solutions_items') ) : the_row(); ?>
+        
+             <div class="col-lg-4 issues-item-wrap">
+                 <div class="issues-item">
+
+                        <?php
+                        $image = get_sub_field('issue_icon');
+                        $size = 'full'; // (thumbnail, medium, large, full or custom size)
+                        if( $image ) {
+                            echo wp_get_attachment_image( $image, $size );
+                        }
+                        ?>
                  
                         <h3><?php the_sub_field('issues_item_hd'); ?></h3>
 
