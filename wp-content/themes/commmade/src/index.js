@@ -5,12 +5,16 @@ import MenuToggle from './js/components/menu-toggle';
 import Dropdown from './js/components/dropdown';
 
 $(() => {
-
-  const headerSearch = new HeaderSearch();
-  headerSearch.init();
-
-  const carousel = new Carousel();
-  carousel.init();
-
+  [
+    () => new HeaderSearch().init(),
+    () => new Carousel().init(),
+    // add MenuToggle, Dropdown etc. here too if they're initialized
+  ].forEach((init) => {
+    try {
+      init();
+    } catch (e) {
+      console.error('Component init failed:', e);
+    }
+  });
 });
 

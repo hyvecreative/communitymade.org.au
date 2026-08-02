@@ -16,30 +16,15 @@ Template Name: front-page-temp
                             <p data-aos="fade-up" data-aos-delay="400" ><?php the_field('hm_hero_sub'); ?></p>
                             <a href="#newsUpdates" class="btn btn-clear">Join us <i class="fa-light fa-arrow-right"></i></a>
             </div>
-            <div class="col-lg-7 hero-image-wrap" style="display: flex;">
-            <?php if (has_post_thumbnail()) : 
-                $thumb_id = get_post_thumbnail_id($post->ID);
-
-                $img_full   = wp_get_attachment_image_src($thumb_id, 'full');
-                $img_large  = wp_get_attachment_image_src($thumb_id, 'large');
-                $img_medium = wp_get_attachment_image_src($thumb_id, 'medium');
-            ?>
-                <img 
-                    src="<?php echo esc_url($img_large[0]); ?>" 
-                    srcset="<?php echo esc_url($img_medium[0]); ?> <?php echo $img_medium[1]; ?>w, 
-                            <?php echo esc_url($img_large[0]); ?> <?php echo $img_large[1]; ?>w, 
-                            <?php echo esc_url($img_full[0]); ?> <?php echo $img_full[1]; ?>w"
-                    sizes="(max-width: 768px) 100vw, 58vw"
-                    alt="<?php the_title_attribute(); ?>"
-                    class="hero-img">
-            <?php endif; ?>
-
+            <div class="col-lg-7 hero-image-wrap hero-slider">
+                     <div class="slider-pic"><img src= "<?php bloginfo('template_directory'); ?>/images/hero-pic_people_4.webp" alt="" /></div>
+                     <div class="slider-pic"><img src= "<?php bloginfo('template_directory'); ?>/images/hero-pic_people_7.webp" alt="" /></div>
+                     <div class="slider-pic"><img src= "<?php bloginfo('template_directory'); ?>/images/hero-pic_people_8.webp" alt="" /></div> 
             </div>
-            </div>
-        
-        <img class="icon-strip" src= "<?php bloginfo('template_directory'); ?>/images/cm-icon-strip.png" alt="" />
-        
         </div>
+        
+        
+    </div>
     
     
     
@@ -50,8 +35,7 @@ Template Name: front-page-temp
     <div class="container">
         <div class="row">
              <div class="col-12">
-                 <h2 data-aos="fade-up" data-aos-delay="800">Good homes and communities,<br />built by the people who know how</h2>
-                    <i class="hm-down-arrow fa-light fa-circle-arrow-down fa-xl"></i>
+                 <h2 data-aos="fade-up" data-aos-delay="800">Great homes and communities,<br />built by the people who know how</h2>
             </div>
         </div>
     </div>
@@ -165,7 +149,7 @@ Template Name: front-page-temp
 		
 		<div class="row">
 				<div class="col-12 text-center">
-                    <h2 class="text-center">Quick Stats<?php the_field('stats_head'); ?></h2>
+                    <h2 class="text-center">Quick Stats – Community Housing in NSW<?php the_field('stats_head'); ?></h2>
                 </div>
                 
                 
@@ -294,7 +278,7 @@ Template Name: front-page-temp
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var placeholder = document.querySelector('#can-form-area-tysb-get-updates-form');
+    var placeholder = document.querySelector('#can-form-area-i-support-community-made');
     if (!placeholder) return;
 
     // Use IntersectionObserver to load script when placeholder scrolls into view

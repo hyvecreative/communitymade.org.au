@@ -38,20 +38,6 @@
         
         .page-container {position: relative;
             
-                &::before {display: none;
-              
-                @include media('>=992px') {
-                  display: block;
-                  content: "";
-                  position: absolute;
-                  top: -1rem;
-                  right: 2rem;
-                  width: 100px;
-                  height: 100px;
-                  background: url('/wp-content/themes/superback/images/arrow-brand-rev.svg') center no-repeat; 
-                  background-size: cover;
-                }
-            }
         }
     }
 }

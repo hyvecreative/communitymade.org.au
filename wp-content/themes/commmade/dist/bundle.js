@@ -93,12 +93,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 $(function () {
-
-  var headerSearch = new __WEBPACK_IMPORTED_MODULE_1__js_components_header_search__["a" /* default */]();
-  headerSearch.init();
-
-  var carousel = new __WEBPACK_IMPORTED_MODULE_2__js_components_carousel__["a" /* default */]();
-  carousel.init();
+  [function () {
+    return new __WEBPACK_IMPORTED_MODULE_1__js_components_header_search__["a" /* default */]().init();
+  }, function () {
+    return new __WEBPACK_IMPORTED_MODULE_2__js_components_carousel__["a" /* default */]().init();
+  }].forEach(function (init) {
+    try {
+      init();
+    } catch (e) {
+      console.error('Component init failed:', e);
+    }
+  });
 });
 
 /***/ }),
@@ -120,44 +125,44 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 var Carousel = function () {
-    function Carousel() {
-        _classCallCheck(this, Carousel);
+  function Carousel() {
+    _classCallCheck(this, Carousel);
+  }
+
+  _createClass(Carousel, [{
+    key: 'init',
+    value: function init() {
+      var $slider = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.hero-slider');
+      if (!$slider.length || $slider.hasClass('slick-initialized')) return;
+
+      $slider.slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        infinite: true,
+        accessibility: true,
+        speed: 1000,
+        cssEase: 'linear',
+        arrows: false,
+        dots: true
+      });
+
+      // Re-measure as images finish loading (the cold-load mobile fix)
+      $slider.find('img').each(function () {
+        if (this.complete) return;
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default()(this).one('load', function () {
+          return $slider.slick('setPosition');
+        });
+      });
+
+      __WEBPACK_IMPORTED_MODULE_0_jquery___default()(window).one('load', function () {
+        return $slider.slick('setPosition');
+      });
     }
+  }]);
 
-    _createClass(Carousel, [{
-        key: 'init',
-        value: function init() {
-            __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".logo-slider").slick({
-
-                // normal options...
-                slidesToShow: 6,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 5000,
-                infinite: true,
-                accessibility: true,
-                speed: 1000,
-
-                // the magic
-                responsive: [{
-
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 2,
-                        infinite: true
-                    }
-
-                }, {
-
-                    breakpoint: 300,
-                    settings: "unslick" // destroys slick
-
-                }]
-            });
-        }
-    }]);
-
-    return Carousel;
+  return Carousel;
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Carousel);

@@ -18496,3 +18496,80 @@ AND `group_id` = 3
 [23-Jul-2026 05:19:51 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>journalism</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
 [23-Jul-2026 05:19:51 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>submissions</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
 [23-Jul-2026 05:19:51 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>your-stories</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[29-Jul-2026 08:22:07 UTC] Automatic updates starting...
+[29-Jul-2026 08:22:08 UTC]   Automatic plugin updates starting...
+[29-Jul-2026 08:22:08 UTC]   Automatic plugin updates complete.
+[29-Jul-2026 08:22:09 UTC]   Automatic theme updates starting...
+[29-Jul-2026 08:22:09 UTC]   Automatic theme updates complete.
+[29-Jul-2026 08:22:09 UTC] Automatic updates complete.
+[29-Jul-2026 08:23:03 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:23:19 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:24:31 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:24:41 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>events</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[29-Jul-2026 08:24:41 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>projects</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[29-Jul-2026 08:24:41 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>journalism</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[29-Jul-2026 08:24:41 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>submissions</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[29-Jul-2026 08:24:41 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>your-stories</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[29-Jul-2026 08:24:51 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:25:32 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:26:00 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:30:32 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:31:39 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:32:23 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:32:43 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:32:52 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:32:56 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:34:43 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:36:19 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 107
+[29-Jul-2026 08:36:31 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 106
+[29-Jul-2026 09:02:33 UTC] Automatic updates starting...
+[29-Jul-2026 09:02:33 UTC]   Automatic plugin updates starting...
+[29-Jul-2026 09:02:33 UTC]   Automatic plugin updates complete.
+[29-Jul-2026 09:02:33 UTC]   Automatic theme updates starting...
+[29-Jul-2026 09:02:33 UTC]   Automatic theme updates complete.
+[29-Jul-2026 09:02:33 UTC] Automatic updates complete.
+[29-Jul-2026 10:24:49 UTC] Automatic updates starting...
+[29-Jul-2026 10:24:49 UTC]   Automatic plugin updates starting...
+[29-Jul-2026 10:24:49 UTC]   Automatic plugin updates complete.
+[29-Jul-2026 10:24:49 UTC]   Automatic theme updates starting...
+[29-Jul-2026 10:24:49 UTC]   Automatic theme updates complete.
+[29-Jul-2026 10:24:49 UTC] Automatic updates complete.
+[29-Jul-2026 10:31:04 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:31:22 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:32:13 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:33:28 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:33:31 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:35:15 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:36:16 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:36:50 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:38:07 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:38:10 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:38:13 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:40:29 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:40:36 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:43:14 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:45:49 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 10:46:23 UTC] PHP Warning:  Undefined variable $sw_form in /var/www/html/wp-content/themes/commmade/share-your-story.php on line 117
+[29-Jul-2026 11:26:11 UTC] Automatic updates starting...
+[29-Jul-2026 11:26:11 UTC]   Automatic plugin updates starting...
+[29-Jul-2026 11:26:11 UTC]   Automatic plugin updates complete.
+[29-Jul-2026 11:26:11 UTC]   Automatic theme updates starting...
+[29-Jul-2026 11:26:11 UTC]   Automatic theme updates complete.
+[29-Jul-2026 11:26:11 UTC] Automatic updates complete.
+[30-Jul-2026 01:15:56 UTC] Automatic updates starting...
+[30-Jul-2026 01:15:57 UTC]   Automatic plugin updates starting...
+[30-Jul-2026 01:15:57 UTC]   Automatic plugin updates complete.
+[30-Jul-2026 01:15:58 UTC]   Automatic theme updates starting...
+[30-Jul-2026 01:15:58 UTC]   Automatic theme updates complete.
+[30-Jul-2026 01:15:58 UTC] Automatic updates complete.
+[30-Jul-2026 02:38:44 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>events</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[30-Jul-2026 02:38:44 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>projects</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[30-Jul-2026 02:38:44 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>journalism</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[30-Jul-2026 02:38:44 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>submissions</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[30-Jul-2026 02:38:44 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>your-stories</code> is not registered, so it may not be reliable to check the capability <code>read_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in /var/www/html/wp-includes/functions.php on line 6170
+[02-Aug-2026 23:12:49 UTC] Automatic updates starting...
+[02-Aug-2026 23:12:49 UTC]   Automatic plugin updates starting...
+[02-Aug-2026 23:12:49 UTC]   Automatic plugin updates complete.
+[02-Aug-2026 23:12:49 UTC]   Automatic theme updates starting...
+[02-Aug-2026 23:12:49 UTC]   Automatic theme updates complete.
+[02-Aug-2026 23:12:49 UTC] Automatic updates complete.

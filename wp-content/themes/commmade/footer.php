@@ -11,13 +11,7 @@
             <div class="col-md-4 col-lg-3 profile-ft">
 				
 				<?php the_field('footer_copyright', 'option'); ?>
-                <a href="<?php the_field('partner_logo_1_url', 'option'); ?>" aria-label="Go to Super Consumers" >
-                    <?php 
-								$image = get_field('partner_logo_1', 'option');
-								if( !empty( $image ) ): ?>
-									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
-					<?php endif; ?>
-                </a>
+                
 				<?php the_field('footer_authorisation_text', 'option'); ?>
 				
 				<?php the_field('footer_contact', 'option'); ?>
@@ -32,8 +26,14 @@
 
 			</div>
         
-            <div class="col-md-2 social-logos">
-                
+            <div class="col-md-2 partner-logos">
+                <a href="<?php the_field('partner_logo_1_url', 'option'); ?>" aria-label="Go to Super Consumers" >
+                    <?php 
+								$image = get_field('partner_logo_1', 'option');
+								if( !empty( $image ) ): ?>
+									<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+					<?php endif; ?>
+                </a>
 				
             </div>
 			
@@ -106,6 +106,8 @@ document.querySelectorAll('a.btn[href^="#"]').forEach(anchor => {
     }
   });
 </script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 
 </body>

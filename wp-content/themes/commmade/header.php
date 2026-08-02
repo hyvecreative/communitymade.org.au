@@ -52,22 +52,6 @@
             <?php get_template_part('fragments/header/button'); ?>
         </div>
 
-        <!-- SEARCH -->
-        <div class="header-items-search header-search">
-            <div class="header-search-wrap">
-                <form role="search" method="get" id="search-form" class="header-search-form" action="<?php echo home_url('/'); ?>">
-                    <label class="header-search-label sr-only" for="s">Search</label>
-                    <input type="text" id="s" name="s" class="header-search-field" placeholder="Search" autocomplete="off">
-                    <input type="button" class="header-search-button search-button header-search-submit" value="Search">
-
-                    <button type="reset" class="header-search-reset">
-                        <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fa-times"><path fill="white" d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z" class=""></path></svg>
-                        <span class="sr-only">clear</span>
-                    </button>
-                </form>
-            </div>
-        </div>
-
         <div class="header__toggle">
             <?php get_template_part('fragments/header/button'); ?>
             <div class="menu-toggle js-toggle">

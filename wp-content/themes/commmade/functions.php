@@ -67,10 +67,10 @@ function theme_enqueue_assets() {
     wp_enqueue_script('scroll',   $js_dir . 'scroll.js',       ['jquery'], null, true);
 
     /* AOS script */
-    wp_enqueue_script(
+        wp_enqueue_script(
         'aos-js',
-        'https://unpkg.com/aos@2.3.0/dist/aos.js',
-        ['jquery'],
+        'https://cdn.jsdelivr.net/npm/aos@2.3.0/dist/aos.js',
+        [],   // AOS doesn't need jQuery — dependency can go too
         null,
         true
     );

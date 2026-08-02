@@ -1,38 +1,31 @@
 'use strict';
 import $ from 'jquery';
-import slick from 'slick-carousel';
+import 'slick-carousel';
 
 export default class Carousel {
-  constructor() {
-  }
-
   init() {
-      $(".logo-slider").slick({
+    const $slider = $('.hero-slider');
+    if (!$slider.length || $slider.hasClass('slick-initialized')) return;
 
-          // normal options...
-          slidesToShow: 6,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 5000,
-          infinite: true,
-          accessibility: true,
-          speed: 1000,
+    $slider.slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      infinite: true,
+      accessibility: true,
+      speed: 1000,
+      cssEase: 'linear',
+      arrows: false,
+      dots: true,
+    });
 
-          // the magic
-          responsive: [{
+    // Re-measure as images finish loading (the cold-load mobile fix)
+    $slider.find('img').each(function () {
+      if (this.complete) return;
+      $(this).one('load', () => $slider.slick('setPosition'));
+    });
 
-              breakpoint: 992,
-              settings: {
-                  slidesToShow: 2,
-                  infinite: true
-              }
-
-          }, {
-
-              breakpoint: 300,
-              settings: "unslick" // destroys slick
-
-          }]
-      });
+    $(window).one('load', () => $slider.slick('setPosition'));
   }
 }
