@@ -18,8 +18,11 @@ Template Name: front-page-temp
             </div>
             <div class="col-lg-7 hero-image-wrap hero-slider">
                      <div class="slider-pic"><img src= "<?php bloginfo('template_directory'); ?>/images/hero-pic_people_4.webp" alt="" /></div>
+                     <div class="slider-pic"><img src= "<?php bloginfo('template_directory'); ?>/images/hero-pic_people_11.webp" alt="" /></div> 
                      <div class="slider-pic"><img src= "<?php bloginfo('template_directory'); ?>/images/hero-pic_people_7.webp" alt="" /></div>
-                     <div class="slider-pic"><img src= "<?php bloginfo('template_directory'); ?>/images/hero-pic_people_8.webp" alt="" /></div> 
+                     <div class="slider-pic"><img src= "<?php bloginfo('template_directory'); ?>/images/hero-pic_people_9.webp" alt="" /></div> 
+                     <div class="slider-pic"><img src= "<?php bloginfo('template_directory'); ?>/images/hero-pic_people_8.webp" alt="" /></div>
+                     <div class="slider-pic"><img src= "<?php bloginfo('template_directory'); ?>/images/hero-pic_people_10.webp" alt="" /></div> 
             </div>
         </div>
         
@@ -243,14 +246,15 @@ Template Name: front-page-temp
                         <div class="col-lg-6 updates-form-head">
                         <h2>Add your name</h2><br>
                             <p>Building enough community housing is a choice, and the people elected in your seat will be the ones who make it for us all. 
-                            <p>Add your name to the growing list of supporters backing community housing.</
+                            <p>To receive updates, add your name to the growing list of supporters backing community housing.</
                             </p>
                         </div>
                     
                        <div class="col-lg-6 updates-form">
                             <?php
                             $sw_form = get_field('sw_form', 'option'); // full AN embed
-
+                            $chia_priv = get_field('collection_statement', 'option'); // Pricavt statement site wide
+                           
                             if ($sw_form) {
                                 // 1️⃣ Remove any <script> tags so JS doesn't run immediately
                                 $sw_form_no_script = preg_replace('/<script.*?<\/script>/is', '', $sw_form);
@@ -259,6 +263,9 @@ Template Name: front-page-temp
                                 echo $sw_form_no_script;
                             }
                             ?>
+                           
+                            <?php echo wp_kses_post($chia_priv); ?>  
+                           
                         </div>
                     
                     </div>

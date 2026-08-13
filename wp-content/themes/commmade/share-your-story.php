@@ -72,6 +72,8 @@ Template Name: share-your-story
                 $action_title = get_field('action_title');
                 $action_sub_title = get_field('action_sub_title');
                 $action_form = get_field('action_form');
+                $chia_priv = get_field('collection_statement', 'option'); // Pricavt statement site wide
+
 
                     if ($action_title) :
                     ?>
@@ -80,6 +82,8 @@ Template Name: share-your-story
                     <?php endif; ?>
                 
                     <div><?php echo $action_form; ?></div>
+                
+                    <?php echo wp_kses_post($chia_priv); ?>  
             </div>
 
         </div> <!-- end video wrap -->

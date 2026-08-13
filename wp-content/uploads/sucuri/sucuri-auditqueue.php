@@ -433,3 +433,5 @@ exit(0);
 1785323009_6026:"Notice: admin, 172.18.0.1; Acf-field-group status has been changed; details: ID: 2805,Old status: draft,New status: publish,Title: Resources"
 1785379106_4172:"Notice: 172.18.0.1; User authentication succeeded: admin"
 1785379131_1066:"Notice: admin, 172.18.0.1; Media file added; ID: 2816; name: CHIA.NSW.REV; type: image\/png"
+1786592567_1875:"Critical: 127.0.0.1; WordPress updated to version: 7.0.4"
+1786592575_979:"Warning: 127.0.0.1; Post deleted: (multiple entries): Post id: 2795,Post author: 1,Post type: post,Post status: auto-draft,Post inserted: 2026-07-29 08:32:00,Post modified: 2026-07-29 08:32:00,Post guid: http:\/\/localhost\/?p=2795,Post title: Auto Draft"
