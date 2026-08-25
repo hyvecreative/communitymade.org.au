@@ -138,13 +138,6 @@ Template Name: front-page-temp
              </div>
 
         </div> <!-- end video wrap -->
-        
-        
-        <div class="row">
-            
-            <link href='https://actionnetwork.org/css/style-embed-whitelabel-v3.css' rel='stylesheet' type='text/css' /><script src='https://actionnetwork.org/widgets/v6/form/share-your-story-143?format=js&source=widget'></script><div id='can-form-area-share-your-story-143' style='width: 100%'><!-- this div is the target for our HTML insertion --></div>
-            
-        </div>
 
     </div>
 </div>
