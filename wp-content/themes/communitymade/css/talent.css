@@ -1,0 +1,141 @@
+.talent-wrapper h1, .talent-wrapper h2, .talent-wrapper h3 {font-family: Poppins, 'Open Sans', Arial, Helvetica, Verdana, sans-serif;}
+
+.rgt-blue {background: #0030fe!important; color: #fff!important;}
+
+.blue-txt {color: #0030fe!important;}
+
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+
+.page-template-talent_awards_temp  {background: #ccc}
+
+#header.header-talent {
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+}
+
+#content.talent-content {width: 100%; margin: 0px auto; background: #fff; padding-bottom: 0px;}
+
+
+@media (min-width: 1200px) {
+	#header.header-talent {width: 1170px;}
+	#content.talent-content {width: 1170px;}
+}
+
+
+#content.talent-content .page-image img {
+    border-radius: 0;
+	transition: all .3s ease-out;
+}
+
+.page-image {}
+
+.intro-text {background: url("img/bot-slope.png") left bottom no-repeat; padding: 2% 4% 0;}
+
+.intro-text h1 {color: #b7b7b7; font-size: 2rem; font-weight: 700; text-transform: uppercase; margin: 0; line-height: 1.1;}
+
+.intro-text h1 span {font-size: 1.25rem;}
+
+.intro-text h2 {color: #b7b7b7; font-size: 2rem; text-transform: uppercase; margin: 0; line-height: 1.1;}
+
+.intro-text h2 span {font-size: 1.25rem;}
+
+
+@media (min-width: 992px) {
+.intro-text h1 {font-size: 3.75rem; text-transform: uppercase;}
+.intro-text h1 span {font-size: 2.5rem;}
+.intro-text h2 {font-size: 3.75rem; text-transform: uppercase;}
+.intro-text h2 span {font-size: 2.5rem;}
+}
+
+.mc-talent-wrap {min-height: 600px; background: #a42610 url("/img/RGT_logo.png") right top no-repeat; padding: 80px 5% 40px;}
+
+@media (min-width: 992px) {
+	
+	.mc-talent-wrap {padding: 120px 7% 80px;}
+
+}
+
+.mc-talent {background: #fff; padding: 4%;}
+
+.mc-talent h3 {font-size: 1.4rem; color: #0030fe; margin: 1rem 0 .5rem;}
+
+.mc-talent ul {padding-left: 15px;}
+
+.mc-talent ul, .mc-talent li {list-style: disc;}
+
+@media (min-width: 400px) {
+.circle-row {padding: 4% 15%;}
+}
+
+@media (min-width: 580px) {
+.circle-row {padding: 4% 25%;}
+}
+
+@media (min-width: 768px) {
+.circle-row  {padding: 2%;}
+}
+
+@media (min-width: 992px) {
+.circle-row  {padding: 2% 0%;}
+}
+
+@media (min-width: 1124px) {
+.circle-row  {padding: 2% 6%;}
+}
+
+.circle {background: #ccc; border-radius: 50%; padding: 2%; margin-bottom: 20px; overflow: hidden;}
+
+.circle p {padding-left: 9%; padding-right: 9%; line-height: 1.6;}
+
+/* ----------- 768px - 992px ----------- */
+@media screen 
+  and (min-width: 768px)
+  and (max-width: 992px){	
+	 .mc-talent { padding: 3%;}
+	  .circle h2 {margin-bottom: .25rem;}
+	 .circle p {font-size: .8rem; padding-left: 3%; padding-right: 3%; line-height: 1.42; margin-top: 0;}
+}
+
+.circle.rgt-blue h2 {color: #fff;}
+
+.hero-circle {width: 150px; position: absolute;
+top: 20px;
+left: 20px;}
+
+@media (min-width: 992px) {
+.hero-circle {top: 40px;
+left: 40px;
+	width: 350px}
+}
+
+.hero-circle img {border-radius: 50%; width: 100%;}
+
+a.btn.rgt-btn {
+    width: 200px;
+    display: block;
+    color: #fff;
+    height: auto;
+    line-height: 30px;
+    font-size: 1.1em;
+    border-radius: 4;
+    background-color: #0030fe;
+    margin: 1% auto 0;
+    padding: 8px 6px;
+}
+
+a.btn.rgt-btn:hover {
+    background-color: #003366;
+}
+
+.rgt-logo-strip {padding: 2% 10%;}
+
+.rgt-logo-strip img {width: 32.5%; height: auto; padding: 0 2%; vertical-align: middle;}

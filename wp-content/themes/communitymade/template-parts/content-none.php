@@ -1,0 +1,1 @@
+<?php /* TEMPLATE PART FOR NO CONTENT */ ?>

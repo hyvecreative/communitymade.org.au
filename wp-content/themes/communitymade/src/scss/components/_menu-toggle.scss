@@ -1,0 +1,40 @@
+/* ------------------------------------------------------------ *\
+	Menu Toggle
+\* ------------------------------------------------------------ */
+
+.menu-toggle {
+	position: relative; 
+	z-index: 2;
+
+	span {
+		display: block; 
+		width: 25px;
+		height: 3px;
+		border-radius: 3px;
+		background-color: $blue_5; 
+		transition: transform .3s, background-color .3s;
+	}
+
+	span + span {
+		margin-top: 5px; 
+	}
+}
+
+.menu-toggle.is-active {
+
+	span:first-child {
+		transform: translateY(8px) rotate(45deg);
+	}
+
+	span:nth-child(2) {
+		transform: translateX(100vw);
+	}
+
+	span:last-child {
+		transform: translateY(-8px) rotate(-45deg);
+	}
+
+	span {
+		background-color: $c-white; 
+	}
+}

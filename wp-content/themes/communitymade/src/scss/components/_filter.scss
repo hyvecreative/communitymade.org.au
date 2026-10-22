@@ -1,0 +1,30 @@
+.searchandfilter {
+	ul {padding-left: 0;}
+	li {padding: 4px 0;
+	}
+	
+	.sf-field-submit {
+		input {padding: 2px 8px; border-radius: 6px; background: #000; color: #fff; border: none; margin-left: 1px;}
+	}
+	
+	select {
+		&.sf-input-select {min-width: 260px; max-width: 240px;}
+	}
+	
+}
+
+
+
+@media (min-width: 768px) {
+	.searchandfilter {
+		ul{
+			li{display:inline-block; margin-right: 15px; padding: 10px 0;
+		}
+		}
+		
+		select {
+				&.sf-input-select {min-width: 170px;}
+		}
+}
+}
+	

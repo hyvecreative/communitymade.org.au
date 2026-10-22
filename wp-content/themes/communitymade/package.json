@@ -1,0 +1,24 @@
+{
+  "name": "communitymade",
+  "version": "2.0.0",
+  "description": "Community Made WordPress theme",
+  "private": true,
+  "type": "module",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.103.1",
+    "vite": "^8.2.2",
+    "vite-plugin-full-reload": "^1.2.0"
+  },
+  "dependencies": {
+    "slick-carousel": "^1.8.1"
+  }
+}

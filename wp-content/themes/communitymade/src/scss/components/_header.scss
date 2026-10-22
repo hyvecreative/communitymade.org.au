@@ -1,0 +1,116 @@
+/* ------------------------------------------------------------ *\
+	Header
+\* ------------------------------------------------------------ */
+
+.header {
+	width: 100%;
+	max-width: 1938px;
+	position: fixed;
+	top: 0;
+	z-index: 100;
+	height: 90px;
+	background-color: $c-white;
+	box-shadow: 0 3px 7px rgba($c-black, .07);
+	@include breakpoint-down(mobile-medium) {
+		height: 65px;
+		box-shadow: 0 3px 7px rgba($c-black, .15);
+	}
+
+
+	.header__actions {
+		margin-left: 27px; 
+
+		@include breakpoint-down(small-desktop) {
+			margin-left: 20px; 
+		}
+
+		@include breakpoint-down(tablet) {
+			display: none!important;  
+		}
+	}
+
+	.header__toggle .header__actions {
+
+		@include breakpoint-down(tablet) {
+			display: block; 
+			margin-right: 20px; 
+		}
+	}
+
+	.header__actions a {
+
+		@include breakpoint-down(mobile-small) {
+			font-size: 11px;
+			padding: 8px 12px; 
+		}
+	}
+
+	.header__nav {
+
+		@include breakpoint-down(tablet) {
+			position: fixed; 
+			top: 0;
+			right: 0;
+			height: 100vh;
+			width: 50%;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background-color: $blue_15;
+			color: $c-white; 
+			text-align: center;
+			transform: translateX(100vw);
+			transition: transform .3s; // .3 transition causes flash of header_nav element when resising - 1034 to 1024px
+			padding: 49px 29px;
+		}
+
+		@include breakpoint-down(mobile) {
+			width: 75%;
+		}
+
+		@include breakpoint-down(mobile-medium) {
+			width: 100%;
+		}
+	}
+
+	.header__nav.is-active {
+		transform: none;
+		transition: transform .3s; // when included (as original) in header_nav it creates flash when resizing window. Included (here) removes animation on close when transform translate re-actived)
+	}
+
+	.header__toggle {
+		display: none; 
+
+		@include breakpoint-down(tablet) {
+			display: flex;
+			align-items: center; 
+		}
+	}
+
+	.header__logo {
+		padding: 5px 0; height: 90px;
+
+		@include breakpoint-down(small-desktop) {
+			padding: 5px 0 5px;
+		}
+        
+        @include breakpoint-down(mobile-medium) {
+			height: 65px;
+		}
+
+		@include breakpoint-down(mobile-small) {
+			padding: 5px 0; height: 65px;
+		}
+	}
+
+	.header__menu {
+		min-height: 100%; padding-top: 1rem;
+	}
+
+	.header__menu .header__actions {
+
+		@include breakpoint-down(tablet) {
+			display: none; 
+		}
+	}
+}

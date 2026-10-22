@@ -1,0 +1,34 @@
+
+.fm-container {height: 80px;
+    margin: 0 auto;
+    width: 1170px;
+}
+
+body .fm-container {
+	height: 80px;
+	margin: 0 auto;
+	background: none no-repeat scroll 0 0 transparent;
+	border: none;
+	background-color:#27bdbe;
+}
+
+ul#mymenu {float: right;}
+
+.col-sm-8 {
+    width: 66.66666667%;
+  }
+  .col-sm-7 {
+    width: 58.33333333%;
+  }
+  .col-sm-6 {
+    width: 50%;
+  }
+  .col-sm-5 {
+    width: 41.66666667%;
+  }
+  .col-sm-4 {
+    width: 33.33333333%;
+  }
+  .col-sm-3 {
+    width: 25%;
+  }
